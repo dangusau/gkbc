@@ -42,12 +42,12 @@ const EventCard: React.FC<EventCardProps> = ({ event, onEdit, onDelete }) => {
 
   const getRSVPButtonStyle = useCallback((): string => {
     if (isOwner) {
-      return "bg-gradient-to-r from-green-50 to-green-100 text-green-700 border border-green-200 cursor-default";
+      return "bg-gradient-to-r from-blue-50 to-blue-100 text-blue-700 border border-blue-200 cursor-default";
     }
     if (hasRSVPed) {
-      return "bg-gradient-to-r from-green-500 to-green-600 text-white shadow-md cursor-default";
+      return "bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-md cursor-default";
     }
-    return "bg-gradient-to-r from-green-600 to-green-700 text-white hover:from-green-700 hover:to-green-800 shadow-md hover:shadow-lg active:scale-[0.98]";
+    return "bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800 shadow-md hover:shadow-lg active:scale-[0.98]";
   }, [isOwner, hasRSVPed]);
 
   const getButtonText = useCallback((): string => {
@@ -58,14 +58,14 @@ const EventCard: React.FC<EventCardProps> = ({ event, onEdit, onDelete }) => {
 
   return (
     <div
-      className="group bg-white rounded-xl shadow-lg border border-green-200/50 overflow-hidden
-                hover:shadow-xl hover:border-green-300 transition-all duration-200
-                focus:outline-none focus:ring-2 focus:ring-green-500/20"
+      className="group bg-white rounded-xl shadow-lg border border-blue-200/50 overflow-hidden
+                hover:shadow-xl hover:border-blue-300 transition-all duration-200
+                focus:outline-none focus:ring-2 focus:ring-blue-500/20"
       role="article"
       aria-label={`${event.title} event organized by ${event.organizer_name}`}
     >
       {/* Header with Image/Placeholder */}
-      <div className="relative h-36 bg-gradient-to-r from-green-500 to-green-600">
+      <div className="relative h-36 bg-gradient-to-r from-blue-500 to-blue-600">
         {event.image_url ? (
           <img
             src={event.image_url}
@@ -84,7 +84,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, onEdit, onDelete }) => {
         <div className="absolute top-3 right-3">
           <div className="bg-white/90 backdrop-blur-sm text-gray-900 px-2 py-1 rounded-full
                         text-xs font-medium shadow-md flex items-center gap-1 border border-white/50">
-            <Users size={12} className="text-green-600" />
+            <Users size={12} className="text-blue-600" />
             <span className="font-bold text-gray-900">{event.rsvp_count}</span>
           </div>
         </div>
@@ -104,7 +104,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, onEdit, onDelete }) => {
                 <div className="absolute left-0 mt-1 w-32 bg-white rounded-lg shadow-lg border border-gray-200 z-10">
                   <button
                     onClick={() => { onEdit(event); setShowMenu(false); }}
-                    className="w-full text-left px-3 py-2 text-xs text-gray-700 hover:bg-green-50 flex items-center gap-2"
+                    className="w-full text-left px-3 py-2 text-xs text-gray-700 hover:bg-blue-50 flex items-center gap-2"
                   >
                     <Edit2 size={12} /> Edit
                   </button>
@@ -130,9 +130,9 @@ const EventCard: React.FC<EventCardProps> = ({ event, onEdit, onDelete }) => {
         </div>
 
         {/* Organizer Information with Verified Badge */}
-        <div className="flex items-center gap-2 mb-3 p-2 bg-gradient-to-r from-green-50 to-green-100 rounded-lg border border-green-100">
+        <div className="flex items-center gap-2 mb-3 p-2 bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg border border-blue-100">
           <div className="relative">
-            <div className="w-8 h-8 bg-gradient-to-br from-green-500 to-green-600 rounded-full
+            <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full
                           flex items-center justify-center text-white text-xs font-bold shadow-sm
                           border-2 border-white">
               {event.organizer_name?.charAt(0).toUpperCase() || 'O'}
@@ -155,8 +155,8 @@ const EventCard: React.FC<EventCardProps> = ({ event, onEdit, onDelete }) => {
         <div className="grid grid-cols-2 gap-2 mb-3">
           {/* Date & Time */}
           <div className="flex items-center gap-2 p-2 bg-gradient-to-r from-gray-50 to-gray-100/50 rounded-lg border border-gray-200">
-            <div className="w-8 h-8 bg-gradient-to-br from-green-100 to-green-200 rounded-lg flex items-center justify-center flex-shrink-0">
-              <Calendar size={14} className="text-green-600" />
+            <div className="w-8 h-8 bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg flex items-center justify-center flex-shrink-0">
+              <Calendar size={14} className="text-blue-600" />
             </div>
             <div className="flex-1 min-w-0">
               <div className="text-xs text-gray-500 font-medium">Date & Time</div>
@@ -167,8 +167,8 @@ const EventCard: React.FC<EventCardProps> = ({ event, onEdit, onDelete }) => {
           {/* Location */}
           {event.location && (
             <div className="flex items-center gap-2 p-2 bg-gradient-to-r from-gray-50 to-gray-100/50 rounded-lg border border-gray-200">
-              <div className="w-8 h-8 bg-gradient-to-br from-green-100 to-green-200 rounded-lg flex items-center justify-center flex-shrink-0">
-                <MapPin size={14} className="text-green-600" />
+              <div className="w-8 h-8 bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg flex items-center justify-center flex-shrink-0">
+                <MapPin size={14} className="text-blue-600" />
               </div>
               <div className="flex-1 min-w-0">
                 <div className="text-xs text-gray-500 font-medium">Location</div>

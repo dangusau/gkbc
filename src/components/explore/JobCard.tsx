@@ -40,9 +40,9 @@ const JobCard: React.FC<JobCardProps> = ({ job, onEdit, onDelete }) => {
   const getJobTypeStyle = useCallback((): string => {
     switch (job.job_type?.toLowerCase()) {
       case 'full-time':
-        return 'bg-gradient-to-r from-green-100 to-green-50 border border-green-200 text-green-700';
+        return 'bg-gradient-to-r from-blue-100 to-blue-50 border border-blue-200 text-blue-700';
       case 'part-time':
-        return 'bg-gradient-to-r from-green-100 to-green-50 border border-green-200 text-green-700';
+        return 'bg-gradient-to-r from-blue-100 to-blue-50 border border-blue-200 text-blue-700';
       case 'contract':
         return 'bg-gradient-to-r from-purple-100 to-purple-50 border border-purple-200 text-purple-700';
       case 'remote':
@@ -54,18 +54,18 @@ const JobCard: React.FC<JobCardProps> = ({ job, onEdit, onDelete }) => {
 
   return (
     <div
-      className="group bg-white rounded-xl shadow-lg border border-green-200/50 overflow-hidden
-                hover:shadow-xl hover:border-green-300 transition-all duration-200
-                focus:outline-none focus:ring-2 focus:ring-green-500/20"
+      className="group bg-white rounded-xl shadow-lg border border-blue-200/50 overflow-hidden
+                hover:shadow-xl hover:border-blue-300 transition-all duration-200
+                focus:outline-none focus:ring-2 focus:ring-blue-500/20"
       role="article"
       aria-label={`${job.title} at ${job.company_name}`}
     >
       {/* Header */}
-      <div className="bg-gradient-to-r from-green-50 via-green-50 to-green-100 p-3 border-b border-green-100">
+      <div className="bg-gradient-to-r from-blue-50 via-blue-50 to-blue-100 p-3 border-b border-blue-100">
         <div className="flex items-start gap-3">
           {/* Company Avatar with Verified Badge */}
           <div className="relative">
-            <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-lg
+            <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg
                           flex items-center justify-center shadow-md border-2 border-white overflow-hidden">
               {job.company_avatar ? (
                 <img
@@ -96,14 +96,14 @@ const JobCard: React.FC<JobCardProps> = ({ job, onEdit, onDelete }) => {
                   {job.is_verified && <VerifiedBadge size={14} />}
                 </div>
                 <div className="flex items-center gap-1">
-                  <Building size={12} className="text-green-500" />
-                  <p className="text-green-700 text-xs font-medium truncate">{job.company_name}</p>
+                  <Building size={12} className="text-blue-500" />
+                  <p className="text-blue-700 text-xs font-medium truncate">{job.company_name}</p>
                 </div>
               </div>
               {job.salary && (
-                <div className="bg-gradient-to-r from-green-500 to-green-600 text-white
+                <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white
                               px-2 py-1 rounded-full text-xs font-bold shadow-sm
-                              border border-green-400/30 ml-2 flex-shrink-0">
+                              border border-blue-400/30 ml-2 flex-shrink-0">
                   {formatSalary(job.salary)}
                 </div>
               )}
@@ -124,7 +124,7 @@ const JobCard: React.FC<JobCardProps> = ({ job, onEdit, onDelete }) => {
                 <div className="absolute right-0 mt-1 w-32 bg-white rounded-lg shadow-lg border border-gray-200 z-10">
                   <button
                     onClick={() => { onEdit(job); setShowMenu(false); }}
-                    className="w-full text-left px-3 py-2 text-xs text-gray-700 hover:bg-green-50 flex items-center gap-2"
+                    className="w-full text-left px-3 py-2 text-xs text-gray-700 hover:bg-blue-50 flex items-center gap-2"
                   >
                     <Edit2 size={12} /> Edit
                   </button>
@@ -146,8 +146,8 @@ const JobCard: React.FC<JobCardProps> = ({ job, onEdit, onDelete }) => {
         <div className="grid grid-cols-2 gap-2 mb-3">
           {/* Job Type */}
           <div className="flex items-center gap-2 p-2 bg-gradient-to-r from-gray-50 to-gray-100/50 rounded-lg border border-gray-200">
-            <div className="w-8 h-8 bg-gradient-to-br from-green-100 to-green-200 rounded-lg flex items-center justify-center flex-shrink-0">
-              <Briefcase size={14} className="text-green-600" />
+            <div className="w-8 h-8 bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg flex items-center justify-center flex-shrink-0">
+              <Briefcase size={14} className="text-blue-600" />
             </div>
             <div className="flex-1 min-w-0">
               <div className="text-xs text-gray-500 font-medium">Job Type</div>
@@ -160,8 +160,8 @@ const JobCard: React.FC<JobCardProps> = ({ job, onEdit, onDelete }) => {
           {/* Location */}
           {job.location && (
             <div className="flex items-center gap-2 p-2 bg-gradient-to-r from-gray-50 to-gray-100/50 rounded-lg border border-gray-200">
-              <div className="w-8 h-8 bg-gradient-to-br from-green-100 to-green-200 rounded-lg flex items-center justify-center flex-shrink-0">
-                <MapPin size={14} className="text-green-600" />
+              <div className="w-8 h-8 bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg flex items-center justify-center flex-shrink-0">
+                <MapPin size={14} className="text-blue-600" />
               </div>
               <div className="flex-1 min-w-0">
                 <div className="text-xs text-gray-500 font-medium">Location</div>
@@ -208,11 +208,11 @@ const JobCard: React.FC<JobCardProps> = ({ job, onEdit, onDelete }) => {
         {!showContact ? (
           <button
             onClick={handleShowContact}
-            className="w-full bg-gradient-to-r from-green-600 to-green-700 text-white
+            className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white
                      font-bold py-2 rounded-lg shadow-md hover:shadow-lg
-                     hover:from-green-700 hover:to-green-800
+                     hover:from-blue-700 hover:to-blue-800
                      active:scale-[0.98] transition-all duration-200
-                     focus:outline-none focus:ring-2 focus:ring-green-500/50 text-xs min-h-[36px]"
+                     focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-xs min-h-[36px]"
           >
             Show Contact & Apply
           </button>
@@ -222,32 +222,32 @@ const JobCard: React.FC<JobCardProps> = ({ job, onEdit, onDelete }) => {
             {job.contact_email && (
               <a
                 href={`mailto:${job.contact_email}`}
-                className="flex items-center gap-2 p-2 bg-gradient-to-r from-green-50 to-green-100/50
-                          rounded-lg border border-green-200 hover:border-green-400 hover:bg-green-100
+                className="flex items-center gap-2 p-2 bg-gradient-to-r from-blue-50 to-blue-100/50
+                          rounded-lg border border-blue-200 hover:border-blue-400 hover:bg-blue-100
                           transition-all duration-200 text-left min-h-[36px]"
               >
-                <div className="w-8 h-8 bg-gradient-to-br from-green-100 to-green-200 rounded-lg flex items-center justify-center">
-                  <Mail size={14} className="text-green-600" />
+                <div className="w-8 h-8 bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg flex items-center justify-center">
+                  <Mail size={14} className="text-blue-600" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="text-xs text-gray-500 font-medium">Email</div>
-                  <div className="text-green-600 font-semibold text-xs truncate">{job.contact_email}</div>
+                  <div className="text-blue-600 font-semibold text-xs truncate">{job.contact_email}</div>
                 </div>
               </a>
             )}
             {job.contact_phone && (
               <a
                 href={`tel:${job.contact_phone.replace(/\D/g, '')}`}
-                className="flex items-center gap-2 p-2 bg-gradient-to-r from-green-50 to-green-100/50
-                          rounded-lg border border-green-200 hover:border-green-400 hover:bg-green-100
+                className="flex items-center gap-2 p-2 bg-gradient-to-r from-blue-50 to-blue-100/50
+                          rounded-lg border border-blue-200 hover:border-blue-400 hover:bg-blue-100
                           transition-all duration-200 text-left min-h-[36px]"
               >
-                <div className="w-8 h-8 bg-gradient-to-br from-green-100 to-green-200 rounded-lg flex items-center justify-center">
-                  <Phone size={14} className="text-green-600" />
+                <div className="w-8 h-8 bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg flex items-center justify-center">
+                  <Phone size={14} className="text-blue-600" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="text-xs text-gray-500 font-medium">Phone</div>
-                  <div className="text-green-600 font-semibold text-xs truncate">{job.contact_phone}</div>
+                  <div className="text-blue-600 font-semibold text-xs truncate">{job.contact_phone}</div>
                 </div>
               </a>
             )}

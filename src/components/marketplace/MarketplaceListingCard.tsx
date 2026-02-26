@@ -51,7 +51,7 @@ const MarketplaceListingCard: React.FC<MarketplaceListingCardProps> = ({
   const getConditionBadgeStyle = (): string => {
     switch (listing.condition) {
       case 'new':
-        return 'bg-green-100 text-green-800 border border-green-200';
+        return 'bg-blue-100 text-blue-800 border border-blue-200';
       case 'used':
         return 'bg-yellow-100 text-yellow-800 border border-yellow-200';
       case 'refurbished':
@@ -62,7 +62,7 @@ const MarketplaceListingCard: React.FC<MarketplaceListingCardProps> = ({
   };
 
   const getCategoryBadgeStyle = (): string => {
-    return 'bg-green-50 text-green-700 border border-green-200';
+    return 'bg-blue-50 text-blue-700 border border-blue-200';
   };
 
   const getSellerInitials = (): string => {
@@ -85,9 +85,9 @@ const MarketplaceListingCard: React.FC<MarketplaceListingCardProps> = ({
   return (
     <div
       onClick={handleCardClick}
-      className="group bg-white rounded-xl border border-green-200 overflow-hidden cursor-pointer 
+      className="group bg-white rounded-xl border border-blue-200 overflow-hidden cursor-pointer 
                  hover:shadow-lg hover:scale-[1.02] active:scale-[0.995] transition-all duration-300
-                 focus:outline-none focus:ring-2 focus:ring-green-500/20"
+                 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
       role="button"
       tabIndex={0}
       onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleCardClick(); }}
@@ -103,8 +103,8 @@ const MarketplaceListingCard: React.FC<MarketplaceListingCardProps> = ({
             onError={handleImageError}
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-green-50 to-indigo-50">
-            <User size={32} className="text-green-300" />
+          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-50">
+            <User size={32} className="text-blue-300" />
           </div>
         )}
 
@@ -127,7 +127,7 @@ const MarketplaceListingCard: React.FC<MarketplaceListingCardProps> = ({
 
         {/* Owner badge */}
         {isOwner && (
-          <div className="absolute top-2 left-2 px-2 py-1 bg-green-600 text-white text-xs font-semibold rounded-full shadow">
+          <div className="absolute top-2 left-2 px-2 py-1 bg-blue-600 text-white text-xs font-semibold rounded-full shadow">
             Your Listing
           </div>
         )}
@@ -145,7 +145,7 @@ const MarketplaceListingCard: React.FC<MarketplaceListingCardProps> = ({
               className="p-1.5 bg-white/90 backdrop-blur-sm rounded-full shadow hover:bg-white"
               aria-label="Edit listing"
             >
-              <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
               </svg>
             </button>
@@ -169,7 +169,7 @@ const MarketplaceListingCard: React.FC<MarketplaceListingCardProps> = ({
             {listing.title}
           </h3>
           <div className="flex items-baseline gap-1">
-            <span className="text-sm font-bold text-green-600">
+            <span className="text-sm font-bold text-blue-600">
               ₦{listing.price.toLocaleString()}
             </span>
           </div>
@@ -189,11 +189,11 @@ const MarketplaceListingCard: React.FC<MarketplaceListingCardProps> = ({
         {/* Seller info */}
         <div className="flex items-center gap-2 pt-3 border-t border-gray-100">
           <div className="relative">
-            <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white font-bold text-xs">
+            <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold text-xs">
               {getSellerInitials()}
             </div>
             {listing.seller_verified && (
-              <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full flex items-center justify-center border border-white">
+              <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-blue-500 rounded-full flex items-center justify-center border border-white">
                 <Shield size={6} className="text-white" />
               </div>
             )}

@@ -62,7 +62,7 @@ const BusinessDetails: React.FC = () => {
   }, [business, newReview, user, isOwner, hasSubmittedReview, addReview, queryClient]);
 
   const getAnonymousName = useCallback((userId: string, index: number): string => {
-    const colors = ['Green', 'Blue', 'Red', 'Yellow', 'Purple', 'Orange', 'Pink', 'Teal'];
+    const colors = ['blue', 'Blue', 'Red', 'Yellow', 'Purple', 'Orange', 'Pink', 'Teal'];
     const animals = ['Lion', 'Tiger', 'Bear', 'Wolf', 'Fox', 'Eagle', 'Dolphin', 'Hawk', 'Spider'];
     const colorIndex = Math.abs(userId.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0)) % colors.length;
     const animalIndex = Math.abs(userId.split('').reduce((acc, char, i) => acc + char.charCodeAt(0) * (i + 1), 0)) % animals.length;
@@ -71,12 +71,12 @@ const BusinessDetails: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-green-50 to-white safe-area">
+      <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white safe-area">
         <div className="animate-pulse">
           <div className="h-48 bg-gradient-to-r from-gray-200 to-gray-300 mb-3"></div>
           <div className="p-3">
             <div className="flex items-end gap-3 mb-4">
-              <div className="w-20 h-20 bg-gray-300 rounded-xl border border-green-200"></div>
+              <div className="w-20 h-20 bg-gray-300 rounded-xl border border-blue-200"></div>
               <div className="flex-1">
                 <div className="h-6 bg-gray-300 rounded w-3/4 mb-2"></div>
                 <div className="h-3 bg-gray-300 rounded w-1/2"></div>
@@ -93,16 +93,16 @@ const BusinessDetails: React.FC = () => {
 
   if (!business) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-green-50 to-white flex items-center justify-center safe-area">
+      <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white flex items-center justify-center safe-area">
         <div className="text-center p-6">
-          <div className="w-16 h-16 bg-gradient-to-br from-green-100 to-green-50 rounded-full flex items-center justify-center border border-green-200 mx-auto mb-3">
-            <AlertCircle className="text-green-500" size={24} />
+          <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-blue-50 rounded-full flex items-center justify-center border border-blue-200 mx-auto mb-3">
+            <AlertCircle className="text-blue-500" size={24} />
           </div>
           <h2 className="text-sm font-bold text-gray-900 mb-2">Business Not Found</h2>
           <p className="text-gray-600 text-xs mb-4">The business doesn't exist or has been removed.</p>
           <button
             onClick={() => navigate('/businesses')}
-            className="px-5 py-2.5 bg-gradient-to-r from-green-400 to-green-600 text-white font-medium rounded-xl hover:from-green-700 hover:to-green-800 border border-green-800 min-h-[36px] text-xs"
+            className="px-5 py-2.5 bg-gradient-to-r from-blue-400 to-blue-600 text-white font-medium rounded-xl hover:from-blue-700 hover:to-blue-800 border border-blue-800 min-h-[36px] text-xs"
           >
             Back to Businesses
           </button>
@@ -112,23 +112,23 @@ const BusinessDetails: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-green-50 to-white safe-area">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white safe-area">
       {/* Header */}
-      <div className="sticky top-0 bg-white/95 backdrop-blur-sm border-b border-green-200 z-10 p-3 flex items-center justify-between">
+      <div className="sticky top-0 bg-white/95 backdrop-blur-sm border-b border-blue-200 z-10 p-3 flex items-center justify-between">
         <button
           onClick={() => navigate(-1)}
-          className="p-2 rounded-xl border border-green-200 hover:bg-green-50 active:scale-95 transition-all min-h-[36px] min-w-[36px]"
+          className="p-2 rounded-xl border border-blue-200 hover:bg-blue-50 active:scale-95 transition-all min-h-[36px] min-w-[36px]"
         >
-          <ArrowLeft size={20} className="text-green-600" />
+          <ArrowLeft size={20} className="text-blue-600" />
         </button>
         <h1 className="font-bold text-gray-900 text-s truncate mx-2">{business.name}</h1>
-        <button className="p-2 rounded-xl border border-green-200 hover:bg-green-50 active:scale-95 transition-all min-h-[36px] min-w-[36px]">
-          <Share2 size={16} className="text-green-600" />
+        <button className="p-2 rounded-xl border border-blue-200 hover:bg-blue-50 active:scale-95 transition-all min-h-[36px] min-w-[36px]">
+          <Share2 size={16} className="text-blue-600" />
         </button>
       </div>
 
       {/* Banner */}
-      <div className="h-48 bg-gradient-to-r from-gray-100 to-gray-200 relative overflow-hidden border-b border-green-300">
+      <div className="h-48 bg-gradient-to-r from-gray-100 to-gray-200 relative overflow-hidden border-b border-blue-300">
         {business.banner_url ? (
           <img src={business.banner_url} alt={business.name} className="w-full h-full object-cover" />
         ) : (
@@ -142,7 +142,7 @@ const BusinessDetails: React.FC = () => {
           </div>
         )}
         {isOwner && (
-          <div className="absolute top-3 left-3 px-2 py-1 bg-gradient-to-r from-green-600 to-green-700 text-white text-xs font-bold rounded-full border border-green-800">
+          <div className="absolute top-3 left-3 px-2 py-1 bg-gradient-to-r from-blue-600 to-blue-700 text-white text-xs font-bold rounded-full border border-blue-800">
             Your Business
           </div>
         )}
@@ -151,12 +151,12 @@ const BusinessDetails: React.FC = () => {
       {/* Business Info */}
       <div className="p-3 -mt-10 relative">
         <div className="flex items-end gap-3 mb-4">
-          <div className="relative w-20 h-20 bg-white border-4 border-white rounded-xl shadow-lg overflow-hidden border border-green-300">
+          <div className="relative w-20 h-20 bg-white border-4 border-white rounded-xl shadow-lg overflow-hidden border border-blue-300">
             {business.logo_url ? (
               <img src={business.logo_url} alt={business.name} className="w-full h-full object-cover" />
             ) : (
-              <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-green-100 to-green-100">
-                <Globe size={20} className="text-green-600" />
+              <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-100 to-blue-100">
+                <Globe size={20} className="text-blue-600" />
               </div>
             )}
            
@@ -167,7 +167,7 @@ const BusinessDetails: React.FC = () => {
               {business.owner_verified && <VerifiedBadge size={10} />}
               {business.is_registered && business.verification_status === 'approved' && (
                 <div className="flex-shrink-0">
-                  <div className="px-2 py-0.5 bg-gradient-to-r from-green-500 to-green-600 text-white text-xs font-bold rounded-full border border-green-600 flex items-center gap-1">
+                  <div className="px-2 py-0.5 bg-gradient-to-r from-blue-500 to-blue-600 text-white text-xs font-bold rounded-full border border-blue-600 flex items-center gap-1">
                     <span className="w-1.5 h-1.5 bg-white rounded-full"></span>
                     Verified
                   </div>
@@ -190,7 +190,7 @@ const BusinessDetails: React.FC = () => {
                 <span className="text-gray-500 text-xs">({business.review_count})</span>
               </div>
               <div className="flex items-center gap-1">
-                <MapPin size={12} className="text-green-500" />
+                <MapPin size={12} className="text-blue-500" />
                 <span className="font-medium text-xs">{business.location_axis}</span>
               </div>
             </div>
@@ -201,8 +201,8 @@ const BusinessDetails: React.FC = () => {
         <div className="flex gap-1 mb-4">
           <span className={`px-2 py-1 rounded-full text-xs font-medium border ${
             business.business_type === 'products'
-              ? 'bg-gradient-to-r from-green-50 to-green-100 border-green-300 text-green-700'
-              : 'bg-gradient-to-r from-green-50 to-green-100 border-green-300 text-green-700'
+              ? 'bg-gradient-to-r from-blue-50 to-blue-100 border-blue-300 text-blue-700'
+              : 'bg-gradient-to-r from-blue-50 to-blue-100 border-blue-300 text-blue-700'
           }`}>
             {business.business_type === 'products' ? 'Products' : 'Services'}
           </span>
@@ -212,19 +212,19 @@ const BusinessDetails: React.FC = () => {
         </div>
 
         {/* Description */}
-        <div className="bg-white rounded-xl border border-green-200 p-3 mb-4">
-          <h3 className="font-bold text-gray-900 mb-2 text-xs border-b border-green-100 pb-2">About</h3>
+        <div className="bg-white rounded-xl border border-blue-200 p-3 mb-4">
+          <h3 className="font-bold text-gray-900 mb-2 text-xs border-b border-blue-100 pb-2">About</h3>
           <p className="text-gray-700 text-xs whitespace-pre-line leading-relaxed">{business.description}</p>
         </div>
 
         {/* Contact Info */}
-        <div className="bg-gradient-to-r from-green-50 to-green-50 rounded-xl border border-green-200 p-3 mb-4">
-          <h3 className="font-bold text-gray-900 mb-3 text-xs border-b border-green-200 pb-2">Contact Information</h3>
+        <div className="bg-gradient-to-r from-blue-50 to-blue-50 rounded-xl border border-blue-200 p-3 mb-4">
+          <h3 className="font-bold text-gray-900 mb-3 text-xs border-b border-blue-200 pb-2">Contact Information</h3>
           <div className="space-y-3">
             {business.address && (
               <div className="flex items-start gap-2">
-                <div className="p-1.5 rounded-lg bg-white border border-green-200">
-                  <MapPin size={14} className="text-green-600" />
+                <div className="p-1.5 rounded-lg bg-white border border-blue-200">
+                  <MapPin size={14} className="text-blue-600" />
                 </div>
                 <div className="flex-1">
                   <p className="text-xs text-gray-600 mb-1">Address</p>
@@ -234,12 +234,12 @@ const BusinessDetails: React.FC = () => {
             )}
             {business.phone && (
               <div className="flex items-start gap-2">
-                <div className="p-1.5 rounded-lg bg-white border border-green-200">
-                  <Phone size={14} className="text-green-600" />
+                <div className="p-1.5 rounded-lg bg-white border border-blue-200">
+                  <Phone size={14} className="text-blue-600" />
                 </div>
                 <div className="flex-1">
                   <p className="text-xs text-gray-600 mb-1">Phone</p>
-                  <a href={`tel:${business.phone}`} className="text-green-700 font-medium hover:text-green-800 text-xs">
+                  <a href={`tel:${business.phone}`} className="text-blue-700 font-medium hover:text-blue-800 text-xs">
                     {business.phone}
                   </a>
                 </div>
@@ -247,12 +247,12 @@ const BusinessDetails: React.FC = () => {
             )}
             {business.email && (
               <div className="flex items-start gap-2">
-                <div className="p-1.5 rounded-lg bg-white border border-green-200">
-                  <Mail size={14} className="text-green-600" />
+                <div className="p-1.5 rounded-lg bg-white border border-blue-200">
+                  <Mail size={14} className="text-blue-600" />
                 </div>
                 <div className="flex-1">
                   <p className="text-xs text-gray-600 mb-1">Email</p>
-                  <a href={`mailto:${business.email}`} className="text-green-700 font-medium hover:text-green-800 truncate block text-xs">
+                  <a href={`mailto:${business.email}`} className="text-blue-700 font-medium hover:text-blue-800 truncate block text-xs">
                     {business.email}
                   </a>
                 </div>
@@ -260,8 +260,8 @@ const BusinessDetails: React.FC = () => {
             )}
             {business.website && (
               <div className="flex items-start gap-2">
-                <div className="p-1.5 rounded-lg bg-white border border-green-200">
-                  <Globe size={14} className="text-green-600" />
+                <div className="p-1.5 rounded-lg bg-white border border-blue-200">
+                  <Globe size={14} className="text-blue-600" />
                 </div>
                 <div className="flex-1">
                   <p className="text-xs text-gray-600 mb-1">Website</p>
@@ -269,7 +269,7 @@ const BusinessDetails: React.FC = () => {
                     href={business.website}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-green-700 font-medium hover:text-green-800 truncate block text-xs"
+                    className="text-blue-700 font-medium hover:text-blue-800 truncate block text-xs"
                   >
                     {business.website.replace(/^https?:\/\//, '')}
                   </a>
@@ -302,8 +302,8 @@ const BusinessDetails: React.FC = () => {
 
             {/* Add Review Form */}
             {user && !hasSubmittedReview && (
-              <div className="bg-white rounded-xl border border-green-200 p-3 mb-4">
-                <h4 className="font-bold text-gray-900 mb-3 text-xs border-b border-green-100 pb-2">Add Your Review</h4>
+              <div className="bg-white rounded-xl border border-blue-200 p-3 mb-4">
+                <h4 className="font-bold text-gray-900 mb-3 text-xs border-b border-blue-100 pb-2">Add Your Review</h4>
                 <div className="flex gap-1 mb-3 justify-center">
                   {[1, 2, 3, 4, 5].map(star => (
                     <button
@@ -327,7 +327,7 @@ const BusinessDetails: React.FC = () => {
                   value={newReview.comment}
                   onChange={(e) => setNewReview(prev => ({ ...prev, comment: e.target.value }))}
                   placeholder="Share your experience..."
-                  className="w-full p-2.5 border border-green-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 mb-3 min-h-[100px] text-xs"
+                  className="w-full p-2.5 border border-blue-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 mb-3 min-h-[100px] text-xs"
                   rows={3}
                   maxLength={500}
                 />
@@ -341,7 +341,7 @@ const BusinessDetails: React.FC = () => {
                 <button
                   onClick={handleAddReview}
                   disabled={!newReview.comment.trim() || submitting}
-                  className="w-full py-2.5 bg-gradient-to-r from-green-600 to-green-700 text-white font-bold rounded-xl hover:from-green-700 hover:to-green-800 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.99] transition-all border border-green-800 min-h-[44px] text-xs"
+                  className="w-full py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-xl hover:from-blue-700 hover:to-blue-800 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.99] transition-all border border-blue-800 min-h-[44px] text-xs"
                 >
                   {submitting ? (
                     <span className="flex items-center justify-center gap-1">
@@ -360,10 +360,10 @@ const BusinessDetails: React.FC = () => {
               <div className="space-y-3">
                 <h4 className="font-bold text-gray-900 mb-2 text-xs">Recent Reviews</h4>
                 {reviews.slice(0, 5).map((review, index) => (
-                  <div key={review.id || index} className="bg-white rounded-xl border border-green-200 p-3">
+                  <div key={review.id || index} className="bg-white rounded-xl border border-blue-200 p-3">
                     <div className="flex items-start gap-2 mb-2">
                       <div className="relative">
-                        <div className="w-8 h-8 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center text-white font-bold text-xs border-2 border-white">
+                        <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xs border-2 border-white">
                           {getAnonymousName(review.user_id || `review_${index}`, index).charAt(0)}
                         </div>
                         {review.user_verified && (

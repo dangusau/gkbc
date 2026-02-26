@@ -132,7 +132,7 @@ const AdminJobsEvents: React.FC = () => {
   if (jobsLoading || eventsLoading) {
     return (
       <div className="p-6 flex items-center justify-center min-h-screen">
-        <Loader2 className="animate-spin text-green-600" size={32} />
+        <Loader2 className="animate-spin text-blue-600" size={32} />
       </div>
     );
   }
@@ -146,7 +146,7 @@ const AdminJobsEvents: React.FC = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-          <Briefcase className="text-green-600" size={24} /> Jobs & Events
+          <Briefcase className="text-blue-600" size={24} /> Jobs & Events
         </h1>
       </div>
 
@@ -157,7 +157,7 @@ const AdminJobsEvents: React.FC = () => {
             onClick={() => setActiveTab('jobs')}
             className={`pb-3 px-1 text-sm font-medium border-b-2 transition-colors ${
               activeTab === 'jobs'
-                ? 'border-green-600 text-green-600'
+                ? 'border-blue-600 text-blue-600'
                 : 'border-transparent text-gray-500 hover:text-gray-700'
             }`}
           >
@@ -167,7 +167,7 @@ const AdminJobsEvents: React.FC = () => {
             onClick={() => setActiveTab('events')}
             className={`pb-3 px-1 text-sm font-medium border-b-2 transition-colors ${
               activeTab === 'events'
-                ? 'border-green-600 text-green-600'
+                ? 'border-blue-600 text-blue-600'
                 : 'border-transparent text-gray-500 hover:text-gray-700'
             }`}
           >
@@ -188,13 +188,13 @@ const AdminJobsEvents: React.FC = () => {
                   onChange={(e) => setJobSearchInput(e.target.value)}
                   onKeyDown={(e) => handleKeyDown(e, 'job')}
                   placeholder="Search jobs by title or company..."
-                  className="w-full pl-9 pr-4 py-2 border border-gray-300 rounded-lg text-sm bg-white focus:ring-2 focus:ring-green-500"
+                  className="w-full pl-9 pr-4 py-2 border border-gray-300 rounded-lg text-sm bg-white focus:ring-2 focus:ring-blue-500"
                 />
                 <Search className="absolute left-3 top-2.5 text-gray-400" size={16} />
               </div>
               <button
                 onClick={handleJobSearch}
-                className="px-4 py-2 bg-green-600 text-white rounded-lg text-sm hover:bg-green-700"
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700"
               >
                 Search
               </button>
@@ -225,16 +225,16 @@ const AdminJobsEvents: React.FC = () => {
           </div>
 
           {jobsFetching && (
-            <div className="fixed top-4 right-4 bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs shadow flex items-center gap-2">
+            <div className="fixed top-4 right-4 bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs shadow flex items-center gap-2">
               <Loader2 size={14} className="animate-spin" /> Updating jobs...
             </div>
           )}
 
           {/* Jobs Table with horizontal scroll */}
-          <div className="bg-white rounded-xl border border-green-200 overflow-hidden">
+          <div className="bg-white rounded-xl border border-blue-200 overflow-hidden">
             <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-green-50">
+                <thead className="bg-blue-50">
                   <tr>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Job</th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Company</th>
@@ -249,7 +249,7 @@ const AdminJobsEvents: React.FC = () => {
                   {jobs.map((job) => (
                     <React.Fragment key={job.id}>
                       <tr
-                        className={`hover:bg-gray-50 cursor-pointer ${expandedJobId === job.id ? 'bg-green-50' : ''}`}
+                        className={`hover:bg-gray-50 cursor-pointer ${expandedJobId === job.id ? 'bg-blue-50' : ''}`}
                         onClick={() => setExpandedJobId(expandedJobId === job.id ? null : job.id)}
                       >
                         <td className="px-6 py-4">
@@ -258,7 +258,7 @@ const AdminJobsEvents: React.FC = () => {
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="flex items-center">
-                            <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center text-green-700 font-bold text-xs mr-2">
+                            <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center text-blue-700 font-bold text-xs mr-2">
                               {job.company.avatar_url ? (
                                 <img src={job.company.avatar_url} alt="" className="w-6 h-6 rounded-full object-cover" />
                               ) : (
@@ -273,7 +273,7 @@ const AdminJobsEvents: React.FC = () => {
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{job.views_count}</td>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <span className={`px-2 py-1 text-xs rounded-full ${
-                            job.is_verified ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
+                            job.is_verified ? 'bg-blue-100 text-blue-800' : 'bg-gray-100 text-gray-800'
                           }`}>
                             {job.is_verified ? 'Verified' : 'Unverified'}
                           </span>
@@ -283,7 +283,7 @@ const AdminJobsEvents: React.FC = () => {
                             {!job.is_verified ? (
                               <button
                                 onClick={() => setConfirmAction({ isOpen: true, type: 'verify', itemType: 'job', item: job })}
-                                className="p-1 text-green-600 hover:bg-green-50 rounded"
+                                className="p-1 text-blue-600 hover:bg-blue-50 rounded"
                                 title="Verify"
                               >
                                 <CheckCircle size={18} />
@@ -310,23 +310,23 @@ const AdminJobsEvents: React.FC = () => {
                       </tr>
                       {expandedJobId === job.id && (
                         <tr>
-                          <td colSpan={7} className="px-6 py-4 bg-green-50">
+                          <td colSpan={7} className="px-6 py-4 bg-blue-50">
                             <div className="space-y-2">
                               <p className="text-sm text-gray-700">{job.description}</p>
                               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-2">
-                                <div className="bg-white rounded-lg border border-green-200 p-2">
+                                <div className="bg-white rounded-lg border border-blue-200 p-2">
                                   <p className="text-xs text-gray-500">Salary</p>
                                   <p className="text-sm font-medium">{job.salary || 'Not specified'}</p>
                                 </div>
-                                <div className="bg-white rounded-lg border border-green-200 p-2">
+                                <div className="bg-white rounded-lg border border-blue-200 p-2">
                                   <p className="text-xs text-gray-500">Experience</p>
                                   <p className="text-sm font-medium">{job.experience_level || 'Not specified'}</p>
                                 </div>
-                                <div className="bg-white rounded-lg border border-green-200 p-2">
+                                <div className="bg-white rounded-lg border border-blue-200 p-2">
                                   <p className="text-xs text-gray-500">Category</p>
                                   <p className="text-sm font-medium">{job.category || 'Uncategorized'}</p>
                                 </div>
-                                <div className="bg-white rounded-lg border border-green-200 p-2">
+                                <div className="bg-white rounded-lg border border-blue-200 p-2">
                                   <p className="text-xs text-gray-500">Contact Info</p>
                                   <p className="text-sm font-medium">View details</p>
                                 </div>
@@ -380,13 +380,13 @@ const AdminJobsEvents: React.FC = () => {
                   onChange={(e) => setEventSearchInput(e.target.value)}
                   onKeyDown={(e) => handleKeyDown(e, 'event')}
                   placeholder="Search events by title or organizer..."
-                  className="w-full pl-9 pr-4 py-2 border border-gray-300 rounded-lg text-sm bg-white focus:ring-2 focus:ring-green-500"
+                  className="w-full pl-9 pr-4 py-2 border border-gray-300 rounded-lg text-sm bg-white focus:ring-2 focus:ring-blue-500"
                 />
                 <Search className="absolute left-3 top-2.5 text-gray-400" size={16} />
               </div>
               <button
                 onClick={handleEventSearch}
-                className="px-4 py-2 bg-green-600 text-white rounded-lg text-sm hover:bg-green-700"
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700"
               >
                 Search
               </button>
@@ -403,16 +403,16 @@ const AdminJobsEvents: React.FC = () => {
           </div>
 
           {eventsFetching && (
-            <div className="fixed top-4 right-4 bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs shadow flex items-center gap-2">
+            <div className="fixed top-4 right-4 bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs shadow flex items-center gap-2">
               <Loader2 size={14} className="animate-spin" /> Updating events...
             </div>
           )}
 
           {/* Events Table with horizontal scroll */}
-          <div className="bg-white rounded-xl border border-green-200 overflow-hidden">
+          <div className="bg-white rounded-xl border border-blue-200 overflow-hidden">
             <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-green-50">
+                <thead className="bg-blue-50">
                   <tr>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Event</th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Organizer</th>
@@ -426,7 +426,7 @@ const AdminJobsEvents: React.FC = () => {
                   {events.map((event) => (
                     <React.Fragment key={event.id}>
                       <tr
-                        className={`hover:bg-gray-50 cursor-pointer ${expandedEventId === event.id ? 'bg-green-50' : ''}`}
+                        className={`hover:bg-gray-50 cursor-pointer ${expandedEventId === event.id ? 'bg-blue-50' : ''}`}
                         onClick={() => setExpandedEventId(expandedEventId === event.id ? null : event.id)}
                       >
                         <td className="px-6 py-4">
@@ -435,7 +435,7 @@ const AdminJobsEvents: React.FC = () => {
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="flex items-center">
-                            <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center text-green-700 font-bold text-xs mr-2">
+                            <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center text-blue-700 font-bold text-xs mr-2">
                               {event.organizer.avatar_url ? (
                                 <img src={event.organizer.avatar_url} alt="" className="w-6 h-6 rounded-full object-cover" />
                               ) : (
@@ -470,7 +470,7 @@ const AdminJobsEvents: React.FC = () => {
                       </tr>
                       {expandedEventId === event.id && (
                         <tr>
-                          <td colSpan={6} className="px-6 py-4 bg-green-50">
+                          <td colSpan={6} className="px-6 py-4 bg-blue-50">
                             <div className="space-y-2">
                               <p className="text-sm text-gray-700">{event.description}</p>
                               {event.image_url && (

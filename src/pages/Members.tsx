@@ -38,8 +38,8 @@ const Members: React.FC = () => {
   const marketAreas = useMemo(() => [
     'Central / Old City', 'Sabon Gari / Kantin Kwari', 'Farm Center / Beirut',
     'France Road', 'Zoo Road', 'Zaria Road', 'Dawanau', 'Sharada / Challawa',
-    'Hotoro', 'Gyadi-Gyadi / Tarauni', 'Jigawa Road', 'Mariri / Sheka',
-    'Bompai', 'Transport (Jigawa Line / Sabon Gari Park)', 'Others'
+    'Hotoro', 'Gyadi-Gyadi / Tarauni', 'Kano Road', 'Mariri / Sheka',
+    'Bompai', 'Transport (Kano Line / Sabon Gari Park)', 'Others'
   ], []);
 
   const {
@@ -195,7 +195,7 @@ const Members: React.FC = () => {
       return (
         <button
           onClick={() => navigate(`/profile/${member.id}`)}
-          className="flex items-center justify-center gap-1 px-3 py-2 text-xs bg-green-100 text-green-700 rounded-lg hover:bg-green-200 border border-green-300 min-h-[36px] w-full sm:w-auto"
+          className="flex items-center justify-center gap-1 px-3 py-2 text-xs bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 border border-blue-300 min-h-[36px] w-full sm:w-auto"
         >
           <User size={14} />
           <span>View Profile</span>
@@ -210,7 +210,7 @@ const Members: React.FC = () => {
         <div className="flex gap-2 w-full sm:w-auto">
           <button
             onClick={() => handleAcceptRequest(request.id, `${member.first_name} ${member.last_name}`)}
-            className="flex-1 sm:flex-none px-3 py-2 text-xs bg-green-600 text-white rounded-lg hover:bg-green-700 min-h-[36px]"
+            className="flex-1 sm:flex-none px-3 py-2 text-xs bg-blue-600 text-white rounded-lg hover:bg-blue-700 min-h-[36px]"
           >
             Accept
           </button>
@@ -239,7 +239,7 @@ const Members: React.FC = () => {
     return (
       <button
         onClick={() => handleConnect(member.id, `${member.first_name} ${member.last_name}`)}
-        className="flex items-center justify-center gap-1 px-3 py-2 text-xs bg-green-600 text-white rounded-lg hover:bg-green-700 border border-green-700 min-h-[36px] w-full sm:w-auto"
+        className="flex items-center justify-center gap-1 px-3 py-2 text-xs bg-blue-600 text-white rounded-lg hover:bg-blue-700 border border-blue-700 min-h-[36px] w-full sm:w-auto"
       >
         <UserPlus size={14} />
         <span>Connect</span>
@@ -252,10 +252,10 @@ const Members: React.FC = () => {
     console.log('🟡 Showing skeleton because isLoading =', isLoading, 'and no data');
     return (
       <div className="min-h-screen bg-gray-50">
-        <div className="bg-gradient-to-r from-green-600 to-green-700 text-white p-4">
+        <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-4">
           <div className="max-w-7xl mx-auto">
-            <h1 className="text-sm font-bold mb-1">GJBC Members Directory</h1>
-            <p className="text-green-200 text-xs">Connect with business professionals</p>
+            <h1 className="text-sm font-bold mb-1">GKBC Members Directory</h1>
+            <p className="text-blue-200 text-xs">Connect with business professionals</p>
           </div>
         </div>
         <div className="max-w-7xl mx-auto p-4">
@@ -321,10 +321,10 @@ const Members: React.FC = () => {
         />
       )}
 
-      <div className="bg-gradient-to-r from-green-600 to-green-700 text-white p-4">
+      <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-4">
         <div className="max-w-7xl mx-auto">
-          <h1 className="text-sm font-bold mb-1">GJBC Members Directory</h1>
-          <p className="text-green-200 text-xs">Connect with business professionals</p>
+          <h1 className="text-sm font-bold mb-1">GKBC Members Directory</h1>
+          <p className="text-blue-200 text-xs">Connect with business professionals</p>
         </div>
       </div>
 
@@ -334,7 +334,7 @@ const Members: React.FC = () => {
             onClick={() => setActiveTab('all')}
             className={`flex-1 py-4 text-center font-medium min-h-[36px] ${
               activeTab === 'all' 
-                ? 'border-b-2 border-green-600 text-green-600' 
+                ? 'border-b-2 border-blue-600 text-blue-600' 
                 : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
             }`}
           >
@@ -348,7 +348,7 @@ const Members: React.FC = () => {
             onClick={() => setActiveTab('connections')}
             className={`flex-1 py-4 text-center font-medium min-h-[36px] relative ${
               activeTab === 'connections' 
-                ? 'border-b-2 border-green-600 text-green-600' 
+                ? 'border-b-2 border-blue-600 text-blue-600' 
                 : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
             }`}
           >
@@ -378,12 +378,12 @@ const Members: React.FC = () => {
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
                     placeholder="Search by name, business..."
-                    className="w-full pl-10 pr-4 py-3 text-xs bg-white rounded-lg border focus:ring-2 focus:ring-green-500 focus:border-green-500 min-h-[36px]"
+                    className="w-full pl-10 pr-4 py-3 text-xs bg-white rounded-lg border focus:ring-2 focus:ring-blue-500 focus:border-blue-500 min-h-[36px]"
                   />
                 </div>
                 <button
                   onClick={() => setShowFilters(!showFilters)}
-                  className="px-4 py-3 text-xs bg-white text-green-600 rounded-lg border border-green-300 hover:bg-green-50 flex items-center gap-2 font-medium min-h-[36px]"
+                  className="px-4 py-3 text-xs bg-white text-blue-600 rounded-lg border border-blue-300 hover:bg-blue-50 flex items-center gap-2 font-medium min-h-[36px]"
                 >
                   <Filter size={16} />
                   <span className="hidden sm:inline">Filters</span>
@@ -391,12 +391,12 @@ const Members: React.FC = () => {
               </div>
 
               {showFilters && (
-                <div className="bg-green-50 p-4 rounded-lg border">
+                <div className="bg-blue-50 p-4 rounded-lg border">
                   <div className="flex items-center justify-between mb-3">
                     <h3 className="font-medium text-xs text-gray-900">Filters</h3>
                     <button
                       onClick={clearFilters}
-                      className="text-xs text-green-600 hover:text-green-700 font-medium min-h-[36px] px-3"
+                      className="text-xs text-blue-600 hover:text-blue-700 font-medium min-h-[36px] px-3"
                     >
                       Clear All
                     </button>
@@ -412,7 +412,7 @@ const Members: React.FC = () => {
                       <select
                         value={businessType}
                         onChange={(e) => setBusinessType(e.target.value)}
-                        className="w-full px-3 py-2.5 text-xs bg-white rounded-lg border focus:ring-2 focus:ring-green-500 focus:border-green-500 min-h-[36px]"
+                        className="w-full px-3 py-2.5 text-xs bg-white rounded-lg border focus:ring-2 focus:ring-blue-500 focus:border-blue-500 min-h-[36px]"
                       >
                         <option value="">All Business Types</option>
                         <option value="products">Products</option>
@@ -429,7 +429,7 @@ const Members: React.FC = () => {
                       <select
                         value={marketArea}
                         onChange={(e) => setMarketArea(e.target.value)}
-                        className="w-full px-3 py-2.5 text-xs bg-white rounded-lg border focus:ring-2 focus:ring-green-500 focus:border-green-500 min-h-[36px]"
+                        className="w-full px-3 py-2.5 text-xs bg-white rounded-lg border focus:ring-2 focus:ring-blue-500 focus:border-blue-500 min-h-[36px]"
                       >
                         <option value="">All Market Areas</option>
                         {marketAreas.map(area => (
@@ -450,14 +450,14 @@ const Members: React.FC = () => {
           <>
             {filteredMembers.length === 0 && membersPages.length > 0 ? (
               <div className="text-center py-12">
-                <div className="w-20 h-20 bg-green-100 rounded-full mx-auto mb-4 flex items-center justify-center">
-                  <Building size={32} className="text-green-500" />
+                <div className="w-20 h-20 bg-blue-100 rounded-full mx-auto mb-4 flex items-center justify-center">
+                  <Building size={32} className="text-blue-500" />
                 </div>
                 <h3 className="text-sm font-semibold text-gray-900 mb-2">No members found</h3>
                 <p className="text-gray-600 text-xs mb-4">Try adjusting your search or check your connections</p>
                 <button
                   onClick={clearFilters}
-                  className="px-5 py-3 text-xs bg-green-600 text-white rounded-lg hover:bg-green-700 font-medium min-h-[36px]"
+                  className="px-5 py-3 text-xs bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium min-h-[36px]"
                 >
                   Clear All Filters
                 </button>
@@ -466,7 +466,7 @@ const Members: React.FC = () => {
               <>
                 {isFetching && (
                   <div className="text-center py-2">
-                    <span className="text-xs text-green-600">Updating...</span>
+                    <span className="text-xs text-blue-600">Updating...</span>
                   </div>
                 )}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
@@ -485,7 +485,7 @@ const Members: React.FC = () => {
                     <button
                       onClick={() => fetchNextPage()}
                       disabled={isFetchingNextPage}
-                      className="px-6 py-3 text-xs bg-white text-green-600 font-medium rounded-lg border border-green-300 hover:bg-green-50 disabled:opacity-50 min-h-[36px]"
+                      className="px-6 py-3 text-xs bg-white text-blue-600 font-medium rounded-lg border border-blue-300 hover:bg-blue-50 disabled:opacity-50 min-h-[36px]"
                     >
                       {isFetchingNextPage ? 'Loading...' : 'Load More Members'}
                     </button>

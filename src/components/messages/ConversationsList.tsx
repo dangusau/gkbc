@@ -126,8 +126,8 @@ const ConversationsList: React.FC = () => {
       <div className="sticky top-0 bg-white border-b z-10 px-4 py-3">
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2">
-            <div className="p-2 bg-green-50 rounded-lg">
-              <MessageCircle className="w-5 h-5 text-green-600" />
+            <div className="p-2 bg-blue-50 rounded-lg">
+              <MessageCircle className="w-5 h-5 text-blue-600" />
             </div>
             <h1 className="text-xl font-bold text-gray-900">Messages</h1>
             {unreadCounts?.total ? (
@@ -153,7 +153,7 @@ const ConversationsList: React.FC = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search conversations..."
-            className="w-full pl-10 pr-4 py-2.5 bg-gray-100 rounded-xl border focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-400"
+            className="w-full pl-10 pr-4 py-2.5 bg-gray-100 rounded-xl border focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400"
           />
         </div>
       </div>
@@ -165,8 +165,8 @@ const ConversationsList: React.FC = () => {
             onClick={() => setActiveTab('all')}
             className={`flex items-center gap-2 py-3 border-b-2 transition-colors ${
               activeTab === 'all'
-                ? 'border-green-600 text-green-600'
-                : 'border-transparent text-gray-500 hover:text-green-600'
+                ? 'border-blue-600 text-blue-600'
+                : 'border-transparent text-gray-500 hover:text-blue-600'
             }`}
           >
             <MessageCircle className="w-4 h-4" />
@@ -184,8 +184,8 @@ const ConversationsList: React.FC = () => {
               onClick={() => setActiveTab('network')}
               className={`flex items-center gap-2 py-3 border-b-2 transition-colors ${
                 activeTab === 'network'
-                  ? 'border-green-600 text-green-600'
-                  : 'border-transparent text-gray-500 hover:text-green-600'
+                  ? 'border-blue-600 text-blue-600'
+                  : 'border-transparent text-gray-500 hover:text-blue-600'
               }`}
             >
               <Users className="w-4 h-4" />
@@ -202,8 +202,8 @@ const ConversationsList: React.FC = () => {
             onClick={() => setActiveTab('marketplace')}
             className={`flex items-center gap-2 py-3 border-b-2 transition-colors ${
               activeTab === 'marketplace'
-                ? 'border-green-600 text-green-600'
-                : 'border-transparent text-gray-500 hover:text-green-600'
+                ? 'border-blue-600 text-blue-600'
+                : 'border-transparent text-gray-500 hover:text-blue-600'
             }`}
           >
             <Store className="w-4 h-4" />
@@ -245,7 +245,7 @@ const ConversationsList: React.FC = () => {
             {!searchQuery && (
               <button
                 onClick={handleNewConversation}
-                className="inline-flex items-center gap-2 bg-green-600 text-white px-4 py-2.5 rounded-xl hover:bg-green-700"
+                className="inline-flex items-center gap-2 bg-blue-600 text-white px-4 py-2.5 rounded-xl hover:bg-blue-700"
               >
                 <Plus className="w-4 h-4" />
                 {activeTab === 'marketplace' ? 'Browse Marketplace' : 'New Conversation'}
@@ -262,7 +262,7 @@ const ConversationsList: React.FC = () => {
               >
                 <div className="flex items-start gap-3">
                   <div className="relative flex-shrink-0">
-                    <div className="w-14 h-14 rounded-full overflow-hidden bg-gradient-to-br from-green-500 to-green-600">
+                    <div className="w-14 h-14 rounded-full overflow-hidden bg-gradient-to-br from-blue-500 to-blue-600">
                       {conv.other_user_avatar ? (
                         <img
                           src={conv.other_user_avatar}
@@ -314,7 +314,7 @@ const ConversationsList: React.FC = () => {
                         <span>{formatTimeAgo(conv.last_message_at)}</span>
                       </div>
                       {conv.unread_count > 0 && (
-                        <span className="text-xs font-medium text-green-600">
+                        <span className="text-xs font-medium text-blue-600">
                           {conv.unread_count} new
                         </span>
                       )}
@@ -331,7 +331,7 @@ const ConversationsList: React.FC = () => {
       {userStatus === 'verified' && (
         <button
           onClick={handleNewConversation}
-          className="fixed bottom-20 right-4 bg-green-600 text-white p-4 rounded-full shadow-xl hover:bg-green-700 transition-colors"
+          className="fixed bottom-20 right-4 bg-blue-600 text-white p-4 rounded-full shadow-xl hover:bg-blue-700 transition-colors"
           aria-label="New conversation"
         >
           <Plus className="w-6 h-6" />

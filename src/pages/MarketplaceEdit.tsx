@@ -164,7 +164,7 @@ const MarketplaceEdit: React.FC = () => {
           <h2 className="text-lg font-bold text-gray-900">Listing not found</h2>
           <button
             onClick={() => navigate('/marketplace')}
-            className="mt-4 px-4 py-2 bg-green-600 text-white rounded-xl"
+            className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-xl"
           >
             Back to Marketplace
           </button>
@@ -185,14 +185,14 @@ const MarketplaceEdit: React.FC = () => {
       )}
 
       {/* Header */}
-      <div className="sticky top-0 z-30 bg-white border-b border-green-200 px-4 py-3">
+      <div className="sticky top-0 z-30 bg-white border-b border-blue-200 px-4 py-3">
         <div className="max-w-2xl mx-auto flex items-center gap-4">
           <button
             onClick={handleCancel}
-            className="p-2 hover:bg-green-50 rounded-full transition-colors"
+            className="p-2 hover:bg-blue-50 rounded-full transition-colors"
             aria-label="Go back"
           >
-            <ArrowLeft size={20} className="text-green-600" />
+            <ArrowLeft size={20} className="text-blue-600" />
           </button>
           <h1 className="text-sm font-bold text-gray-900">Edit Listing</h1>
         </div>
@@ -208,8 +208,8 @@ const MarketplaceEdit: React.FC = () => {
               value={title}
               onChange={(e) => { setTitle(e.target.value); if (formErrors.title) setFormErrors(prev => ({ ...prev, title: '' })); }}
               placeholder="What are you selling?"
-              className={`w-full p-2 border rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all ${
-                formErrors.title ? 'border-red-300' : 'border-green-200'
+              className={`w-full p-2 border rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all ${
+                formErrors.title ? 'border-red-300' : 'border-blue-200'
               }`}
               maxLength={100}
             />
@@ -228,7 +228,7 @@ const MarketplaceEdit: React.FC = () => {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Describe your item in detail..."
-              className="w-full p-2 border border-green-200 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all h-24 resize-none"
+              className="w-full p-2 border border-blue-200 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all h-24 resize-none"
               maxLength={1000}
             />
             <div className="flex justify-between text-xs text-gray-500">
@@ -250,8 +250,8 @@ const MarketplaceEdit: React.FC = () => {
                   value={price}
                   onChange={(e) => { setPrice(e.target.value); if (formErrors.price) setFormErrors(prev => ({ ...prev, price: '' })); }}
                   placeholder="0.00"
-                  className={`w-full pl-10 pr-3 py-2 border rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all ${
-                    formErrors.price ? 'border-red-300' : 'border-green-200'
+                  className={`w-full pl-10 pr-3 py-2 border rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all ${
+                    formErrors.price ? 'border-red-300' : 'border-blue-200'
                   }`}
                   min="0"
                   step="0.01"
@@ -270,8 +270,8 @@ const MarketplaceEdit: React.FC = () => {
               <select
                 value={category}
                 onChange={(e) => { setCategory(e.target.value); if (formErrors.category) setFormErrors(prev => ({ ...prev, category: '' })); }}
-                className={`w-full p-2 border rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all ${
-                  formErrors.category ? 'border-red-300' : 'border-green-200'
+                className={`w-full p-2 border rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all ${
+                  formErrors.category ? 'border-red-300' : 'border-blue-200'
                 }`}
               >
                 <option value="">Select category</option>
@@ -300,8 +300,8 @@ const MarketplaceEdit: React.FC = () => {
                     onClick={() => setCondition(value)}
                     className={`p-2 rounded-lg border text-xs font-medium transition-all min-h-[36px] ${
                       condition === value
-                        ? 'bg-green-600 text-white border-green-600'
-                        : 'bg-white text-gray-700 border-green-200 hover:bg-green-50'
+                        ? 'bg-blue-600 text-white border-blue-600'
+                        : 'bg-white text-gray-700 border-blue-200 hover:bg-blue-50'
                     }`}
                   >
                     {label}
@@ -321,8 +321,8 @@ const MarketplaceEdit: React.FC = () => {
                   value={location}
                   onChange={(e) => { setLocation(e.target.value); if (formErrors.location) setFormErrors(prev => ({ ...prev, location: '' })); }}
                   placeholder="City, State"
-                  className={`w-full pl-10 pr-3 py-2 border rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all ${
-                    formErrors.location ? 'border-red-300' : 'border-green-200'
+                  className={`w-full pl-10 pr-3 py-2 border rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all ${
+                    formErrors.location ? 'border-red-300' : 'border-blue-200'
                   }`}
                 />
               </div>
@@ -346,7 +346,7 @@ const MarketplaceEdit: React.FC = () => {
             <div className="grid grid-cols-3 sm:grid-cols-5 gap-2">
               {/* Existing images */}
               {existingImages.map((url, index) => (
-                <div key={`existing-${index}`} className="relative aspect-square rounded-lg overflow-hidden border border-green-200 group">
+                <div key={`existing-${index}`} className="relative aspect-square rounded-lg overflow-hidden border border-blue-200 group">
                   <img src={url} alt={`Existing ${index + 1}`} className="w-full h-full object-cover" />
                   <button
                     type="button"
@@ -356,7 +356,7 @@ const MarketplaceEdit: React.FC = () => {
                     <X size={12} />
                   </button>
                   {index === 0 && existingImages.length > 0 && (
-                    <div className="absolute top-1 left-1 px-1 py-0.5 bg-green-600 text-white text-xs font-medium rounded-full">
+                    <div className="absolute top-1 left-1 px-1 py-0.5 bg-blue-600 text-white text-xs font-medium rounded-full">
                       Cover
                     </div>
                   )}
@@ -365,7 +365,7 @@ const MarketplaceEdit: React.FC = () => {
 
               {/* New images */}
               {images.map((file, index) => (
-                <div key={`new-${index}`} className="relative aspect-square rounded-lg overflow-hidden border border-green-200 group">
+                <div key={`new-${index}`} className="relative aspect-square rounded-lg overflow-hidden border border-blue-200 group">
                   <img
                     src={URL.createObjectURL(file)}
                     alt={`New ${index + 1}`}
@@ -383,9 +383,9 @@ const MarketplaceEdit: React.FC = () => {
 
               {/* Add button */}
               {existingImages.length + images.length < MAX_IMAGES && (
-                <label className="aspect-square border border-dashed border-green-300 rounded-lg flex flex-col items-center justify-center cursor-pointer hover:border-green-500 hover:bg-green-50 transition-all group">
-                  <Camera size={16} className="text-green-600 mb-2" />
-                  <span className="text-xs font-medium text-green-700">Add Photo</span>
+                <label className="aspect-square border border-dashed border-blue-300 rounded-lg flex flex-col items-center justify-center cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition-all group">
+                  <Camera size={16} className="text-blue-600 mb-2" />
+                  <span className="text-xs font-medium text-blue-700">Add Photo</span>
                   <input
                     type="file"
                     accept="image/*"
@@ -416,7 +416,7 @@ const MarketplaceEdit: React.FC = () => {
             <button
               type="submit"
               disabled={uploading}
-              className="flex-1 py-3 bg-green-600 text-white rounded-xl font-medium hover:bg-green-700 disabled:opacity-50 transition-colors text-sm"
+              className="flex-1 py-3 bg-blue-600 text-white rounded-xl font-medium hover:bg-blue-700 disabled:opacity-50 transition-colors text-sm"
             >
               {uploading ? 'Saving...' : 'Save Changes'}
             </button>

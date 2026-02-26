@@ -130,12 +130,12 @@ const Explore: React.FC = () => {
   }, [deleteEvent, deleteConfirm]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-green-50 to-white safe-area">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white safe-area">
       {/* Header */}
-      <div className="bg-gradient-to-r from-green-600 to-green-700 text-white p-3 border-b border-green-800">
+      <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-3 border-b border-blue-800">
         <div className="max-w-7xl mx-auto">
           <h1 className="text-sm font-bold mb-1">Explore</h1>
-          <p className="text-green-100 text-xs">Find jobs and events in GJBC community</p>
+          <p className="text-blue-100 text-xs">Find jobs and events in GKBC community</p>
         </div>
       </div>
 
@@ -149,7 +149,7 @@ const Explore: React.FC = () => {
       )}
 
       {/* Search and Filter Bar */}
-      <div className="sticky top-0 bg-white border-b border-green-200 z-10 p-3">
+      <div className="sticky top-0 bg-white border-b border-blue-200 z-10 p-3">
         <div className="flex items-center gap-2">
           <div className="flex-1 relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={16} />
@@ -158,24 +158,24 @@ const Explore: React.FC = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder={activeTab === 'jobs' ? "Search jobs..." : "Search events..."}
-              className="w-full pl-10 pr-3 py-2 bg-white rounded-lg border border-green-300
-                       focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 text-xs
+              className="w-full pl-10 pr-3 py-2 bg-white rounded-lg border border-blue-300
+                       focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-xs
                        min-h-[36px]"
               aria-label={`Search ${activeTab}`}
             />
           </div>
           <button
-            className="p-2 bg-white rounded-lg border border-green-300 hover:bg-green-50
+            className="p-2 bg-white rounded-lg border border-blue-300 hover:bg-blue-50
                      min-h-[36px] min-w-[36px] flex items-center justify-center"
             aria-label="Filter results"
           >
-            <Filter size={16} className="text-green-600" />
+            <Filter size={16} className="text-blue-600" />
           </button>
           <button
             onClick={handleCreateClick}
             className={`p-2 rounded-lg border min-h-[36px] min-w-[36px] flex items-center justify-center ${
               isVerified
-                ? 'bg-gradient-to-r from-green-600 to-green-700 text-white hover:from-green-700 hover:to-green-800 border-green-700'
+                ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800 border-blue-700'
                 : 'bg-gray-100 text-gray-400 border-gray-300 cursor-not-allowed'
             }`}
             aria-label={activeTab === 'jobs' ? "Post a job" : "Create an event"}
@@ -189,13 +189,13 @@ const Explore: React.FC = () => {
       </div>
 
       {/* Tabs */}
-      <div className="border-b border-green-200">
+      <div className="border-b border-blue-200">
         <div className="flex">
           <button
             onClick={() => setActiveTab('jobs')}
             className={`flex-1 py-2 text-center font-medium transition-colors min-h-[36px] ${
               activeTab === 'jobs'
-                ? 'bg-gradient-to-r from-green-50 to-green-100 text-green-700 border-b-2 border-green-600'
+                ? 'bg-gradient-to-r from-blue-50 to-blue-100 text-blue-700 border-b-2 border-blue-600'
                 : 'text-gray-600 hover:bg-gray-50'
             }`}
             aria-label="Show jobs"
@@ -204,7 +204,7 @@ const Explore: React.FC = () => {
               <Briefcase size={14} />
               <span className="text-xs">Jobs</span>
               {jobs.length > 0 && (
-                <span className="bg-green-100 text-green-700 text-xs font-medium px-2 py-0.5 rounded-full">
+                <span className="bg-blue-100 text-blue-700 text-xs font-medium px-2 py-0.5 rounded-full">
                   {jobs.length}
                 </span>
               )}
@@ -214,7 +214,7 @@ const Explore: React.FC = () => {
             onClick={() => setActiveTab('events')}
             className={`flex-1 py-2 text-center font-medium transition-colors min-h-[36px] ${
               activeTab === 'events'
-                ? 'bg-gradient-to-r from-green-50 to-green-100 text-green-700 border-b-2 border-green-600'
+                ? 'bg-gradient-to-r from-blue-50 to-blue-100 text-blue-700 border-b-2 border-blue-600'
                 : 'text-gray-600 hover:bg-gray-50'
             }`}
             aria-label="Show events"
@@ -223,7 +223,7 @@ const Explore: React.FC = () => {
               <Calendar size={14} />
               <span className="text-xs">Events</span>
               {events.length > 0 && (
-                <span className="bg-green-100 text-green-700 text-xs font-medium px-2 py-0.5 rounded-full">
+                <span className="bg-blue-100 text-blue-700 text-xs font-medium px-2 py-0.5 rounded-full">
                   {events.length}
                 </span>
               )}
@@ -237,9 +237,9 @@ const Explore: React.FC = () => {
         {loading ? (
           <div className="space-y-3">
             {[...Array(3)].map((_, i) => (
-              <div key={i} className="bg-white rounded-xl p-3 border border-green-200 animate-pulse">
+              <div key={i} className="bg-white rounded-xl p-3 border border-blue-200 animate-pulse">
                 <div className="flex gap-3">
-                  <div className="w-12 h-12 bg-gray-200 rounded-lg border border-green-200"></div>
+                  <div className="w-12 h-12 bg-gray-200 rounded-lg border border-blue-200"></div>
                   <div className="flex-1">
                     <div className="h-3 bg-gray-200 rounded w-3/4 mb-2"></div>
                     <div className="h-2 bg-gray-200 rounded w-1/2 mb-2"></div>
@@ -253,8 +253,8 @@ const Explore: React.FC = () => {
           <div className="space-y-3">
             {jobs.length === 0 ? (
               <div className="text-center py-6">
-                <div className="w-16 h-16 bg-green-100 rounded-full mx-auto mb-3 flex items-center justify-center border border-green-200">
-                  <Briefcase size={24} className="text-green-500" />
+                <div className="w-16 h-16 bg-blue-100 rounded-full mx-auto mb-3 flex items-center justify-center border border-blue-200">
+                  <Briefcase size={24} className="text-blue-500" />
                 </div>
                 <h3 className="text-sm font-bold text-gray-900 mb-1">No jobs found</h3>
                 <p className="text-xs text-gray-600 mb-3">
@@ -266,7 +266,7 @@ const Explore: React.FC = () => {
                   onClick={handleCreateClick}
                   className={`px-4 py-2 rounded-lg font-medium shadow-md text-xs min-h-[36px] ${
                     isVerified
-                      ? 'bg-gradient-to-r from-green-600 to-green-700 text-white hover:from-green-700 hover:to-green-800'
+                      ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800'
                       : 'bg-gray-100 text-gray-400 border border-gray-300 cursor-not-allowed'
                   }`}
                   aria-label={isVerified ? "Post a job" : "Upgrade to post job"}
@@ -290,8 +290,8 @@ const Explore: React.FC = () => {
           <div className="space-y-3">
             {events.length === 0 ? (
               <div className="text-center py-6">
-                <div className="w-16 h-16 bg-green-100 rounded-full mx-auto mb-3 flex items-center justify-center border border-green-200">
-                  <Calendar size={24} className="text-green-500" />
+                <div className="w-16 h-16 bg-blue-100 rounded-full mx-auto mb-3 flex items-center justify-center border border-blue-200">
+                  <Calendar size={24} className="text-blue-500" />
                 </div>
                 <h3 className="text-sm font-bold text-gray-900 mb-1">No events found</h3>
                 <p className="text-xs text-gray-600 mb-3">
@@ -303,7 +303,7 @@ const Explore: React.FC = () => {
                   onClick={handleCreateClick}
                   className={`px-4 py-2 rounded-lg font-medium shadow-md text-xs min-h-[36px] ${
                     isVerified
-                      ? 'bg-gradient-to-r from-green-600 to-green-700 text-white hover:from-green-700 hover:to-green-800'
+                      ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800'
                       : 'bg-gray-100 text-gray-400 border border-gray-300 cursor-not-allowed'
                   }`}
                   aria-label={isVerified ? "Create an event" : "Upgrade to create event"}
@@ -329,9 +329,9 @@ const Explore: React.FC = () => {
       {/* Floating Create Button */}
       <button
         onClick={handleCreateClick}
-        className={`fixed bottom-20 right-4 bg-green-600 text-white p-3 rounded-full shadow-lg hover:bg-green-700 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center ${
+        className={`fixed bottom-20 right-4 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center ${
           isVerified
-            ? 'bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 border-green-800'
+            ? 'bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 border-blue-800'
             : 'bg-gray-400 border-gray-500 cursor-not-allowed'
         }`}
         aria-label={activeTab === 'jobs' ? "Post a job" : "Create an event"}

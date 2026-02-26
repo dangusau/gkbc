@@ -213,7 +213,7 @@ export const LOCATION_AXIS = [
   'Sharada / Challawa',
   'Hotoro',
   'Gyadi-Gyadi / Tarauni',
-  'Jigawa Road',
+  'Kano Road',
   'Mariri / Sheka',
   'Bompai',
   'Transport (Kano Line / Sabon Gari Park)',

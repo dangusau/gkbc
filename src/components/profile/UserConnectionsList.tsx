@@ -71,8 +71,8 @@ export const UserConnectionsList: React.FC<UserConnectionsListProps> = ({ userId
             onClick={() => sendRequestMutation.mutate(conn.user_id)}
             className={`w-full py-2 text-xs rounded-lg font-medium min-h-[36px] flex items-center justify-center gap-1 ${
               isAlreadyConnected
-                ? 'bg-green-100 text-green-700 border border-green-300'
-                : 'bg-green-600 text-white hover:bg-green-700 border border-green-700'
+                ? 'bg-blue-100 text-blue-700 border border-blue-300'
+                : 'bg-blue-600 text-white hover:bg-blue-700 border border-blue-700'
             }`}
           >
             {sendRequestMutation.isPending ? (

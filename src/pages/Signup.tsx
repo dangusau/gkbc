@@ -52,13 +52,13 @@ const StatusModal: React.FC<{
           <div className="flex items-center justify-center mb-3">
             <div className={`w-12 h-12 rounded-full flex items-center justify-center border ${
               isAlreadyRegistered 
-                ? 'bg-green-100 border-green-200' 
-                : 'bg-green-100 border-green-200'
+                ? 'bg-blue-100 border-blue-200' 
+                : 'bg-blue-100 border-blue-200'
             }`}>
               {isAlreadyRegistered ? (
-                <UserCheck className="text-green-600" size={24} />
+                <UserCheck className="text-blue-600" size={24} />
               ) : (
-                <CheckCircle className="text-green-600" size={24} />
+                <CheckCircle className="text-blue-600" size={24} />
               )}
             </div>
           </div>
@@ -73,7 +73,7 @@ const StatusModal: React.FC<{
             {isAlreadyRegistered ? (
               <>
                 <p className="text-gray-600 mb-2 text-sm">
-                  An account with email <span className="font-semibold text-green-600">{email}</span> already exists.
+                  An account with email <span className="font-semibold text-blue-600">{email}</span> already exists.
                 </p>
                 <p className="text-gray-600 text-sm">
                   Redirecting you to login...
@@ -84,10 +84,10 @@ const StatusModal: React.FC<{
                 <p className="text-gray-600 mb-2 text-sm">
                   A verification link has been sent to:
                 </p>
-                <p className="font-semibold text-green-600 text-base mb-3">{email}</p>
-                <div className="text-left bg-green-50 border border-green-200 rounded-lg p-3 mb-3">
+                <p className="font-semibold text-blue-600 text-base mb-3">{email}</p>
+                <div className="text-left bg-blue-50 border border-blue-200 rounded-lg p-3 mb-3">
                   <p className="text-xs text-gray-700 mb-1">
-                    <span className="font-semibold">📧 Check your inbox or spam folder</span> for an email titled <span className="font-mono bg-green-100 px-1 py-0.5 rounded">"Supabase Authentication"</span>
+                    <span className="font-semibold">📧 Check your inbox or spam folder</span> for an email titled <span className="font-mono bg-blue-100 px-1 py-0.5 rounded">"Supabase Authentication"</span>
                   </p>
                   <p className="text-xs text-gray-700 mb-1">
                     <span className="font-semibold">🔗 Click the link</span> to verify your email. You'll be redirected to login.
@@ -109,12 +109,12 @@ const StatusModal: React.FC<{
               <span className="text-xs font-medium text-gray-700">
                 {isAlreadyRegistered ? 'Redirecting to login...' : 'Redirecting in...'}
               </span>
-              <span className="text-xs font-medium text-green-600">{redirectSeconds}s</span>
+              <span className="text-xs font-medium text-blue-600">{redirectSeconds}s</span>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-1.5">
               <div 
                 className={`h-1.5 rounded-full ${
-                  isAlreadyRegistered ? 'bg-green-500' : 'bg-green-500'
+                  isAlreadyRegistered ? 'bg-blue-500' : 'bg-blue-500'
                 }`}
                 style={{ 
                   width: `${100 - (redirectSeconds / (isAlreadyRegistered ? 3 : 10) * 100)}%` 
@@ -411,29 +411,29 @@ const SignUp: React.FC = () => {
         redirectSeconds={redirectSeconds}
       />
       
-      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-green-50 flex flex-col justify-center items-center px-3 py-6 safe-area">
+      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-blue-50 flex flex-col justify-center items-center px-3 py-6 safe-area">
         {/* Background Elements */}
-        <div className="absolute top-0 left-0 right-0 h-48 bg-gradient-to-b from-green-600/10 to-transparent" />
-        <div className="absolute top-1/4 -right-12 w-48 h-48 bg-green-500/5 rounded-full blur-3xl" />
+        <div className="absolute top-0 left-0 right-0 h-48 bg-gradient-to-b from-blue-600/10 to-transparent" />
+        <div className="absolute top-1/4 -right-12 w-48 h-48 bg-blue-500/5 rounded-full blur-3xl" />
         <div className="absolute bottom-1/4 -left-12 w-48 h-48 bg-indigo-400/5 rounded-full blur-3xl" />
         
         {/* Main Container */}
         <div className="w-full max-w-md relative z-10">
           {/* Header */}
           <div className="flex flex-col items-center mb-6">
-            {/* Logo Container */}
+            {/* logo Container */}
             <div className="relative mb-3">
-              <div className="w-20 h-20 rounded-xl flex items-center justify-center shadow-lg shadow-green-500/20 overflow-hidden border border-green-100">
+              <div className="w-20 h-20 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20 overflow-hidden border border-blue-100">
                 <img 
-                  src="/GJBCLOGO.png" 
-                  alt="GJBC Logo" 
+                  src="/GKBClogo.png" 
+                  alt="GKBC logo" 
                   className="w-full h-full object-contain p-1"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.style.display = 'none';
                     target.parentElement!.innerHTML = `
-                      <div class="w-full h-full bg-gradient-to-br from-green-600 to-green-600 rounded-lg flex items-center justify-center">
-                        <span class="text-white font-bold text-base">GJBC</span>
+                      <div class="w-full h-full bg-gradient-to-br from-blue-600 to-blue-600 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-base">GKBC</span>
                       </div>
                     `;
                   }}
@@ -441,15 +441,15 @@ const SignUp: React.FC = () => {
               </div>
             </div>
             
-            {/* GJBC Title */}
+            {/* GKBC Title */}
             <div className="mb-4">
               <h1 className="text-2xl font-black text-gray-900 text-center">
-                <span className="bg-gradient-to-r from-green-600 to-green-600 bg-clip-text text-transparent">
-                  GJBC
+                <span className="bg-gradient-to-r from-blue-600 to-blue-600 bg-clip-text text-transparent">
+                  GKBC
                 </span>
               </h1>
               <p className="text-xs text-gray-500 text-center font-medium mt-0.5">
-                Driving Economic Growth
+                Africa's Emerging Economic Vanguard
               </p>
             </div>
             
@@ -457,7 +457,7 @@ const SignUp: React.FC = () => {
             <div className="text-center mb-2">
               <h2 className="text-xl font-bold text-gray-900 mb-1">Create Your Account</h2>
               <p className="text-xs text-gray-500 font-medium max-w-xs mx-auto">
-                Join Greater Jigawa and grow your business
+                Join Greater Kano and grow your business
               </p>
             </div>
           </div>
@@ -494,10 +494,10 @@ const SignUp: React.FC = () => {
                         type="text"
                         value={formData.firstName}
                         onChange={(e) => handleInputChange('firstName', e.target.value)}
-                        className={`w-full pl-10 pr-3 py-2.5 bg-white border rounded-lg text-sm focus:outline-none focus:ring-1 focus:border-green-500 ${
+                        className={`w-full pl-10 pr-3 py-2.5 bg-white border rounded-lg text-sm focus:outline-none focus:ring-1 focus:border-blue-500 ${
                           validationErrors.firstName
                             ? 'border-red-300 focus:ring-red-500/20'
-                            : 'border-green-200 focus:ring-green-500/20'
+                            : 'border-blue-200 focus:ring-blue-500/20'
                         }`}
                         placeholder="Ahmad"
                         required
@@ -520,10 +520,10 @@ const SignUp: React.FC = () => {
                       type="text"
                       value={formData.lastName}
                       onChange={(e) => handleInputChange('lastName', e.target.value)}
-                      className={`w-full px-3 py-2.5 bg-white border rounded-lg text-sm focus:outline-none focus:ring-1 focus:border-green-500 ${
+                      className={`w-full px-3 py-2.5 bg-white border rounded-lg text-sm focus:outline-none focus:ring-1 focus:border-blue-500 ${
                         validationErrors.lastName
                           ? 'border-red-300 focus:ring-red-500/20'
-                          : 'border-green-200 focus:ring-green-500/20'
+                          : 'border-blue-200 focus:ring-blue-500/20'
                       }`}
                       placeholder="Abubakar"
                       required
@@ -550,10 +550,10 @@ const SignUp: React.FC = () => {
                       type="email"
                       value={formData.email}
                       onChange={(e) => handleInputChange('email', e.target.value)}
-                      className={`w-full pl-10 pr-3 py-2.5 bg-white border rounded-lg text-sm focus:outline-none focus:ring-1 focus:border-green-500 ${
+                      className={`w-full pl-10 pr-3 py-2.5 bg-white border rounded-lg text-sm focus:outline-none focus:ring-1 focus:border-blue-500 ${
                         validationErrors.email
                           ? 'border-red-300 focus:ring-red-500/20'
-                          : 'border-green-200 focus:ring-green-500/20'
+                          : 'border-blue-200 focus:ring-blue-500/20'
                       }`}
                       placeholder="Ahmad@company.com"
                       required
@@ -580,10 +580,10 @@ const SignUp: React.FC = () => {
                       type="tel"
                       value={formData.phone}
                       onChange={(e) => handleInputChange('phone', e.target.value)}
-                      className={`w-full pl-10 pr-3 py-2.5 bg-white border rounded-lg text-sm focus:outline-none focus:ring-1 focus:border-green-500 ${
+                      className={`w-full pl-10 pr-3 py-2.5 bg-white border rounded-lg text-sm focus:outline-none focus:ring-1 focus:border-blue-500 ${
                         validationErrors.phone
                           ? 'border-red-300 focus:ring-red-500/20'
-                          : 'border-green-200 focus:ring-green-500/20'
+                          : 'border-blue-200 focus:ring-blue-500/20'
                       }`}
                       placeholder="+2348000000000"
                     />
@@ -608,7 +608,7 @@ const SignUp: React.FC = () => {
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="text-xs text-green-600 hover:text-green-700 font-medium flex items-center gap-0.5"
+                      className="text-xs text-blue-600 hover:text-blue-700 font-medium flex items-center gap-0.5"
                     >
                       {showPassword ? 'Hide' : 'Show'}
                     </button>
@@ -622,10 +622,10 @@ const SignUp: React.FC = () => {
                       type={showPassword ? 'text' : 'password'}
                       value={formData.password}
                       onChange={(e) => handleInputChange('password', e.target.value)}
-                      className={`w-full pl-10 pr-10 py-2.5 bg-white border rounded-lg text-sm focus:outline-none focus:ring-1 focus:border-green-500 ${
+                      className={`w-full pl-10 pr-10 py-2.5 bg-white border rounded-lg text-sm focus:outline-none focus:ring-1 focus:border-blue-500 ${
                         validationErrors.password
                           ? 'border-red-300 focus:ring-red-500/20'
-                          : 'border-green-200 focus:ring-green-500/20'
+                          : 'border-blue-200 focus:ring-blue-500/20'
                       }`}
                       placeholder="Create a strong password"
                       required
@@ -648,7 +648,7 @@ const SignUp: React.FC = () => {
                         <span className="text-gray-600">Password strength:</span>
                         <span className={`font-medium ${
                           passwordStrength < 50 ? 'text-red-600' :
-                          passwordStrength < 80 ? 'text-yellow-600' : 'text-green-600'
+                          passwordStrength < 80 ? 'text-yellow-600' : 'text-blue-600'
                         }`}>
                           {passwordStrength < 50 ? 'Weak' :
                            passwordStrength < 80 ? 'Good' : 'Strong'}
@@ -658,7 +658,7 @@ const SignUp: React.FC = () => {
                         <div 
                           className={`h-1.5 rounded-full ${
                             passwordStrength < 50 ? 'bg-red-500' :
-                            passwordStrength < 80 ? 'bg-yellow-500' : 'bg-green-500'
+                            passwordStrength < 80 ? 'bg-yellow-500' : 'bg-blue-500'
                           }`}
                           style={{ width: `${passwordStrength}%` }}
                         />
@@ -683,10 +683,10 @@ const SignUp: React.FC = () => {
                     type={showPassword ? 'text' : 'password'}
                     value={formData.confirmPassword}
                     onChange={(e) => handleInputChange('confirmPassword', e.target.value)}
-                    className={`w-full px-3 py-2.5 bg-white border rounded-lg text-sm focus:outline-none focus:ring-1 focus:border-green-500 ${
+                    className={`w-full px-3 py-2.5 bg-white border rounded-lg text-sm focus:outline-none focus:ring-1 focus:border-blue-500 ${
                       validationErrors.confirmPassword
                         ? 'border-red-300 focus:ring-red-500/20'
-                        : 'border-green-200 focus:ring-green-500/20'
+                        : 'border-blue-200 focus:ring-blue-500/20'
                     }`}
                     placeholder="Re-enter your password"
                     required
@@ -710,18 +710,18 @@ const SignUp: React.FC = () => {
                         className={`h-4 w-4 rounded border ${
                           validationErrors.agreeToTerms
                             ? 'border-red-300 text-red-600'
-                            : 'border-green-300 text-green-600'
+                            : 'border-blue-300 text-blue-600'
                         }`}
                       />
                     </div>
                     <div className="flex-1 min-w-0">
                       <span className="text-xs text-gray-700">
                         I agree to the{' '}
-                        <Link to="/Terms" className="text-green-600 font-semibold hover:underline">
+                        <Link to="/Terms" className="text-blue-600 font-semibold hover:underline">
                           Terms & Conditions
                         </Link>{' '}
                         and{' '}
-                        <Link to="/Privacy" className="text-green-600 font-semibold hover:underline">
+                        <Link to="/Privacy" className="text-blue-600 font-semibold hover:underline">
                           Privacy Policy
                         </Link>
                       </span>
@@ -739,7 +739,7 @@ const SignUp: React.FC = () => {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full bg-gradient-to-r from-green-600 to-green-700 text-white font-bold py-3 rounded-lg shadow hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center gap-1.5 min-h-[44px]"
+                  className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold py-3 rounded-lg shadow hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center gap-1.5 min-h-[44px]"
                 >
                   {isLoading ? (
                     <>
@@ -765,7 +765,7 @@ const SignUp: React.FC = () => {
               {/* Login Link */}
               <button
                 onClick={() => navigate('/')}
-                className="w-full border border-gray-300 text-gray-700 font-bold py-2.5 rounded-lg hover:border-green-500 hover:text-green-600 hover:bg-green-50 transition-all duration-200 min-h-[44px]"
+                className="w-full border border-gray-300 text-gray-700 font-bold py-2.5 rounded-lg hover:border-blue-500 hover:text-blue-600 hover:bg-blue-50 transition-all duration-200 min-h-[44px]"
               >
                 Sign In Instead
               </button>
@@ -776,13 +776,13 @@ const SignUp: React.FC = () => {
           <div className="bg-gradient-to-r from-white/80 to-white/60 backdrop-blur-sm rounded-lg border border-gray-200/60 p-3">
             <div className="flex items-center justify-center gap-4">
               <div className="flex flex-col items-center">
-                <div className="w-6 h-6 bg-gradient-to-br from-green-500 to-green-600 rounded-md flex items-center justify-center mb-0.5">
+                <div className="w-6 h-6 bg-gradient-to-br from-blue-500 to-blue-600 rounded-md flex items-center justify-center mb-0.5">
                   <Shield size={12} className="text-white" />
                 </div>
                 <span className="text-xs text-gray-600 font-medium">Secure</span>
               </div>
               <div className="flex flex-col items-center">
-                <div className="w-6 h-6 bg-gradient-to-br from-green-500 to-green-600 rounded-md flex items-center justify-center mb-0.5">
+                <div className="w-6 h-6 bg-gradient-to-br from-blue-500 to-blue-600 rounded-md flex items-center justify-center mb-0.5">
                   <Building size={12} className="text-white" />
                 </div>
                 <span className="text-xs text-gray-600 font-medium">Verified</span>
@@ -791,7 +791,7 @@ const SignUp: React.FC = () => {
                 <div className="w-6 h-6 bg-gradient-to-br from-purple-500 to-purple-600 rounded-md flex items-center justify-center mb-0.5">
                   <Smartphone size={12} className="text-white" />
                 </div>
-                <span className="text-xs text-gray-600 font-medium">GJBC</span>
+                <span className="text-xs text-gray-600 font-medium">GKBC</span>
               </div>
             </div>
           </div>

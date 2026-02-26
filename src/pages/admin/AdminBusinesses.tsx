@@ -115,7 +115,7 @@ const AdminBusinesses: React.FC = () => {
   if (isLoading) {
     return (
       <div className="p-6 flex items-center justify-center min-h-screen">
-        <Loader2 className="animate-spin text-green-600" size={32} />
+        <Loader2 className="animate-spin text-blue-600" size={32} />
       </div>
     );
   }
@@ -129,7 +129,7 @@ const AdminBusinesses: React.FC = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-          <Briefcase className="text-green-600" size={24} /> Business Listings
+          <Briefcase className="text-blue-600" size={24} /> Business Listings
         </h1>
         <div className="flex items-center gap-2">
           <div className="relative">
@@ -139,13 +139,13 @@ const AdminBusinesses: React.FC = () => {
               onChange={(e) => setSearchInput(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Search by name or owner..."
-              className="pl-9 pr-4 py-2 border border-gray-300 rounded-lg text-sm bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500"
+              className="pl-9 pr-4 py-2 border border-gray-300 rounded-lg text-sm bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
             <Search className="absolute left-3 top-2.5 text-gray-400" size={16} />
           </div>
           <button
             onClick={handleSearch}
-            className="px-4 py-2 bg-green-600 text-white rounded-lg text-sm hover:bg-green-700"
+            className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700"
           >
             Search
           </button>
@@ -153,7 +153,7 @@ const AdminBusinesses: React.FC = () => {
       </div>
 
       {isFetching && (
-        <div className="fixed top-4 right-4 bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs shadow flex items-center gap-2">
+        <div className="fixed top-4 right-4 bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs shadow flex items-center gap-2">
           <Loader2 size={14} className="animate-spin" /> Updating...
         </div>
       )}
@@ -181,9 +181,9 @@ const AdminBusinesses: React.FC = () => {
       </div>
 
       {/* Businesses Table */}
-      <div className="bg-white rounded-xl border border-green-200 overflow-hidden">
+      <div className="bg-white rounded-xl border border-blue-200 overflow-hidden">
         <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-green-50">
+          <thead className="bg-blue-50">
             <tr>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Business</th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Owner</th>
@@ -197,7 +197,7 @@ const AdminBusinesses: React.FC = () => {
             {businesses.map((business) => (
               <React.Fragment key={business.id}>
                 <tr
-                  className={`hover:bg-gray-50 cursor-pointer ${expandedBusinessId === business.id ? 'bg-green-50' : ''}`}
+                  className={`hover:bg-gray-50 cursor-pointer ${expandedBusinessId === business.id ? 'bg-blue-50' : ''}`}
                   onClick={() => setExpandedBusinessId(expandedBusinessId === business.id ? null : business.id)}
                 >
                   <td className="px-6 py-4">
@@ -207,7 +207,7 @@ const AdminBusinesses: React.FC = () => {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
-                      <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center text-green-700 font-bold text-xs mr-2">
+                      <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center text-blue-700 font-bold text-xs mr-2">
                         {business.owner.avatar_url ? (
                           <img src={business.owner.avatar_url} alt="" className="w-6 h-6 rounded-full object-cover" />
                         ) : (
@@ -230,7 +230,7 @@ const AdminBusinesses: React.FC = () => {
                   <td className="px-6 py-4 whitespace-nowrap">
                     <span className={`px-2 py-1 text-xs rounded-full ${
                       business.verification_status === 'approved'
-                        ? 'bg-green-100 text-green-800'
+                        ? 'bg-blue-100 text-blue-800'
                         : business.verification_status === 'rejected'
                         ? 'bg-red-100 text-red-800'
                         : 'bg-yellow-100 text-yellow-800'
@@ -244,7 +244,7 @@ const AdminBusinesses: React.FC = () => {
                         <>
                           <button
                             onClick={() => handleApprove(business)}
-                            className="p-1 text-green-600 hover:bg-green-50 rounded"
+                            className="p-1 text-blue-600 hover:bg-blue-50 rounded"
                             title="Approve"
                           >
                             <CheckCircle size={18} />
@@ -275,7 +275,7 @@ const AdminBusinesses: React.FC = () => {
                 </tr>
                 {expandedBusinessId === business.id && (
                   <tr>
-                    <td colSpan={6} className="px-6 py-4 bg-green-50">
+                    <td colSpan={6} className="px-6 py-4 bg-blue-50">
                       {isLoadingDetails ? (
                         <div className="flex items-center gap-2 text-sm text-gray-600">
                           <Loader2 size={16} className="animate-spin" /> Loading details...

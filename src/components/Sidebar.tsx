@@ -26,7 +26,7 @@ const Sidebar: React.FC = () => {
           
         </div>
         
-        <div className="h-0.5 w-20 bg-gradient-to-r from-green-500 to-green-800 rounded-full"></div>
+        <div className="h-0.5 w-20 bg-gradient-to-r from-blue-500 to-blue-800 rounded-full"></div>
       </div>
       
       {/* Navigation */}
@@ -41,7 +41,7 @@ const Sidebar: React.FC = () => {
                 flex items-center gap-4 px-5 py-4 rounded-2xl transition-all duration-300
                 w-full text-left group
                 ${active 
-                  ? 'bg-green-50 border-l-4 border-green-600 text-green-800' 
+                  ? 'bg-blue-50 border-l-4 border-blue-600 text-blue-800' 
                   : 'text-gray-700 hover:bg-gray-50 hover:border-l-4 hover:border-gray-300'
                 }
               `}
@@ -49,7 +49,7 @@ const Sidebar: React.FC = () => {
               <div className={`
                 p-2.5 rounded-xl transition-all duration-300
                 ${active 
-                  ? 'bg-blue-100 text-green-600' 
+                  ? 'bg-blue-100 text-blue-600' 
                   : 'bg-gray-100 text-gray-600 group-hover:bg-gray-300'
                 }
               `}>
@@ -58,7 +58,7 @@ const Sidebar: React.FC = () => {
               <span className="font-bold text-lg">{item.label}</span>
               {active && (
                 <div className="ml-auto animate-pulse">
-                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                  <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                 </div>
               )}
             </NavLink>
@@ -70,7 +70,7 @@ const Sidebar: React.FC = () => {
       <div className="mt-20 pt-6 border-t border-gray-200">
         <div className="text-center">
           <div className="text-sm text-gray-600 mb-2 font-medium">
-            GJBC Community Platform
+            GKBC Community Platform
           </div>
           <div className="text-xs text-gray-400">
             Connect • Collaborate • Grow

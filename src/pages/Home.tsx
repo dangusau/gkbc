@@ -58,7 +58,7 @@ const Home: React.FC = () => {
         <Toaster position="top-right" />
         <div className="space-y-3">
           {[...Array(3)].map((_, i) => (
-            <div key={i} className="bg-white rounded-xl border border-green-200 shadow p-3 animate-pulse">
+            <div key={i} className="bg-white rounded-xl border border-blue-200 shadow p-3 animate-pulse">
               <div className="flex items-center gap-2 mb-3">
                 <div className="w-8 h-8 bg-gray-200 rounded-full" />
                 <div className="flex-1">
@@ -78,7 +78,7 @@ const Home: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-green-50 to-white safe-area">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white safe-area">
       <Toaster position="top-right" />
 
       {/* Refresh button */}
@@ -86,7 +86,7 @@ const Home: React.FC = () => {
         <div className="px-3 pt-3 pb-2">
           <button
             onClick={handleRefresh}
-            className="w-full py-2 bg-gradient-to-r from-green-50 to-green-50 text-green-600 rounded-lg text-xs font-medium border border-green-200 hover:from-green-100 hover:to-green-100 transition-all flex items-center justify-center gap-1.5"
+            className="w-full py-2 bg-gradient-to-r from-blue-50 to-blue-50 text-blue-600 rounded-lg text-xs font-medium border border-blue-200 hover:from-blue-100 hover:to-blue-100 transition-all flex items-center justify-center gap-1.5"
           >
             <RefreshCw size={14} />
             Refresh Feed
@@ -95,11 +95,11 @@ const Home: React.FC = () => {
       )}
 
       {/* Create post button */}
-      <div className="sticky top-12 z-30 bg-gradient-to-b from-white to-green-50/50 px-3 pb-3 pt-1.5">
-        <div className="bg-white rounded-xl shadow border border-green-200 overflow-hidden">
+      <div className="sticky top-12 z-30 bg-gradient-to-b from-white to-blue-50/50 px-3 pb-3 pt-1.5">
+        <div className="bg-white rounded-xl shadow border border-blue-200 overflow-hidden">
           <div className="p-3">
             <div className="flex items-center gap-2 mb-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-green-500 to-green-500 rounded-full flex items-center justify-center text-white text-xs font-bold shadow">
+              <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-500 rounded-full flex items-center justify-center text-white text-xs font-bold shadow">
                 {userProfile?.first_name?.charAt(0) || '+'}
               </div>
               <div className="flex-1">
@@ -125,14 +125,14 @@ const Home: React.FC = () => {
       <div className="pb-20">
         {posts.length === 0 ? (
           <div className="p-6 text-center">
-            <div className="w-16 h-16 bg-gradient-to-br from-green-100 to-green-100 rounded-xl flex items-center justify-center mx-auto mb-3 border border-green-200">
-              <MessageCircle size={24} className="text-green-500" />
+            <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-blue-100 rounded-xl flex items-center justify-center mx-auto mb-3 border border-blue-200">
+              <MessageCircle size={24} className="text-blue-500" />
             </div>
             <h3 className="text-sm font-bold text-gray-900 mb-1.5">No posts yet</h3>
             <p className="text-xs text-gray-600 mb-4">Be the first to share something!</p>
             <button
               onClick={() => setShowPostModal(true)}
-              className="bg-gradient-to-r from-green-600 to-green-600 hover:from-green-700 hover:to-green-700 text-white px-5 py-2.5 rounded-lg font-medium shadow text-xs"
+              className="bg-gradient-to-r from-blue-600 to-blue-600 hover:from-blue-700 hover:to-blue-700 text-white px-5 py-2.5 rounded-lg font-medium shadow text-xs"
             >
               Create First Post
             </button>
@@ -150,7 +150,7 @@ const Home: React.FC = () => {
             {isFetchingNextPage && (
               <div className="py-6 text-center">
                 <div className="flex items-center justify-center gap-2">
-                  <div className="w-5 h-5 border-2 border-green-600 border-t-transparent rounded-full animate-spin" />
+                  <div className="w-5 h-5 border-2 border-blue-600 border-t-transparent rounded-full animate-spin" />
                   <span className="text-sm text-gray-600 font-medium">Loading more posts...</span>
                 </div>
               </div>

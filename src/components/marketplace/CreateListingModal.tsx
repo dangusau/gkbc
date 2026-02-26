@@ -118,15 +118,15 @@ const CreateListingModal: React.FC<CreateListingModalProps> = ({ isOpen, onClose
 
   return (
     <div className="fixed inset-0 z-50 flex items-end md:items-center justify-center p-0 md:p-3 bg-black/50 backdrop-blur-sm">
-      <div className="bg-white w-full md:max-w-2xl max-h-[90vh] md:max-h-[80vh] overflow-y-auto rounded-t-xl md:rounded-xl shadow-lg border border-green-200">
-        <div className="sticky top-0 bg-gradient-to-r from-green-50 to-green-100/50 border-b border-green-200 p-3 md:p-4 flex items-center justify-between backdrop-blur-sm z-10">
+      <div className="bg-white w-full md:max-w-2xl max-h-[90vh] md:max-h-[80vh] overflow-y-auto rounded-t-xl md:rounded-xl shadow-lg border border-blue-200">
+        <div className="sticky top-0 bg-gradient-to-r from-blue-50 to-blue-100/50 border-b border-blue-200 p-3 md:p-4 flex items-center justify-between backdrop-blur-sm z-10">
           <div>
             <h2 className="text-sm font-bold text-gray-900">Create New Listing</h2>
-            <p className="text-xs text-gray-600 mt-0.5">Sell your items on GJBC Marketplace</p>
+            <p className="text-xs text-gray-600 mt-0.5">Sell your items on GKBC Marketplace</p>
           </div>
           <button 
             onClick={handleClose}
-            className="p-1 hover:bg-white/80 rounded-full transition-colors active:scale-95 focus:outline-none focus:ring-2 focus:ring-green-500/50 min-w-[36px] min-h-[36px] flex items-center justify-center"
+            className="p-1 hover:bg-white/80 rounded-full transition-colors active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500/50 min-w-[36px] min-h-[36px] flex items-center justify-center"
             aria-label="Close modal"
           >
             <X size={20} className="text-gray-600" />
@@ -142,8 +142,8 @@ const CreateListingModal: React.FC<CreateListingModalProps> = ({ isOpen, onClose
               value={title}
               onChange={(e) => { setTitle(e.target.value); if (formErrors.title) setFormErrors(prev => ({ ...prev, title: '' })); }}
               placeholder="What are you selling?"
-              className={`w-full p-2 border rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all ${
-                formErrors.title ? 'border-red-300' : 'border-green-200'
+              className={`w-full p-2 border rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all ${
+                formErrors.title ? 'border-red-300' : 'border-blue-200'
               }`}
               maxLength={100}
             />
@@ -162,7 +162,7 @@ const CreateListingModal: React.FC<CreateListingModalProps> = ({ isOpen, onClose
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Describe your item in detail..."
-              className="w-full p-2 border border-green-200 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all h-24 resize-none"
+              className="w-full p-2 border border-blue-200 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all h-24 resize-none"
               maxLength={1000}
             />
             <div className="flex justify-between text-xs text-gray-500">
@@ -184,8 +184,8 @@ const CreateListingModal: React.FC<CreateListingModalProps> = ({ isOpen, onClose
                   value={price}
                   onChange={(e) => { setPrice(e.target.value); if (formErrors.price) setFormErrors(prev => ({ ...prev, price: '' })); }}
                   placeholder="0.00"
-                  className={`w-full pl-10 pr-3 py-2 border rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all ${
-                    formErrors.price ? 'border-red-300' : 'border-green-200'
+                  className={`w-full pl-10 pr-3 py-2 border rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all ${
+                    formErrors.price ? 'border-red-300' : 'border-blue-200'
                   }`}
                   min="0"
                   step="0.01"
@@ -204,8 +204,8 @@ const CreateListingModal: React.FC<CreateListingModalProps> = ({ isOpen, onClose
               <select
                 value={category}
                 onChange={(e) => { setCategory(e.target.value); if (formErrors.category) setFormErrors(prev => ({ ...prev, category: '' })); }}
-                className={`w-full p-2 border rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all ${
-                  formErrors.category ? 'border-red-300' : 'border-green-200'
+                className={`w-full p-2 border rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all ${
+                  formErrors.category ? 'border-red-300' : 'border-blue-200'
                 }`}
               >
                 <option value="">Select category</option>
@@ -234,8 +234,8 @@ const CreateListingModal: React.FC<CreateListingModalProps> = ({ isOpen, onClose
                     onClick={() => setCondition(value)}
                     className={`p-2 rounded-lg border text-xs font-medium transition-all min-h-[36px] ${
                       condition === value
-                        ? 'bg-green-600 text-white border-green-600'
-                        : 'bg-white text-gray-700 border-green-200 hover:bg-green-50'
+                        ? 'bg-blue-600 text-white border-blue-600'
+                        : 'bg-white text-gray-700 border-blue-200 hover:bg-blue-50'
                     }`}
                   >
                     {label}
@@ -255,8 +255,8 @@ const CreateListingModal: React.FC<CreateListingModalProps> = ({ isOpen, onClose
                   value={location}
                   onChange={(e) => { setLocation(e.target.value); if (formErrors.location) setFormErrors(prev => ({ ...prev, location: '' })); }}
                   placeholder="City, State"
-                  className={`w-full pl-10 pr-3 py-2 border rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all ${
-                    formErrors.location ? 'border-red-300' : 'border-green-200'
+                  className={`w-full pl-10 pr-3 py-2 border rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all ${
+                    formErrors.location ? 'border-red-300' : 'border-blue-200'
                   }`}
                 />
               </div>
@@ -277,7 +277,7 @@ const CreateListingModal: React.FC<CreateListingModalProps> = ({ isOpen, onClose
             </div>
             <div className="grid grid-cols-3 sm:grid-cols-5 gap-2">
               {images.map((file, index) => (
-                <div key={index} className="relative aspect-square rounded-lg overflow-hidden border border-green-200 group">
+                <div key={index} className="relative aspect-square rounded-lg overflow-hidden border border-blue-200 group">
                   <img
                     src={URL.createObjectURL(file)}
                     alt={`Preview ${index + 1}`}
@@ -291,16 +291,16 @@ const CreateListingModal: React.FC<CreateListingModalProps> = ({ isOpen, onClose
                     <X size={12} />
                   </button>
                   {index === 0 && (
-                    <div className="absolute top-1 left-1 px-1 py-0.5 bg-green-600 text-white text-xs font-medium rounded-full">
+                    <div className="absolute top-1 left-1 px-1 py-0.5 bg-blue-600 text-white text-xs font-medium rounded-full">
                       Cover
                     </div>
                   )}
                 </div>
               ))}
               {images.length < MAX_IMAGES && (
-                <label className="aspect-square border border-dashed border-green-300 rounded-lg flex flex-col items-center justify-center cursor-pointer hover:border-green-500 hover:bg-green-50 transition-all group">
-                  <Camera size={16} className="text-green-600 mb-2" />
-                  <span className="text-xs font-medium text-green-700">Add Photo</span>
+                <label className="aspect-square border border-dashed border-blue-300 rounded-lg flex flex-col items-center justify-center cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition-all group">
+                  <Camera size={16} className="text-blue-600 mb-2" />
+                  <span className="text-xs font-medium text-blue-700">Add Photo</span>
                   <input
                     type="file"
                     accept="image/*"
@@ -323,7 +323,7 @@ const CreateListingModal: React.FC<CreateListingModalProps> = ({ isOpen, onClose
           <button
             type="submit"
             disabled={uploading}
-            className="w-full bg-green-600 text-white font-medium py-2 rounded-lg hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all min-h-[44px] text-xs flex items-center justify-center gap-2"
+            className="w-full bg-blue-600 text-white font-medium py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all min-h-[44px] text-xs flex items-center justify-center gap-2"
           >
             {uploading ? (
               <>
@@ -339,11 +339,11 @@ const CreateListingModal: React.FC<CreateListingModalProps> = ({ isOpen, onClose
           </button>
 
           {/* Guidelines */}
-          <div className="flex items-start gap-2 p-2 bg-green-50 border border-green-200 rounded-lg">
-            <Info size={14} className="text-green-600 flex-shrink-0 mt-0.5" />
+          <div className="flex items-start gap-2 p-2 bg-blue-50 border border-blue-200 rounded-lg">
+            <Info size={14} className="text-blue-600 flex-shrink-0 mt-0.5" />
             <div className="flex-1">
-              <p className="text-green-800 text-xs font-medium mb-0.5">Photo Guidelines</p>
-              <ul className="text-green-700 text-xs space-y-0.5">
+              <p className="text-blue-800 text-xs font-medium mb-0.5">Photo Guidelines</p>
+              <ul className="text-blue-700 text-xs space-y-0.5">
                 <li>• Upload up to {MAX_IMAGES} clear photos</li>
                 <li>• First photo is cover image</li>
                 <li>• Max 5MB per photo</li>

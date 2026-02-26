@@ -70,7 +70,7 @@ const AdminAnnouncements: React.FC = () => {
   if (isLoading) {
     return (
       <div className="p-6 flex items-center justify-center min-h-screen">
-        <Loader2 className="animate-spin text-green-600" size={32} />
+        <Loader2 className="animate-spin text-blue-600" size={32} />
       </div>
     );
   }
@@ -82,12 +82,12 @@ const AdminAnnouncements: React.FC = () => {
   return (
     <div className="p-6 space-y-6 bg-gray-50 min-h-screen">
       <div className="flex items-center gap-2">
-        <Megaphone className="text-green-600" size={28} />
+        <Megaphone className="text-blue-600" size={28} />
         <h1 className="text-2xl font-bold text-gray-900">Announcements</h1>
       </div>
 
       {/* Create Form */}
-      <div className="bg-white rounded-xl border border-green-200 p-6">
+      <div className="bg-white rounded-xl border border-blue-200 p-6">
         <h2 className="text-lg font-semibold text-gray-800 mb-4">New Announcement</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -96,7 +96,7 @@ const AdminAnnouncements: React.FC = () => {
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
               placeholder="Announcement title"
               required
             />
@@ -107,7 +107,7 @@ const AdminAnnouncements: React.FC = () => {
               value={content}
               onChange={(e) => setContent(e.target.value)}
               rows={4}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
               placeholder="Write your announcement..."
               required
             />
@@ -121,7 +121,7 @@ const AdminAnnouncements: React.FC = () => {
                   value="all"
                   checked={audience === 'all'}
                   onChange={(e) => setAudience(e.target.value as typeof audience)}
-                  className="text-green-600"
+                  className="text-blue-600"
                 />
                 <Users size={16} className="text-gray-600" />
                 <span>All Users</span>
@@ -132,7 +132,7 @@ const AdminAnnouncements: React.FC = () => {
                   value="verified"
                   checked={audience === 'verified'}
                   onChange={(e) => setAudience(e.target.value as typeof audience)}
-                  className="text-green-600"
+                  className="text-blue-600"
                 />
                 <UserCheck size={16} className="text-gray-600" />
                 <span>Verified</span>
@@ -143,7 +143,7 @@ const AdminAnnouncements: React.FC = () => {
                   value="members"
                   checked={audience === 'members'}
                   onChange={(e) => setAudience(e.target.value as typeof audience)}
-                  className="text-green-600"
+                  className="text-blue-600"
                 />
                 <Users size={16} className="text-gray-600" />
                 <span>Members</span>
@@ -153,7 +153,7 @@ const AdminAnnouncements: React.FC = () => {
           <button
             type="submit"
             disabled={createAnnouncement.isPending}
-            className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:opacity-50 flex items-center gap-2"
+            className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 flex items-center gap-2"
           >
             {createAnnouncement.isPending ? <Loader2 size={16} className="animate-spin" /> : <Send size={16} />}
             Send Announcement
@@ -165,7 +165,7 @@ const AdminAnnouncements: React.FC = () => {
       <div>
         <h2 className="text-lg font-semibold text-gray-800 mb-4">Past Announcements</h2>
         {isFetching && (
-          <div className="fixed top-4 right-4 bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs shadow flex items-center gap-2">
+          <div className="fixed top-4 right-4 bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs shadow flex items-center gap-2">
             <Loader2 size={14} className="animate-spin" /> Updating...
           </div>
         )}
@@ -175,7 +175,7 @@ const AdminAnnouncements: React.FC = () => {
             <p className="text-gray-500 text-center py-8">No announcements yet.</p>
           ) : (
             announcements.map((ann) => (
-              <div key={ann.id} className="bg-white rounded-lg border border-green-200 overflow-hidden">
+              <div key={ann.id} className="bg-white rounded-lg border border-blue-200 overflow-hidden">
                 <div
                   className="p-4 flex items-center justify-between cursor-pointer hover:bg-gray-50"
                   onClick={() => setExpandedId(expandedId === ann.id ? null : ann.id)}

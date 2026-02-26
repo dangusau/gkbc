@@ -79,7 +79,7 @@ export const AnnouncementPage: React.FC = () => {
           <p className="text-gray-600 text-sm mb-4">{error || 'The announcement may have been removed.'}</p>
           <button
             onClick={() => navigate(-1)}
-            className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
+            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
           >
             Go Back
           </button>
@@ -94,7 +94,7 @@ export const AnnouncementPage: React.FC = () => {
         <div className="max-w-3xl mx-auto px-4 py-3">
           <button
             onClick={() => navigate(-1)}
-            className="flex items-center gap-2 text-gray-600 hover:text-green-600"
+            className="flex items-center gap-2 text-gray-600 hover:text-blue-600"
           >
             <ArrowLeft size={20} />
             <span>Back</span>

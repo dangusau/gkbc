@@ -81,7 +81,7 @@ const AdminMarketplace: React.FC = () => {
   if (isLoading) {
     return (
       <div className="p-6 flex items-center justify-center min-h-screen">
-        <Loader2 className="animate-spin text-green-600" size={32} />
+        <Loader2 className="animate-spin text-blue-600" size={32} />
       </div>
     );
   }
@@ -95,7 +95,7 @@ const AdminMarketplace: React.FC = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-          <ShoppingBag className="text-green-600" size={24} /> Marketplace Listings
+          <ShoppingBag className="text-blue-600" size={24} /> Marketplace Listings
         </h1>
         <div className="flex items-center gap-2">
           <div className="relative">
@@ -105,13 +105,13 @@ const AdminMarketplace: React.FC = () => {
               onChange={(e) => setSearchInput(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Search by title or seller..."
-              className="pl-9 pr-4 py-2 border border-gray-300 rounded-lg text-sm bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500"
+              className="pl-9 pr-4 py-2 border border-gray-300 rounded-lg text-sm bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
             <Search className="absolute left-3 top-2.5 text-gray-400" size={16} />
           </div>
           <button
             onClick={handleSearch}
-            className="px-4 py-2 bg-green-600 text-white rounded-lg text-sm hover:bg-green-700"
+            className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700"
           >
             Search
           </button>
@@ -119,7 +119,7 @@ const AdminMarketplace: React.FC = () => {
       </div>
 
       {isFetching && (
-        <div className="fixed top-4 right-4 bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs shadow flex items-center gap-2">
+        <div className="fixed top-4 right-4 bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs shadow flex items-center gap-2">
           <Loader2 size={14} className="animate-spin" /> Updating...
         </div>
       )}
@@ -158,9 +158,9 @@ const AdminMarketplace: React.FC = () => {
       </div>
 
       {/* Listings Table */}
-      <div className="bg-white rounded-xl border border-green-200 overflow-hidden">
+      <div className="bg-white rounded-xl border border-blue-200 overflow-hidden">
         <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-green-50">
+          <thead className="bg-blue-50">
             <tr>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Listing</th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Seller</th>
@@ -175,7 +175,7 @@ const AdminMarketplace: React.FC = () => {
             {listings.map((listing) => (
               <React.Fragment key={listing.id}>
                 <tr
-                  className={`hover:bg-gray-50 cursor-pointer ${expandedListingId === listing.id ? 'bg-green-50' : ''}`}
+                  className={`hover:bg-gray-50 cursor-pointer ${expandedListingId === listing.id ? 'bg-blue-50' : ''}`}
                   onClick={() => setExpandedListingId(expandedListingId === listing.id ? null : listing.id)}
                 >
                   <td className="px-6 py-4">
@@ -184,7 +184,7 @@ const AdminMarketplace: React.FC = () => {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
-                      <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center text-green-700 font-bold text-xs mr-2">
+                      <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center text-blue-700 font-bold text-xs mr-2">
                         {listing.seller.avatar_url ? (
                           <img src={listing.seller.avatar_url} alt="" className="w-6 h-6 rounded-full object-cover" />
                         ) : (
@@ -207,7 +207,7 @@ const AdminMarketplace: React.FC = () => {
                     <span className={`px-2 py-1 text-xs rounded-full ${
                       listing.is_sold
                         ? 'bg-gray-100 text-gray-800'
-                        : 'bg-green-100 text-green-800'
+                        : 'bg-blue-100 text-blue-800'
                     }`}>
                       {listing.is_sold ? 'Sold' : 'Available'}
                     </span>
@@ -231,7 +231,7 @@ const AdminMarketplace: React.FC = () => {
                 </tr>
                 {expandedListingId === listing.id && (
                   <tr>
-                    <td colSpan={7} className="px-6 py-4 bg-green-50">
+                    <td colSpan={7} className="px-6 py-4 bg-blue-50">
                       {isLoadingDetails ? (
                         <div className="flex items-center gap-2 text-sm text-gray-600">
                           <Loader2 size={16} className="animate-spin" /> Loading details...

@@ -28,9 +28,9 @@ const CreateBusinessModal: React.FC<CreateBusinessModalProps> = ({ isOpen, onClo
     website: '',
     is_registered: false,
   });
-  const [logoFile, setLogoFile] = useState<File | null>(null);
+  const [logoFile, setlogoFile] = useState<File | null>(null);
   const [bannerFile, setBannerFile] = useState<File | null>(null);
-  const [logoPreview, setLogoPreview] = useState<string>('');
+  const [logoPreview, setlogoPreview] = useState<string>('');
   const [bannerPreview, setBannerPreview] = useState<string>('');
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState('');
@@ -129,28 +129,28 @@ const CreateBusinessModal: React.FC<CreateBusinessModalProps> = ({ isOpen, onClo
       website: '',
       is_registered: false,
     });
-    setLogoFile(null);
+    setlogoFile(null);
     setBannerFile(null);
-    setLogoPreview('');
+    setlogoPreview('');
     setBannerPreview('');
     setStep(1);
     setError('');
     setSuccess('');
   }, []);
 
-  const handleLogoUpload = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+  const handlelogoUpload = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
     if (file.size > 5 * 1024 * 1024) {
-      setError('Logo file size should be less than 5MB');
+      setError('logo file size should be less than 5MB');
       return;
     }
     if (!file.type.startsWith('image/')) {
       setError('Please upload an image file');
       return;
     }
-    setLogoFile(file);
-    setLogoPreview(URL.createObjectURL(file));
+    setlogoFile(file);
+    setlogoPreview(URL.createObjectURL(file));
     setError('');
   }, []);
 
@@ -170,11 +170,11 @@ const CreateBusinessModal: React.FC<CreateBusinessModalProps> = ({ isOpen, onClo
     setError('');
   }, []);
 
-  const removeLogoFile = useCallback((e: React.MouseEvent) => {
+  const removelogoFile = useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
-    setLogoFile(null);
+    setlogoFile(null);
     if (logoPreview) URL.revokeObjectURL(logoPreview);
-    setLogoPreview('');
+    setlogoPreview('');
   }, [logoPreview]);
 
   const removeBannerFile = useCallback((e: React.MouseEvent) => {
@@ -236,24 +236,24 @@ const CreateBusinessModal: React.FC<CreateBusinessModalProps> = ({ isOpen, onClo
 
   return (
     <div className="fixed inset-0 z-50 flex items-end md:items-center justify-center p-0 md:p-3 bg-black/50 backdrop-blur-sm safe-area">
-      <div className="bg-white w-full md:max-w-2xl max-h-[90vh] md:max-h-[80vh] overflow-y-auto rounded-t-xl md:rounded-xl shadow-lg border border-green-200">
+      <div className="bg-white w-full md:max-w-2xl max-h-[90vh] md:max-h-[80vh] overflow-y-auto rounded-t-xl md:rounded-xl shadow-lg border border-blue-200">
         {/* Header */}
-        <div className="sticky top-0 bg-white border-b border-green-200 p-3 z-10 safe-area-top">
+        <div className="sticky top-0 bg-white border-b border-blue-200 p-3 z-10 safe-area-top">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-green-600 to-green-700 rounded-xl flex items-center justify-center">
+              <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl flex items-center justify-center">
                 <Building size={16} className="text-white" />
               </div>
               <div>
                 <h2 className="text-sm font-bold text-gray-900">Create Business</h2>
-                <p className="text-xs text-gray-600">Join GJBC business network</p>
+                <p className="text-xs text-gray-600">Join GKBC business network</p>
               </div>
               {step === 3 && (
                 <button
                   type="submit"
                   form="business-form"
                   disabled={!isStepValid() || uploading}
-                  className="ml-2 px-3 py-1.5 bg-gradient-to-r from-green-600 to-green-700 text-white font-medium rounded-xl hover:from-green-700 hover:to-green-800 disabled:opacity-50 disabled:cursor-not-allowed min-h-[36px] text-xs flex items-center justify-center gap-1"
+                  className="ml-2 px-3 py-1.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium rounded-xl hover:from-blue-700 hover:to-blue-800 disabled:opacity-50 disabled:cursor-not-allowed min-h-[36px] text-xs flex items-center justify-center gap-1"
                 >
                   {uploading ? (
                     <>
@@ -276,7 +276,7 @@ const CreateBusinessModal: React.FC<CreateBusinessModalProps> = ({ isOpen, onClo
                   onClose();
                 }
               }}
-              className="p-1.5 hover:bg-green-50 rounded-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed min-h-[36px] min-w-[36px] flex items-center justify-center"
+              className="p-1.5 hover:bg-blue-50 rounded-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed min-h-[36px] min-w-[36px] flex items-center justify-center"
               disabled={uploading}
               aria-label="Close modal"
             >
@@ -293,9 +293,9 @@ const CreateBusinessModal: React.FC<CreateBusinessModalProps> = ({ isOpen, onClo
                 <div
                   className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300 ${
                     step === stepNumber
-                      ? 'bg-gradient-to-r from-green-600 to-green-700 text-white'
+                      ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white'
                       : step > stepNumber
-                      ? 'bg-green-500 text-white'
+                      ? 'bg-blue-500 text-white'
                       : 'bg-gray-100 text-gray-500'
                   }`}
                 >
@@ -304,9 +304,9 @@ const CreateBusinessModal: React.FC<CreateBusinessModalProps> = ({ isOpen, onClo
                 <span
                   className={`text-xs font-medium mt-1 transition-colors duration-300 ${
                     step === stepNumber
-                      ? 'text-green-600'
+                      ? 'text-blue-600'
                       : step > stepNumber
-                      ? 'text-green-600'
+                      ? 'text-blue-600'
                       : 'text-gray-500'
                   }`}
                 >
@@ -317,7 +317,7 @@ const CreateBusinessModal: React.FC<CreateBusinessModalProps> = ({ isOpen, onClo
           </div>
           <div className="relative w-full h-1 bg-gray-100 rounded-full overflow-hidden">
             <div
-              className="absolute top-0 left-0 h-full bg-gradient-to-r from-green-600 to-green-700 transition-all duration-500"
+              className="absolute top-0 left-0 h-full bg-gradient-to-r from-blue-600 to-blue-700 transition-all duration-500"
               style={{ width: `${((step - 1) / 2) * 100}%` }}
             />
           </div>
@@ -335,10 +335,10 @@ const CreateBusinessModal: React.FC<CreateBusinessModalProps> = ({ isOpen, onClo
               </div>
             )}
             {success && (
-              <div className="p-3 bg-green-50 border border-green-200 rounded-xl flex items-start gap-2">
-                <CheckCircle size={16} className="text-green-600 flex-shrink-0 mt-0.5" />
+              <div className="p-3 bg-blue-50 border border-blue-200 rounded-xl flex items-start gap-2">
+                <CheckCircle size={16} className="text-blue-600 flex-shrink-0 mt-0.5" />
                 <div>
-                  <p className="text-green-700 text-xs">{success}</p>
+                  <p className="text-blue-700 text-xs">{success}</p>
                 </div>
               </div>
             )}
@@ -364,7 +364,7 @@ const CreateBusinessModal: React.FC<CreateBusinessModalProps> = ({ isOpen, onClo
                       value={formData.name}
                       onChange={(e) => updateFormData('name', e.target.value)}
                       placeholder="Enter your business name"
-                      className="w-full pl-8 pr-3 py-2.5 bg-white border border-green-200 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-400 transition-all disabled:opacity-50"
+                      className="w-full pl-8 pr-3 py-2.5 bg-white border border-blue-200 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-400 transition-all disabled:opacity-50"
                       required
                       disabled={uploading}
                       maxLength={100}
@@ -381,14 +381,14 @@ const CreateBusinessModal: React.FC<CreateBusinessModalProps> = ({ isOpen, onClo
                     value={formData.description}
                     onChange={(e) => updateFormData('description', e.target.value)}
                     placeholder="Describe what your business does..."
-                    className="w-full p-2.5 bg-white border border-green-200 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-400 transition-all disabled:opacity-50 h-32"
+                    className="w-full p-2.5 bg-white border border-blue-200 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-400 transition-all disabled:opacity-50 h-32"
                     maxLength={500}
                     required
                     disabled={uploading}
                   />
                   <div className="flex justify-between items-center mt-1">
                     <p className="text-xs text-gray-500">Brief description helps customers understand your business</p>
-                    <span className="text-xs font-medium text-green-600">{formData.description.length}/500</span>
+                    <span className="text-xs font-medium text-blue-600">{formData.description.length}/500</span>
                   </div>
                 </div>
 
@@ -397,14 +397,14 @@ const CreateBusinessModal: React.FC<CreateBusinessModalProps> = ({ isOpen, onClo
                     <label className="block text-xs font-medium text-gray-700 mb-1">
                       Business Type *
                     </label>
-                    <div className="flex border border-green-200 rounded-xl overflow-hidden">
+                    <div className="flex border border-blue-200 rounded-xl overflow-hidden">
                       <button
                         type="button"
                         onClick={() => updateFormData('business_type', 'products')}
                         className={`flex-1 py-2.5 text-center font-medium text-xs transition-colors min-h-[36px] ${
                           formData.business_type === 'products'
-                            ? 'bg-green-600 text-white'
-                            : 'bg-white text-gray-700 hover:bg-green-50'
+                            ? 'bg-blue-600 text-white'
+                            : 'bg-white text-gray-700 hover:bg-blue-50'
                         }`}
                       >
                         Products
@@ -414,8 +414,8 @@ const CreateBusinessModal: React.FC<CreateBusinessModalProps> = ({ isOpen, onClo
                         onClick={() => updateFormData('business_type', 'services')}
                         className={`flex-1 py-2.5 text-center font-medium text-xs transition-colors min-h-[36px] ${
                           formData.business_type === 'services'
-                            ? 'bg-green-600 text-white'
-                            : 'bg-white text-gray-700 hover:bg-green-50'
+                            ? 'bg-blue-600 text-white'
+                            : 'bg-white text-gray-700 hover:bg-blue-50'
                         }`}
                       >
                         Services
@@ -430,7 +430,7 @@ const CreateBusinessModal: React.FC<CreateBusinessModalProps> = ({ isOpen, onClo
                     <select
                       value={formData.category}
                       onChange={(e) => updateFormData('category', e.target.value)}
-                      className="w-full p-2.5 bg-white border border-green-200 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-400 transition-all disabled:opacity-50 min-h-[36px]"
+                      className="w-full p-2.5 bg-white border border-blue-200 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-400 transition-all disabled:opacity-50 min-h-[36px]"
                       required
                       disabled={uploading}
                     >
@@ -448,7 +448,7 @@ const CreateBusinessModal: React.FC<CreateBusinessModalProps> = ({ isOpen, onClo
                         value={formData.category}
                         onChange={(e) => updateFormData('category', e.target.value)}
                         placeholder="Enter custom category"
-                        className="w-full p-2.5 mt-2 bg-white border border-green-200 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-400"
+                        className="w-full p-2.5 mt-2 bg-white border border-blue-200 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-400"
                         maxLength={50}
                       />
                     )}
@@ -471,7 +471,7 @@ const CreateBusinessModal: React.FC<CreateBusinessModalProps> = ({ isOpen, onClo
                     <select
                       value={formData.location_axis}
                       onChange={(e) => updateFormData('location_axis', e.target.value)}
-                      className="w-full pl-8 pr-3 py-2.5 bg-white border border-green-200 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-400 transition-all disabled:opacity-50 min-h-[36px]"
+                      className="w-full pl-8 pr-3 py-2.5 bg-white border border-blue-200 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-400 transition-all disabled:opacity-50 min-h-[36px]"
                       required
                       disabled={uploading}
                     >
@@ -498,7 +498,7 @@ const CreateBusinessModal: React.FC<CreateBusinessModalProps> = ({ isOpen, onClo
                       value={formData.address}
                       onChange={(e) => updateFormData('address', e.target.value)}
                       placeholder="Street, building, landmark details"
-                      className="w-full pl-8 pr-3 py-2.5 bg-white border border-green-200 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-400 transition-all disabled:opacity-50"
+                      className="w-full pl-8 pr-3 py-2.5 bg-white border border-blue-200 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-400 transition-all disabled:opacity-50"
                       disabled={uploading}
                       maxLength={200}
                     />
@@ -506,23 +506,23 @@ const CreateBusinessModal: React.FC<CreateBusinessModalProps> = ({ isOpen, onClo
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {/* Logo Upload */}
+                  {/* logo Upload */}
                   <div>
                     <label className="block text-xs font-medium text-gray-700 mb-1">
-                      Logo (Optional)
+                      logo (Optional)
                     </label>
                     <label
                       className={`block relative aspect-square border-2 border-dashed rounded-xl overflow-hidden cursor-pointer transition-all duration-300 ${
-                        uploading ? 'opacity-50 cursor-not-allowed' : 'hover:border-green-300'
-                      } ${logoFile ? 'border-green-400' : 'border-green-200'}`}
+                        uploading ? 'opacity-50 cursor-not-allowed' : 'hover:border-blue-300'
+                      } ${logoFile ? 'border-blue-400' : 'border-blue-200'}`}
                     >
                       {logoPreview ? (
                         <>
-                          <img src={logoPreview} alt="Logo preview" className="w-full h-full object-cover" />
+                          <img src={logoPreview} alt="logo preview" className="w-full h-full object-cover" />
                           {!uploading && (
                             <button
                               type="button"
-                              onClick={removeLogoFile}
+                              onClick={removelogoFile}
                               className="absolute top-1 right-1 w-6 h-6 bg-black/70 text-white rounded-full flex items-center justify-center hover:bg-black/90 transition-colors duration-200 min-h-[24px] min-w-[24px]"
                               aria-label="Remove logo"
                             >
@@ -532,17 +532,17 @@ const CreateBusinessModal: React.FC<CreateBusinessModalProps> = ({ isOpen, onClo
                         </>
                       ) : (
                         <div className="w-full h-full flex flex-col items-center justify-center p-3">
-                          <div className="w-8 h-8 bg-green-50 rounded-full flex items-center justify-center mb-1 border border-green-200">
-                            <Upload size={14} className="text-green-500" />
+                          <div className="w-8 h-8 bg-blue-50 rounded-full flex items-center justify-center mb-1 border border-blue-200">
+                            <Upload size={14} className="text-blue-500" />
                           </div>
-                          <span className="text-xs text-gray-600 font-medium">Upload Logo</span>
+                          <span className="text-xs text-gray-600 font-medium">Upload logo</span>
                           <span className="text-xs text-gray-500 mt-0.5 text-center">Square image, max 5MB</span>
                         </div>
                       )}
                       <input
                         type="file"
                         accept="image/*"
-                        onChange={handleLogoUpload}
+                        onChange={handlelogoUpload}
                         className="hidden"
                         disabled={uploading}
                         aria-label="Upload business logo"
@@ -557,8 +557,8 @@ const CreateBusinessModal: React.FC<CreateBusinessModalProps> = ({ isOpen, onClo
                     </label>
                     <label
                       className={`block relative aspect-video border-2 border-dashed rounded-xl overflow-hidden cursor-pointer transition-all duration-300 ${
-                        uploading ? 'opacity-50 cursor-not-allowed' : 'hover:border-green-300'
-                      } ${bannerFile ? 'border-green-400' : 'border-green-200'}`}
+                        uploading ? 'opacity-50 cursor-not-allowed' : 'hover:border-blue-300'
+                      } ${bannerFile ? 'border-blue-400' : 'border-blue-200'}`}
                     >
                       {bannerPreview ? (
                         <>
@@ -576,8 +576,8 @@ const CreateBusinessModal: React.FC<CreateBusinessModalProps> = ({ isOpen, onClo
                         </>
                       ) : (
                         <div className="w-full h-full flex flex-col items-center justify-center p-3">
-                          <div className="w-8 h-8 bg-green-50 rounded-full flex items-center justify-center mb-1 border border-green-200">
-                            <Upload size={14} className="text-green-500" />
+                          <div className="w-8 h-8 bg-blue-50 rounded-full flex items-center justify-center mb-1 border border-blue-200">
+                            <Upload size={14} className="text-blue-500" />
                           </div>
                           <span className="text-xs text-gray-600 font-medium">Upload Banner</span>
                           <span className="text-xs text-gray-500 mt-0.5 text-center">Wide image, max 10MB</span>
@@ -614,7 +614,7 @@ const CreateBusinessModal: React.FC<CreateBusinessModalProps> = ({ isOpen, onClo
                         value={formData.email}
                         onChange={(e) => updateFormData('email', e.target.value)}
                         placeholder="business@email.com"
-                        className="w-full pl-8 pr-3 py-2.5 bg-white border border-green-200 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-400 transition-all disabled:opacity-50"
+                        className="w-full pl-8 pr-3 py-2.5 bg-white border border-blue-200 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-400 transition-all disabled:opacity-50"
                         disabled={uploading}
                       />
                     </div>
@@ -633,7 +633,7 @@ const CreateBusinessModal: React.FC<CreateBusinessModalProps> = ({ isOpen, onClo
                         value={formData.phone}
                         onChange={(e) => updateFormData('phone', e.target.value)}
                         placeholder="080XXXXXXXX or +2348012345678"
-                        className="w-full pl-8 pr-3 py-2.5 bg-white border border-green-200 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-400 transition-all disabled:opacity-50"
+                        className="w-full pl-8 pr-3 py-2.5 bg-white border border-blue-200 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-400 transition-all disabled:opacity-50"
                         required
                         disabled={uploading}
                         inputMode="tel"
@@ -656,7 +656,7 @@ const CreateBusinessModal: React.FC<CreateBusinessModalProps> = ({ isOpen, onClo
                       value={formData.website}
                       onChange={(e) => updateFormData('website', e.target.value)}
                       placeholder="example.com or www.example.com"
-                      className="w-full pl-8 pr-3 py-2.5 bg-white border border-green-200 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-400 transition-all disabled:opacity-50"
+                      className="w-full pl-8 pr-3 py-2.5 bg-white border border-blue-200 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-400 transition-all disabled:opacity-50"
                       disabled={uploading}
                       inputMode="url"
                     />
@@ -667,8 +667,8 @@ const CreateBusinessModal: React.FC<CreateBusinessModalProps> = ({ isOpen, onClo
                 <div
                   className={`p-3 rounded-xl border transition-all duration-300 ${
                     formData.is_registered
-                      ? 'bg-green-50 border-green-300'
-                      : 'bg-white border-green-200 hover:border-green-300'
+                      ? 'bg-blue-50 border-blue-300'
+                      : 'bg-white border-blue-200 hover:border-blue-300'
                   } ${uploading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
                   onClick={() => !uploading && updateFormData('is_registered', !formData.is_registered)}
                   role="checkbox"
@@ -685,8 +685,8 @@ const CreateBusinessModal: React.FC<CreateBusinessModalProps> = ({ isOpen, onClo
                     <div
                       className={`w-5 h-5 rounded border flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
                         formData.is_registered
-                          ? 'bg-gradient-to-r from-green-600 to-green-700 border-green-600'
-                          : 'bg-white border-green-300'
+                          ? 'bg-gradient-to-r from-blue-600 to-blue-700 border-blue-600'
+                          : 'bg-white border-blue-300'
                       }`}
                     >
                       {formData.is_registered && <CheckCircle size={12} className="text-white" />}
@@ -703,13 +703,13 @@ const CreateBusinessModal: React.FC<CreateBusinessModalProps> = ({ isOpen, onClo
             )}
 
             {/* Navigation Buttons */}
-            <div className="flex items-center gap-2 pt-4 border-t border-green-100">
+            <div className="flex items-center gap-2 pt-4 border-t border-blue-100">
               {step > 1 && (
                 <button
                   type="button"
                   onClick={goToPrevStep}
                   disabled={uploading}
-                  className="flex-1 px-4 py-2.5 border border-green-200 text-green-600 font-medium rounded-xl hover:bg-green-50 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-1 text-xs min-h-[36px]"
+                  className="flex-1 px-4 py-2.5 border border-blue-200 text-blue-600 font-medium rounded-xl hover:bg-blue-50 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-1 text-xs min-h-[36px]"
                 >
                   <ChevronLeft size={14} />
                   Back
@@ -720,7 +720,7 @@ const CreateBusinessModal: React.FC<CreateBusinessModalProps> = ({ isOpen, onClo
                   type="button"
                   onClick={goToNextStep}
                   disabled={!isStepValid()}
-                  className="flex-1 py-2.5 bg-gradient-to-r from-green-600 to-green-700 text-white font-medium rounded-xl hover:from-green-700 hover:to-green-800 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-1 text-xs min-h-[36px]"
+                  className="flex-1 py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium rounded-xl hover:from-blue-700 hover:to-blue-800 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-1 text-xs min-h-[36px]"
                 >
                   Continue
                   <ChevronRight size={14} />
@@ -729,7 +729,7 @@ const CreateBusinessModal: React.FC<CreateBusinessModalProps> = ({ isOpen, onClo
                 <button
                   type="submit"
                   disabled={!isStepValid() || uploading || !isVerified}
-                  className="flex-1 py-2.5 bg-gradient-to-r from-green-600 to-green-700 text-white font-medium rounded-xl hover:from-green-700 hover:to-green-800 disabled:opacity-50 disabled:cursor-not-allowed text-xs min-h-[36px]"
+                  className="flex-1 py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium rounded-xl hover:from-blue-700 hover:to-blue-800 disabled:opacity-50 disabled:cursor-not-allowed text-xs min-h-[36px]"
                 >
                   {uploading ? 'Submitting...' : isVerified ? 'Submit Business' : 'Verified Members Only'}
                 </button>
@@ -740,7 +740,7 @@ const CreateBusinessModal: React.FC<CreateBusinessModalProps> = ({ isOpen, onClo
           /* Success State */
           <div className="p-4">
             <div className="flex flex-col items-center justify-center py-6">
-              <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl flex items-center justify-center mb-3">
+              <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-emerald-600 rounded-xl flex items-center justify-center mb-3">
                 <CheckCircle size={24} className="text-white" />
               </div>
               <h3 className="text-sm font-bold text-gray-900 mb-2 text-center">Business Submitted!</h3>
@@ -749,7 +749,7 @@ const CreateBusinessModal: React.FC<CreateBusinessModalProps> = ({ isOpen, onClo
               </p>
               <button
                 onClick={onClose}
-                className="px-4 py-2.5 bg-gradient-to-r from-green-600 to-green-700 text-white font-medium rounded-xl hover:from-green-700 hover:to-green-800 transition-all min-h-[36px] text-xs"
+                className="px-4 py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all min-h-[36px] text-xs"
               >
                 Close
               </button>

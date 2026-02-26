@@ -65,12 +65,12 @@ const CreateJobModal: React.FC<CreateJobModalProps> = ({ isOpen, onClose, onSubm
       aria-labelledby="create-job-title"
     >
       <div className="w-full max-w-md max-h-[90vh] overflow-hidden bg-white rounded-t-2xl md:rounded-2xl
-                    border border-green-200 shadow-2xl animate-slide-up">
+                    border border-blue-200 shadow-2xl animate-slide-up">
         {/* Header */}
-        <div className="sticky top-0 z-10 bg-gradient-to-r from-green-50 to-green-100 border-b border-green-200 p-3">
+        <div className="sticky top-0 z-10 bg-gradient-to-r from-blue-50 to-blue-100 border-b border-blue-200 p-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-green-500 to-green-600 rounded-lg
+              <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg
                             flex items-center justify-center">
                 <Briefcase size={16} className="text-white" />
               </div>
@@ -82,7 +82,7 @@ const CreateJobModal: React.FC<CreateJobModalProps> = ({ isOpen, onClose, onSubm
             <button
               onClick={onClose}
               className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/50
-                       active:scale-95 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-green-500/20"
+                       active:scale-95 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
               aria-label="Close modal"
             >
               <X size={18} className="text-gray-600" />
@@ -98,15 +98,15 @@ const CreateJobModal: React.FC<CreateJobModalProps> = ({ isOpen, onClose, onSubm
               <label htmlFor="job-title" className="block text-xs font-medium text-gray-700">Job Title *</label>
               <div className="relative group">
                 <FileText className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400
-                                   group-focus-within:text-green-600 transition-colors" size={16} />
+                                   group-focus-within:text-blue-600 transition-colors" size={16} />
                 <input
                   id="job-title"
                   type="text"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   placeholder="e.g., Senior Software Engineer"
-                  className="w-full pl-9 pr-3 py-2 bg-white border border-green-200 rounded-lg text-xs
-                           focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-400 transition-all
+                  className="w-full pl-9 pr-3 py-2 bg-white border border-blue-200 rounded-lg text-xs
+                           focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 transition-all
                            min-h-[36px]"
                   required
                   autoComplete="off"
@@ -123,8 +123,8 @@ const CreateJobModal: React.FC<CreateJobModalProps> = ({ isOpen, onClose, onSubm
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="Describe the job responsibilities, requirements, and benefits..."
-                className="w-full p-2 bg-white border border-green-200 rounded-lg text-xs
-                         focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-400
+                className="w-full p-2 bg-white border border-blue-200 rounded-lg text-xs
+                         focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400
                          transition-all h-24 resize-none"
                 maxLength={1000}
                 aria-describedby="description-help"
@@ -141,15 +141,15 @@ const CreateJobModal: React.FC<CreateJobModalProps> = ({ isOpen, onClose, onSubm
                 <label htmlFor="job-salary" className="block text-xs font-medium text-gray-700">Salary</label>
                 <div className="relative group">
                   <DollarSign className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400
-                                       group-focus-within:text-green-600 transition-colors" size={16} />
+                                       group-focus-within:text-blue-600 transition-colors" size={16} />
                   <input
                     id="job-salary"
                     type="text"
                     value={salary}
                     onChange={(e) => setSalary(e.target.value)}
                     placeholder="e.g., ₦200,000 - ₦300,000"
-                    className="w-full pl-9 pr-3 py-2 bg-white border border-green-200 rounded-lg text-xs
-                             focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-400 transition-all
+                    className="w-full pl-9 pr-3 py-2 bg-white border border-blue-200 rounded-lg text-xs
+                             focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 transition-all
                              min-h-[36px]"
                     autoComplete="off"
                   />
@@ -160,13 +160,13 @@ const CreateJobModal: React.FC<CreateJobModalProps> = ({ isOpen, onClose, onSubm
                 <label htmlFor="job-type" className="block text-xs font-medium text-gray-700">Job Type *</label>
                 <div className="relative group">
                   <Briefcase className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400
-                                      group-focus-within:text-green-600 transition-colors pointer-events-none" size={16} />
+                                      group-focus-within:text-blue-600 transition-colors pointer-events-none" size={16} />
                   <select
                     id="job-type"
                     value={jobType}
                     onChange={(e) => setJobType(e.target.value)}
-                    className="w-full pl-9 pr-3 py-2 bg-white border border-green-200 rounded-lg text-xs
-                             focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-400
+                    className="w-full pl-9 pr-3 py-2 bg-white border border-blue-200 rounded-lg text-xs
+                             focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400
                              transition-all appearance-none cursor-pointer min-h-[36px]"
                     required
                     aria-required="true"
@@ -189,15 +189,15 @@ const CreateJobModal: React.FC<CreateJobModalProps> = ({ isOpen, onClose, onSubm
               <label htmlFor="job-location" className="block text-xs font-medium text-gray-700">Location</label>
               <div className="relative group">
                 <MapPin className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400
-                                 group-focus-within:text-green-600 transition-colors" size={16} />
+                                 group-focus-within:text-blue-600 transition-colors" size={16} />
                 <input
                   id="job-location"
                   type="text"
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
-                  placeholder="e.g., Jigawa, Nigeria"
-                  className="w-full pl-9 pr-3 py-2 bg-white border border-green-200 rounded-lg text-xs
-                           focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-400 transition-all
+                  placeholder="e.g., Kano, Nigeria"
+                  className="w-full pl-9 pr-3 py-2 bg-white border border-blue-200 rounded-lg text-xs
+                           focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 transition-all
                            min-h-[36px]"
                   autoComplete="off"
                 />
@@ -207,9 +207,9 @@ const CreateJobModal: React.FC<CreateJobModalProps> = ({ isOpen, onClose, onSubm
             {/* Contact Information */}
             <div className="space-y-2 pt-1">
               <div className="flex items-center gap-2">
-                <div className="w-6 h-6 bg-gradient-to-br from-green-100 to-green-200 rounded-lg
+                <div className="w-6 h-6 bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg
                               flex items-center justify-center">
-                  <Mail size={12} className="text-green-600" />
+                  <Mail size={12} className="text-blue-600" />
                 </div>
                 <h3 className="font-medium text-gray-900 text-xs">Contact Information</h3>
               </div>
@@ -218,15 +218,15 @@ const CreateJobModal: React.FC<CreateJobModalProps> = ({ isOpen, onClose, onSubm
                 <label htmlFor="contact-email" className="text-xs text-gray-600">Email Address</label>
                 <div className="relative group">
                   <Mail className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400
-                                 group-focus-within:text-green-600 transition-colors" size={16} />
+                                 group-focus-within:text-blue-600 transition-colors" size={16} />
                   <input
                     id="contact-email"
                     type="email"
                     value={contactEmail}
                     onChange={(e) => setContactEmail(e.target.value)}
                     placeholder="contact@company.com"
-                    className="w-full pl-9 pr-3 py-2 bg-white border border-green-200 rounded-lg text-xs
-                             focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-400 transition-all
+                    className="w-full pl-9 pr-3 py-2 bg-white border border-blue-200 rounded-lg text-xs
+                             focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 transition-all
                              min-h-[36px]"
                     autoComplete="email"
                     inputMode="email"
@@ -238,15 +238,15 @@ const CreateJobModal: React.FC<CreateJobModalProps> = ({ isOpen, onClose, onSubm
                 <label htmlFor="contact-phone" className="text-xs text-gray-600">Phone Number</label>
                 <div className="relative group">
                   <Phone className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400
-                                  group-focus-within:text-green-600 transition-colors" size={16} />
+                                  group-focus-within:text-blue-600 transition-colors" size={16} />
                   <input
                     id="contact-phone"
                     type="tel"
                     value={contactPhone}
                     onChange={(e) => setContactPhone(e.target.value)}
                     placeholder="e.g., +2348000000000"
-                    className="w-full pl-9 pr-3 py-2 bg-white border border-green-200 rounded-lg text-xs
-                             focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-400 transition-all
+                    className="w-full pl-9 pr-3 py-2 bg-white border border-blue-200 rounded-lg text-xs
+                             focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 transition-all
                              min-h-[36px]"
                     autoComplete="tel"
                     inputMode="tel"
@@ -259,12 +259,12 @@ const CreateJobModal: React.FC<CreateJobModalProps> = ({ isOpen, onClose, onSubm
             <button
               type="submit"
               disabled={isLoading || !title.trim()}
-              className="w-full bg-gradient-to-r from-green-600 to-green-700 text-white
+              className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white
                        font-bold py-2 rounded-lg shadow-md hover:shadow-lg
-                       hover:from-green-700 hover:to-green-800
+                       hover:from-blue-700 hover:to-blue-800
                        disabled:opacity-50 disabled:cursor-not-allowed
                        active:scale-[0.99] transition-all duration-200
-                       focus:outline-none focus:ring-2 focus:ring-green-500/50 mt-3 text-xs min-h-[36px]"
+                       focus:outline-none focus:ring-2 focus:ring-blue-500/50 mt-3 text-xs min-h-[36px]"
               aria-label={isLoading ? 'Posting job...' : 'Post job listing'}
             >
               {isLoading ? (

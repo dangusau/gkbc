@@ -9,7 +9,7 @@ const getIconForType = (type: string) => {
     case 'post':
       return <MessageCircle className="text-blue-500" size={18} />;
     case 'connection':
-      return <User className="text-green-500" size={18} />;
+      return <User className="text-blue-500" size={18} />;
     case 'marketplace':
       return <ShoppingBag className="text-purple-500" size={18} />;
     case 'business':
@@ -90,7 +90,7 @@ export const NotificationsPage: React.FC = () => {
         {unreadCount > 0 && (
           <button
             onClick={() => markAllAsRead()}
-            className="flex items-center gap-2 px-4 py-2 text-sm bg-green-50 text-green-600 rounded-lg hover:bg-green-100"
+            className="flex items-center gap-2 px-4 py-2 text-sm bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100"
           >
             <CheckCheck size={18} />
             Mark all as read
@@ -115,7 +115,7 @@ export const NotificationsPage: React.FC = () => {
                   key={notification.id}
                   onClick={() => handleNotificationClick(notification)}
                   className={`p-4 bg-white rounded-lg border cursor-pointer hover:shadow-sm transition ${
-                    !notification.read ? 'border-l-4 border-l-green-500 bg-green-50/30' : ''
+                    !notification.read ? 'border-l-4 border-l-blue-500 bg-blue-50/30' : ''
                   }`}
                 >
                   <div className="flex items-start gap-3">
@@ -146,7 +146,7 @@ export const NotificationsPage: React.FC = () => {
                       )}
                     </div>
                     {!notification.read && (
-                      <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+                      <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
                     )}
                   </div>
                 </div>

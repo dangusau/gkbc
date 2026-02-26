@@ -52,21 +52,21 @@ const ResetPassword: React.FC = () => {
 
   if (success) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-green-50 flex flex-col justify-center items-center px-3 safe-area">
+      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-blue-50 flex flex-col justify-center items-center px-3 safe-area">
         <div className="w-full max-w-md">
           <div className="flex flex-col items-center mb-6">
             <div className="relative mb-3">
-              <div className="w-16 h-16 rounded-xl flex items-center justify-center shadow-lg shadow-green-500/20 overflow-hidden border border-green-100">
-                <div className="w-full h-full bg-gradient-to-br from-green-600 to-indigo-600 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-base">GJBC</span>
+              <div className="w-16 h-16 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20 overflow-hidden border border-blue-100">
+                <div className="w-full h-full bg-gradient-to-br from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center">
+                  <span className="text-white font-bold text-base">GKBC</span>
                 </div>
               </div>
             </div>
             
             <div className="mb-4">
               <h1 className="text-2xl font-black text-gray-900 text-center">
-                <span className="bg-gradient-to-r from-green-600 to-indigo-600 bg-clip-text text-transparent">
-                  GJBC
+                <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                  GKBC
                 </span>
               </h1>
               <p className="text-xs text-gray-500 text-center font-medium mt-0.5">
@@ -76,8 +76,8 @@ const ResetPassword: React.FC = () => {
           </div>
 
           <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-4 text-center">
-            <div className="w-12 h-12 bg-gradient-to-br from-green-100 to-green-50 rounded-full flex items-center justify-center mx-auto mb-4 border border-green-200">
-              <CheckCircle className="text-green-600" size={24} />
+            <div className="w-12 h-12 bg-gradient-to-br from-blue-100 to-blue-50 rounded-full flex items-center justify-center mx-auto mb-4 border border-blue-200">
+              <CheckCircle className="text-blue-600" size={24} />
             </div>
             <h2 className="text-lg font-bold text-gray-900 mb-2">Password Updated!</h2>
             <p className="text-gray-600 text-sm mb-4">
@@ -85,7 +85,7 @@ const ResetPassword: React.FC = () => {
             </p>
             <button
               onClick={() => navigate('/login')}
-              className="w-full bg-gradient-to-r from-green-600 to-green-700 text-white font-bold py-2.5 rounded-lg hover:from-green-700 hover:to-green-800 transition-all min-h-[44px]"
+              className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold py-2.5 rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all min-h-[44px]"
             >
               Go to Login Now
             </button>
@@ -96,21 +96,21 @@ const ResetPassword: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-green-50 flex flex-col justify-center items-center px-3 safe-area">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-blue-50 flex flex-col justify-center items-center px-3 safe-area">
       <div className="w-full max-w-md">
         <div className="flex flex-col items-center mb-6">
           <div className="relative mb-3">
-            <div className="w-16 h-16 rounded-xl flex items-center justify-center shadow-lg shadow-green-500/20 overflow-hidden border border-green-100">
-              <div className="w-full h-full bg-gradient-to-br from-green-600 to-indigo-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-base">GJBC</span>
+            <div className="w-16 h-16 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20 overflow-hidden border border-blue-100">
+              <div className="w-full h-full bg-gradient-to-br from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-base">GKBC</span>
               </div>
             </div>
           </div>
           
           <div className="mb-4">
             <h1 className="text-2xl font-black text-gray-900 text-center">
-              <span className="bg-gradient-to-r from-green-600 to-indigo-600 bg-clip-text text-transparent">
-                GJBC
+              <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                GKBC
               </span>
             </h1>
             <p className="text-xs text-gray-500 text-center font-medium mt-0.5">
@@ -122,8 +122,8 @@ const ResetPassword: React.FC = () => {
         <div className="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
           <div className="p-4">
             <div className="text-center mb-6">
-              <div className="w-12 h-12 bg-gradient-to-br from-green-100 to-green-50 rounded-full flex items-center justify-center mx-auto mb-3 border border-green-200">
-                <Lock className="text-green-600" size={22} />
+              <div className="w-12 h-12 bg-gradient-to-br from-blue-100 to-blue-50 rounded-full flex items-center justify-center mx-auto mb-3 border border-blue-200">
+                <Lock className="text-blue-600" size={22} />
               </div>
               <h2 className="text-lg font-bold text-gray-900 mb-1.5">Set New Password</h2>
               <p className="text-gray-500 text-xs">
@@ -153,7 +153,7 @@ const ResetPassword: React.FC = () => {
                     type={showPassword ? "text" : "password"}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full pl-10 pr-10 py-2.5 bg-white border border-green-200 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-green-500/20 focus:border-green-500 transition-all"
+                    className="w-full pl-10 pr-10 py-2.5 bg-white border border-blue-200 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
                     placeholder="Enter new password"
                     required
                     minLength={6}
@@ -183,7 +183,7 @@ const ResetPassword: React.FC = () => {
                     type={showConfirmPassword ? "text" : "password"}
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
-                    className="w-full pl-10 pr-10 py-2.5 bg-white border border-green-200 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-green-500/20 focus:border-green-500 transition-all"
+                    className="w-full pl-10 pr-10 py-2.5 bg-white border border-blue-200 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
                     placeholder="Confirm new password"
                     required
                     minLength={6}
@@ -201,7 +201,7 @@ const ResetPassword: React.FC = () => {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full bg-gradient-to-r from-green-600 to-green-700 text-white font-bold py-2.5 rounded-lg hover:from-green-700 hover:to-green-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all min-h-[44px]"
+                className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold py-2.5 rounded-lg hover:from-blue-700 hover:to-blue-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all min-h-[44px]"
               >
                 {isLoading ? 'Resetting Password...' : 'Reset Password'}
               </button>

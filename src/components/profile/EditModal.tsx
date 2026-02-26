@@ -12,7 +12,7 @@ interface EditModalProps {
 const MARKET_AREAS = [
   'Central / Old City', 'Sabon Gari / Kantin Kwari', 'Farm Center / Beirut',
   'France Road', 'Zoo Road', 'Zaria Road', 'Dawanau', 'Sharada / Challawa',
-  'Hotoro', 'Gyadi-Gyadi / Tarauni', 'Jigawa Road', 'Mariri / Sheka',
+  'Hotoro', 'Gyadi-Gyadi / Tarauni', 'Kano Road', 'Mariri / Sheka',
   'Bompai', 'Transport (Kano Line / Sabon Gari Park)', 'Others'
 ];
 
@@ -101,9 +101,9 @@ export const EditModal: React.FC<EditModalProps> = ({ type, data, isOpen, onClos
         </div>
 
         {success && (
-          <div className="m-4 p-3 bg-green-50 border border-green-200 rounded-lg flex items-center gap-2">
-            <CheckCircle className="text-green-600" size={20} />
-            <span className="text-green-700 font-medium">Changes saved successfully!</span>
+          <div className="m-4 p-3 bg-blue-50 border border-blue-200 rounded-lg flex items-center gap-2">
+            <CheckCircle className="text-blue-600" size={20} />
+            <span className="text-blue-700 font-medium">Changes saved successfully!</span>
           </div>
         )}
 
@@ -243,7 +243,7 @@ export const EditModal: React.FC<EditModalProps> = ({ type, data, isOpen, onClos
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-lg font-medium hover:from-green-700 hover:to-green-800 disabled:opacity-50 transition-all min-h-[44px] border border-green-800"
+                className="w-full py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg font-medium hover:from-blue-700 hover:to-blue-800 disabled:opacity-50 transition-all min-h-[44px] border border-blue-800"
               >
                 {loading ? 'Saving...' : 'Save Profile'}
               </button>

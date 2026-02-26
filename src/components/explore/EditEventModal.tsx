@@ -67,12 +67,12 @@ const EditEventModal: React.FC<EditEventModalProps> = ({
       aria-labelledby="edit-event-title"
     >
       <div className="w-full max-w-md max-h-[90vh] overflow-hidden bg-white rounded-t-2xl md:rounded-2xl
-                    border border-green-200 shadow-2xl animate-slide-up">
+                    border border-blue-200 shadow-2xl animate-slide-up">
         {/* Header */}
-        <div className="sticky top-0 z-10 bg-gradient-to-r from-green-50 to-green-100 border-b border-green-200 p-3">
+        <div className="sticky top-0 z-10 bg-gradient-to-r from-blue-50 to-blue-100 border-b border-blue-200 p-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-green-500 to-green-600 rounded-lg
+              <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg
                             flex items-center justify-center">
                 <CalendarDays size={16} className="text-white" />
               </div>
@@ -84,7 +84,7 @@ const EditEventModal: React.FC<EditEventModalProps> = ({
             <button
               onClick={onClose}
               className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/50
-                       active:scale-95 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-green-500/20"
+                       active:scale-95 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
               aria-label="Close modal"
             >
               <X size={18} className="text-gray-600" />
@@ -100,14 +100,14 @@ const EditEventModal: React.FC<EditEventModalProps> = ({
               <label htmlFor="edit-event-title" className="block text-xs font-medium text-gray-700">Event Title *</label>
               <div className="relative group">
                 <CalendarDays className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400
-                                       group-focus-within:text-green-600 transition-colors" size={16} />
+                                       group-focus-within:text-blue-600 transition-colors" size={16} />
                 <input
                   id="edit-event-title"
                   type="text"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  className="w-full pl-9 pr-3 py-2 bg-white border border-green-200 rounded-lg text-xs
-                           focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-400 transition-all
+                  className="w-full pl-9 pr-3 py-2 bg-white border border-blue-200 rounded-lg text-xs
+                           focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 transition-all
                            min-h-[36px]"
                   required
                   autoComplete="off"
@@ -122,8 +122,8 @@ const EditEventModal: React.FC<EditEventModalProps> = ({
                 id="edit-event-description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                className="w-full p-2 bg-white border border-green-200 rounded-lg text-xs
-                         focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-400
+                className="w-full p-2 bg-white border border-blue-200 rounded-lg text-xs
+                         focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400
                          transition-all h-24 resize-none"
                 maxLength={1000}
               />
@@ -135,14 +135,14 @@ const EditEventModal: React.FC<EditEventModalProps> = ({
                 <label htmlFor="edit-event-date" className="block text-xs font-medium text-gray-700">Date *</label>
                 <div className="relative group">
                   <Calendar className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400
-                                     group-focus-within:text-green-600 transition-colors pointer-events-none" size={16} />
+                                     group-focus-within:text-blue-600 transition-colors pointer-events-none" size={16} />
                   <input
                     id="edit-event-date"
                     type="date"
                     value={eventDate}
                     onChange={(e) => setEventDate(e.target.value)}
-                    className="w-full pl-9 pr-3 py-2 bg-white border border-green-200 rounded-lg text-xs
-                             focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-400
+                    className="w-full pl-9 pr-3 py-2 bg-white border border-blue-200 rounded-lg text-xs
+                             focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400
                              transition-all cursor-pointer min-h-[36px]"
                     required
                   />
@@ -153,14 +153,14 @@ const EditEventModal: React.FC<EditEventModalProps> = ({
                 <label htmlFor="edit-event-time" className="block text-xs font-medium text-gray-700">Time *</label>
                 <div className="relative group">
                   <Clock className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400
-                                  group-focus-within:text-green-600 transition-colors pointer-events-none" size={16} />
+                                  group-focus-within:text-blue-600 transition-colors pointer-events-none" size={16} />
                   <input
                     id="edit-event-time"
                     type="time"
                     value={eventTime}
                     onChange={(e) => setEventTime(e.target.value)}
-                    className="w-full pl-9 pr-3 py-2 bg-white border border-green-200 rounded-lg text-xs
-                             focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-400
+                    className="w-full pl-9 pr-3 py-2 bg-white border border-blue-200 rounded-lg text-xs
+                             focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400
                              transition-all cursor-pointer min-h-[36px]"
                     required
                   />
@@ -173,14 +173,14 @@ const EditEventModal: React.FC<EditEventModalProps> = ({
               <label htmlFor="edit-event-location" className="block text-xs font-medium text-gray-700">Location</label>
               <div className="relative group">
                 <MapPin className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400
-                                 group-focus-within:text-green-600 transition-colors" size={16} />
+                                 group-focus-within:text-blue-600 transition-colors" size={16} />
                 <input
                   id="edit-event-location"
                   type="text"
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
-                  className="w-full pl-9 pr-3 py-2 bg-white border border-green-200 rounded-lg text-xs
-                           focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-400 transition-all
+                  className="w-full pl-9 pr-3 py-2 bg-white border border-blue-200 rounded-lg text-xs
+                           focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 transition-all
                            min-h-[36px]"
                   autoComplete="off"
                 />
@@ -191,12 +191,12 @@ const EditEventModal: React.FC<EditEventModalProps> = ({
             <button
               type="submit"
               disabled={isLoading || !title.trim() || !eventDate || !eventTime}
-              className="w-full bg-gradient-to-r from-green-600 to-green-700 text-white
+              className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white
                        font-bold py-2 rounded-lg shadow-md hover:shadow-lg
-                       hover:from-green-700 hover:to-green-800
+                       hover:from-blue-700 hover:to-blue-800
                        disabled:opacity-50 disabled:cursor-not-allowed
                        active:scale-[0.99] transition-all duration-200
-                       focus:outline-none focus:ring-2 focus:ring-green-500/50 text-xs min-h-[36px]"
+                       focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-xs min-h-[36px]"
             >
               {isLoading ? (
                 <div className="flex items-center justify-center gap-1">

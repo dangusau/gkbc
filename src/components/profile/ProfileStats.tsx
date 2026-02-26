@@ -30,13 +30,13 @@ export const ProfileStats: React.FC<ProfileStatsProps> = ({
               onClick={() => onTabChange(stat.key)}
               className={`flex flex-col items-center p-1 rounded-2xl transition-all active:scale-[0.98] border-1 ${
                 activeTab === stat.key
-                  ? 'bg-gradient-to-br from-green-50 to-green-100 border-green-200 shadow-lg transform -translate-y-1'
-                  : 'bg-white border-gray-200 hover:border-green-300 hover:shadow-md'
+                  ? 'bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200 shadow-lg transform -translate-y-1'
+                  : 'bg-white border-gray-200 hover:border-blue-300 hover:shadow-md'
               }`}
             >
               <Icon
                 size={25}
-                className={`mb-3 ${activeTab === stat.key ? 'text-green-600' : 'text-gray-600'}`}
+                className={`mb-3 ${activeTab === stat.key ? 'text-blue-600' : 'text-gray-600'}`}
               />
               <span className="text-l font-bold text-gray-900">{stat.count}</span>
               <span className="text-sm text-gray-600 mt-1 font-bold">{stat.label}</span>

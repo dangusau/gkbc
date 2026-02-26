@@ -124,19 +124,19 @@ const Marketplace: React.FC = () => {
       )}
 
       {/* Header */}
-      <div className="sticky top-0 z-30 bg-white border-b border-green-200">
-        <div className="bg-gradient-to-r from-green-600 to-green-700 p-3">
+      <div className="sticky top-0 z-30 bg-white border-b border-blue-200">
+        <div className="bg-gradient-to-r from-blue-600 to-blue-700 p-3">
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-sm font-bold text-white">Marketplace</h1>
-              <p className="text-xs text-green-100">GJBC community marketplace</p>
+              <p className="text-xs text-blue-100">GKBC community marketplace</p>
             </div>
             {user && (
               <div className="flex items-center gap-1">
                 {isVerified ? (
-                  <div className="flex items-center gap-1 px-2 py-1 bg-green-500/20 border border-green-400/30 rounded-full">
-                    <Shield size={10} className="text-green-200" />
-                    <span className="text-xs text-green-100 font-medium">Verified</span>
+                  <div className="flex items-center gap-1 px-2 py-1 bg-blue-500/20 border border-blue-400/30 rounded-full">
+                    <Shield size={10} className="text-blue-200" />
+                    <span className="text-xs text-blue-100 font-medium">Verified</span>
                   </div>
                 ) : (
                   <div className="flex items-center gap-1 px-2 py-1 bg-yellow-500/20 border border-yellow-400/30 rounded-full">
@@ -154,7 +154,7 @@ const Marketplace: React.FC = () => {
             onClick={() => setActiveTab('browse')}
             className={`flex-1 py-3 text-center font-medium text-sm ${
               activeTab === 'browse'
-                ? 'border-b-2 border-green-600 text-green-600'
+                ? 'border-b-2 border-blue-600 text-blue-600'
                 : 'text-gray-500 hover:text-gray-700'
             }`}
           >
@@ -165,7 +165,7 @@ const Marketplace: React.FC = () => {
               onClick={() => setActiveTab('myListings')}
               className={`flex-1 py-3 text-center font-medium text-sm ${
                 activeTab === 'myListings'
-                  ? 'border-b-2 border-green-600 text-green-600'
+                  ? 'border-b-2 border-blue-600 text-blue-600'
                   : 'text-gray-500 hover:text-gray-700'
               }`}
             >
@@ -184,7 +184,7 @@ const Marketplace: React.FC = () => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search listings..."
-                className="w-full pl-9 pr-8 py-2 border border-green-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500/20 text-xs"
+                className="w-full pl-9 pr-8 py-2 border border-blue-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 text-xs"
               />
               {searchQuery && (
                 <button
@@ -226,8 +226,8 @@ const Marketplace: React.FC = () => {
               </div>
             ) : listings.length === 0 ? (
               <div className="text-center py-12">
-                <div className="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-3">
-                  <MessageCircle size={24} className="text-green-500" />
+                <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-3">
+                  <MessageCircle size={24} className="text-blue-500" />
                 </div>
                 <h3 className="text-sm font-bold text-gray-900 mb-1">No listings found</h3>
                 <p className="text-xs text-gray-600 mb-4">
@@ -236,7 +236,7 @@ const Marketplace: React.FC = () => {
                 {activeFilterCount > 0 && (
                   <button
                     onClick={clearFilters}
-                    className="px-4 py-2 bg-white text-green-600 rounded-xl font-medium border border-green-200 hover:bg-green-50 text-xs"
+                    className="px-4 py-2 bg-white text-blue-600 rounded-xl font-medium border border-blue-200 hover:bg-blue-50 text-xs"
                   >
                     Clear Filters
                   </button>
@@ -258,7 +258,7 @@ const Marketplace: React.FC = () => {
                     <button
                       onClick={() => browseQuery.fetchNextPage()}
                       disabled={isFetchingMore}
-                      className="px-6 py-2 bg-white text-green-600 rounded-xl font-medium border border-green-200 hover:bg-green-50 disabled:opacity-50 text-xs"
+                      className="px-6 py-2 bg-white text-blue-600 rounded-xl font-medium border border-blue-200 hover:bg-blue-50 disabled:opacity-50 text-xs"
                     >
                       {isFetchingMore ? 'Loading...' : 'Load More'}
                     </button>
@@ -283,14 +283,14 @@ const Marketplace: React.FC = () => {
               </div>
             ) : myListings.length === 0 ? (
               <div className="text-center py-12">
-                <div className="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-3">
-                  <Plus size={24} className="text-green-500" />
+                <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-3">
+                  <Plus size={24} className="text-blue-500" />
                 </div>
                 <h3 className="text-sm font-bold text-gray-900 mb-1">No listings yet</h3>
                 <p className="text-xs text-gray-600 mb-4">Create your first listing to start selling</p>
                 <button
                   onClick={() => setShowCreateModal(true)}
-                  className="px-4 py-2 bg-green-600 text-white rounded-xl font-medium hover:bg-green-700 text-xs"
+                  className="px-4 py-2 bg-blue-600 text-white rounded-xl font-medium hover:bg-blue-700 text-xs"
                 >
                   Create Listing
                 </button>
@@ -319,7 +319,7 @@ const Marketplace: React.FC = () => {
       {activeTab === 'browse' && isVerified && (
         <button
           onClick={() => setShowCreateModal(true)}
-          className="fixed bottom-20 right-4 bg-green-600 text-white p-3 rounded-full shadow-lg hover:bg-green-700 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
+          className="fixed bottom-20 right-4 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
           aria-label="Create listing"
         >
           <Plus size={20} />

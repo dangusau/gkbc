@@ -11,7 +11,7 @@ interface Props {
 const BusinessCard: React.FC<Props> = ({ business }) => {
   return (
     <Link to={`/business/${business.id}`} className="block">
-      <div className="bg-white rounded-xl border border-green-200 overflow-hidden hover:border-green-400 transition-shadow">
+      <div className="bg-white rounded-xl border border-blue-200 overflow-hidden hover:border-blue-400 transition-shadow">
         {/* Banner */}
         <div className="h-24 bg-gradient-to-r from-gray-100 to-gray-200 relative">
           {business.banner_url ? (
@@ -28,7 +28,7 @@ const BusinessCard: React.FC<Props> = ({ business }) => {
             </div>
           )}
           
-          {/* Logo */}
+          {/* logo */}
           <div className="absolute -bottom-4 left-3">
             <div className="relative w-12 h-12 bg-white rounded-lg border-2 border-white flex items-center justify-center overflow-hidden">
               {business.logo_url ? (
@@ -40,7 +40,7 @@ const BusinessCard: React.FC<Props> = ({ business }) => {
                   decoding="async"
                 />
               ) : (
-                <Building size={20} className="text-green-600" />
+                <Building size={20} className="text-blue-600" />
               )}
              
             </div>
@@ -66,7 +66,7 @@ const BusinessCard: React.FC<Props> = ({ business }) => {
           </p>
 
           <div className="flex items-center justify-between">
-            <span className="px-2 py-0.5 bg-green-100 text-green-700 text-xs rounded-full">
+            <span className="px-2 py-0.5 bg-blue-100 text-blue-700 text-xs rounded-full">
               {business.category}
             </span>
             <div className="flex items-center gap-0.5 text-gray-500 text-xs">

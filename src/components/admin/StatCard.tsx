@@ -28,7 +28,7 @@ export const StatCard: React.FC<StatCardProps> = ({
   });
 
   return (
-    <div className="bg-white rounded-xl border border-green-200 p-4 shadow-sm">
+    <div className="bg-white rounded-xl border border-blue-200 p-4 shadow-sm">
       <div className="flex items-start justify-between">
         <div>
           <p className="text-sm font-medium text-gray-600">{title}</p>
@@ -38,20 +38,20 @@ export const StatCard: React.FC<StatCardProps> = ({
           {previous != null && percentChange !== null && (
             <div className="flex items-center gap-1 mt-1 text-xs">
               {percentChange > 0 ? (
-                <TrendingUp size={14} className="text-green-600" />
+                <TrendingUp size={14} className="text-blue-600" />
               ) : percentChange < 0 ? (
                 <TrendingDown size={14} className="text-red-600" />
               ) : (
                 <Minus size={14} className="text-gray-400" />
               )}
-              <span className={percentChange > 0 ? 'text-green-600' : percentChange < 0 ? 'text-red-600' : 'text-gray-500'}>
+              <span className={percentChange > 0 ? 'text-blue-600' : percentChange < 0 ? 'text-red-600' : 'text-gray-500'}>
                 {percentChange > 0 ? '+' : ''}{percentChange.toFixed(1)}%
               </span>
               <span className="text-gray-500 ml-1">vs previous</span>
             </div>
           )}
         </div>
-        <div className="p-2 rounded-lg bg-green-100 text-green-700">{icon}</div>
+        <div className="p-2 rounded-lg bg-blue-100 text-blue-700">{icon}</div>
       </div>
     </div>
   );

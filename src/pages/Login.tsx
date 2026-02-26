@@ -59,7 +59,7 @@ const LoginStatusModal: React.FC<{
           message: (
             <>
               <p className="text-gray-600 mb-2 text-sm">
-                Your email <span className="font-semibold text-green-600">{email}</span> has not been verified yet.
+                Your email <span className="font-semibold text-blue-600">{email}</span> has not been verified yet.
               </p>
               <p className="text-gray-600 text-sm">
                 Please check your inbox for the verification link. If you didn't receive it, check your spam folder.
@@ -83,25 +83,25 @@ const LoginStatusModal: React.FC<{
                 Your account has been restricted.
               </p>
               <p className="text-gray-600 text-sm">
-                Please contact support@GJBC.com for assistance.
+                Please contact support@GKBC.com for assistance.
               </p>
             </>
           ),
           primaryButton: 'Contact Support',
           secondaryButton: 'Close',
-          primaryAction: () => window.open('mailto:support@GJBC.com', '_blank'),
+          primaryAction: () => window.open('mailto:support@GKBC.com', '_blank'),
           secondaryAction: onClose,
         };
       case 'no_account':
         return {
           title: 'No Account Found',
-          icon: <UserX className="text-green-600" size={24} />,
-          iconBg: 'from-green-100 to-green-50',
-          iconBorder: 'border-green-200',
+          icon: <UserX className="text-blue-600" size={24} />,
+          iconBg: 'from-blue-100 to-blue-50',
+          iconBorder: 'border-blue-200',
           message: (
             <>
               <p className="text-gray-600 mb-2 text-sm">
-                No account found with email <span className="font-semibold text-green-600">{email}</span>.
+                No account found with email <span className="font-semibold text-blue-600">{email}</span>.
               </p>
               <p className="text-gray-600 text-sm">
                 Please sign up to create a new account and join our business community.
@@ -165,7 +165,7 @@ const LoginStatusModal: React.FC<{
                   : status === 'unverified'
                   ? 'bg-gradient-to-r from-yellow-600 to-orange-600 hover:from-yellow-700 hover:to-orange-700'
                   : status === 'no_account'
-                  ? 'bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800'
+                  ? 'bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800'
                   : 'bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800'
               } text-white font-bold py-2.5 rounded-lg hover:shadow transition-all duration-200 min-h-[44px]`}
             >
@@ -173,7 +173,7 @@ const LoginStatusModal: React.FC<{
             </button>
             <button
               onClick={config.secondaryAction}
-              className="w-full border border-gray-300 text-gray-700 font-bold py-2.5 rounded-lg hover:border-green-500 hover:text-green-600 hover:bg-green-50 transition-all duration-200 min-h-[44px]"
+              className="w-full border border-gray-300 text-gray-700 font-bold py-2.5 rounded-lg hover:border-blue-500 hover:text-blue-600 hover:bg-blue-50 transition-all duration-200 min-h-[44px]"
             >
               {config.secondaryButton}
             </button>
@@ -329,7 +329,7 @@ const Login: React.FC = () => {
         if (profileError.message.includes('network')) {
           console.error('Critical network error fetching profile');
         }
-        setError('Account error. Please contact support@GJBC.com');
+        setError('Account error. Please contact support@GKBC.com');
         setIsLoading(false);
         return;
       }
@@ -401,25 +401,25 @@ const Login: React.FC = () => {
         onForgotPassword={handleForgotPassword}
       />
       
-      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-green-50 flex flex-col justify-center items-center px-3 relative overflow-hidden safe-area">
-        <div className="absolute top-0 left-0 right-0 h-48 bg-gradient-to-b from-green-600/10 to-transparent" />
-        <div className="absolute top-1/4 -right-12 w-48 h-48 bg-green-500/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 -left-12 w-48 h-48 bg-green-400/5 rounded-full blur-3xl" />
+      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-blue-50 flex flex-col justify-center items-center px-3 relative overflow-hidden safe-area">
+        <div className="absolute top-0 left-0 right-0 h-48 bg-gradient-to-b from-blue-600/10 to-transparent" />
+        <div className="absolute top-1/4 -right-12 w-48 h-48 bg-blue-500/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 -left-12 w-48 h-48 bg-blue-400/5 rounded-full blur-3xl" />
         
         <div className="w-full max-w-md relative z-10">
           <div className="flex flex-col items-center mb-6">
             <div className="relative mb-3">
-              <div className="w-20 h-20 rounded-xl flex items-center justify-center shadow-lg shadow-green-500/20 overflow-hidden border border-green-100">
+              <div className="w-20 h-20 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20 overflow-hidden border border-blue-100">
                 <img 
-                  src="/GJBCLOGO.png" 
-                  alt="GJBC Logo" 
+                  src="/GKBClogo.png" 
+                  alt="GKBC logo" 
                   className="w-full h-full object-contain p-1"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.style.display = 'none';
                     target.parentElement!.innerHTML = `
-                      <div class="w-full h-full bg-gradient-to-br from-green-600 to-indigo-600 rounded-lg flex items-center justify-center">
-                        <span class="text-white font-bold text-base">GJBC</span>
+                      <div class="w-full h-full bg-gradient-to-br from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-base">GKBC</span>
                       </div>
                     `;
                   }}
@@ -429,12 +429,12 @@ const Login: React.FC = () => {
             
             <div className="mb-3">
               <h1 className="text-2xl font-black text-gray-900 text-center">
-                <span className="bg-gradient-to-r from-green-600 to-green-600 bg-clip-text text-transparent">
-                  GJBC
+                <span className="bg-gradient-to-r from-blue-600 to-blue-600 bg-clip-text text-transparent">
+                  GKBC
                 </span>
               </h1>
               <p className="text-xs text-gray-500 text-center font-medium mt-0.5">
-                Driving Economic Growth
+                Africa's Emerging Economic Vanguard
               </p>
             </div>
             
@@ -451,19 +451,19 @@ const Login: React.FC = () => {
               {error && (
                 <div className={`mb-4 p-3 rounded-lg ${
                   error.includes('sent') || error.includes('check your email') 
-                    ? 'bg-green-50 border border-green-100' 
+                    ? 'bg-blue-50 border border-blue-100' 
                     : 'bg-red-50 border border-red-100'
                 }`}>
                   <div className="flex items-start gap-2">
                     <div className="flex-shrink-0">
                       {error.includes('sent') || error.includes('check your email') ? (
-                        <CheckCircle className="text-green-600" size={16} />
+                        <CheckCircle className="text-blue-600" size={16} />
                       ) : (
                         <AlertCircle className="text-red-600" size={16} />
                       )}
                     </div>
                     <div className="flex-1">
-                      <p className={`font-medium text-xs ${error.includes('sent') ? 'text-green-800' : 'text-red-800'}`}>
+                      <p className={`font-medium text-xs ${error.includes('sent') ? 'text-blue-800' : 'text-red-800'}`}>
                         {error}
                       </p>
                     </div>
@@ -484,7 +484,7 @@ const Login: React.FC = () => {
                       type="email"
                       value={formData.email}
                       onChange={(e) => handleInputChange('email', e.target.value)}
-                      className="w-full pl-10 pr-3 py-2.5 bg-white border border-green-200 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-green-500/20 focus:border-green-500 transition-all"
+                      className="w-full pl-10 pr-3 py-2.5 bg-white border border-blue-200 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
                       placeholder="your@email.com"
                       required
                       autoComplete="email"
@@ -500,7 +500,7 @@ const Login: React.FC = () => {
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="text-xs text-green-600 hover:text-green-700 font-medium flex items-center gap-0.5"
+                      className="text-xs text-blue-600 hover:text-blue-700 font-medium flex items-center gap-0.5"
                     >
                       {showPassword ? 'Hide' : 'Show'}
                     </button>
@@ -513,7 +513,7 @@ const Login: React.FC = () => {
                       type={showPassword ? 'text' : 'password'}
                       value={formData.password}
                       onChange={(e) => handleInputChange('password', e.target.value)}
-                      className="w-full pl-10 pr-10 py-2.5 bg-white border border-green-200 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-green-500/20 focus:border-green-500 transition-all"
+                      className="w-full pl-10 pr-10 py-2.5 bg-white border border-blue-200 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
                       placeholder="Enter your password"
                       required
                       autoComplete="current-password"
@@ -533,7 +533,7 @@ const Login: React.FC = () => {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full bg-gradient-to-r from-green-600 to-green-700 text-white font-bold py-2.5 rounded-lg hover:shadow hover:from-green-700 hover:to-green-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center gap-1.5 min-h-[44px]"
+                  className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold py-2.5 rounded-lg hover:shadow hover:from-blue-700 hover:to-blue-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center gap-1.5 min-h-[44px]"
                 >
                   {isLoading ? (
                     <>
@@ -552,7 +552,7 @@ const Login: React.FC = () => {
               <div className="mt-4 space-y-2">
                 <button
                   onClick={() => navigate('/Signup')}
-                  className="w-full text-center text-green-600 hover:text-green-700 font-medium text-xs py-2 rounded-md hover:bg-green-50 transition-colors"
+                  className="w-full text-center text-blue-600 hover:text-blue-700 font-medium text-xs py-2 rounded-md hover:bg-blue-50 transition-colors"
                 >
                   Don't have an account? Sign Up
                 </button>
@@ -570,13 +570,13 @@ const Login: React.FC = () => {
           <div className="bg-gradient-to-r from-white/80 to-white/60 backdrop-blur-sm rounded-lg border border-gray-200/60 p-3">
             <div className="flex items-center justify-center gap-4">
               <div className="flex flex-col items-center">
-                <div className="w-6 h-6 bg-gradient-to-br from-green-500 to-green-600 rounded-md flex items-center justify-center mb-0.5">
+                <div className="w-6 h-6 bg-gradient-to-br from-blue-500 to-blue-600 rounded-md flex items-center justify-center mb-0.5">
                   <Shield size={12} className="text-white" />
                 </div>
                 <span className="text-xs text-gray-600 font-medium">Secure</span>
               </div>
               <div className="flex flex-col items-center">
-                <div className="w-6 h-6 bg-gradient-to-br from-green-500 to-green-600 rounded-md flex items-center justify-center mb-0.5">
+                <div className="w-6 h-6 bg-gradient-to-br from-blue-500 to-blue-600 rounded-md flex items-center justify-center mb-0.5">
                   <Building size={12} className="text-white" />
                 </div>
                 <span className="text-xs text-gray-600 font-medium">Verified</span>
@@ -585,13 +585,13 @@ const Login: React.FC = () => {
                 <div className="w-6 h-6 bg-gradient-to-br from-purple-500 to-purple-600 rounded-md flex items-center justify-center mb-0.5">
                   <Smartphone size={12} className="text-white" />
                 </div>
-                <span className="text-xs text-gray-600 font-medium">GJBC</span>
+                <span className="text-xs text-gray-600 font-medium">GKBC</span>
               </div>
             </div>
           </div>
           
           <div className="text-center mt-3">
-            <p className="text-xs text-gray-400">GJBC Network v1.0</p>
+            <p className="text-xs text-gray-400">GKBC Network v1.0</p>
           </div>
         </div>
       </div>

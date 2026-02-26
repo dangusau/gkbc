@@ -64,18 +64,18 @@ const Businesses: React.FC = () => {
 
   if (isLoading && businesses.length === 0) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-green-50 to-white safe-area">
-        <div className="bg-gradient-to-r from-green-600 to-green-700 text-white p-3 border-b border-green-800">
+      <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white safe-area">
+        <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-3 border-b border-blue-800">
           <div className="max-w-7xl mx-auto">
-            <h1 className="text-sm font-bold mb-1">GJBC Business Directory</h1>
-            <p className="text-green-100 text-xs">Find reliable and trusted businesses</p>
+            <h1 className="text-sm font-bold mb-1">GKBC Business Directory</h1>
+            <p className="text-blue-100 text-xs">Find reliable and trusted businesses</p>
           </div>
         </div>
         <div className="p-3 space-y-3">
           {[...Array(4)].map((_, i) => (
-            <div key={i} className="bg-white rounded-xl p-3 border border-green-200 animate-pulse">
+            <div key={i} className="bg-white rounded-xl p-3 border border-blue-200 animate-pulse">
               <div className="flex gap-2">
-                <div className="w-14 h-14 bg-gray-200 rounded-lg border border-green-200"></div>
+                <div className="w-14 h-14 bg-gray-200 rounded-lg border border-blue-200"></div>
                 <div className="flex-1">
                   <div className="h-3 bg-gray-200 rounded w-3/4 mb-2"></div>
                   <div className="h-2.5 bg-gray-200 rounded w-1/2 mb-2"></div>
@@ -90,12 +90,12 @@ const Businesses: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-green-50 to-white pb-20 safe-area">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white pb-20 safe-area">
       {/* Header */}
-      <div className="bg-gradient-to-r from-green-600 to-green-700 text-white p-3 border-b border-green-800">
+      <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-3 border-b border-blue-800">
         <div className="max-w-7xl mx-auto">
-          <h1 className="text-sm font-bold mb-1">GJBC Business Directory</h1>
-          <p className="text-green-100 text-xs">Find GJBC Businesses in Jigawa • Reliable and Verified</p>
+          <h1 className="text-sm font-bold mb-1">GKBC Business Directory</h1>
+          <p className="text-blue-100 text-xs">Find GKBC Businesses in Kano • Reliable and Verified</p>
         </div>
       </div>
 
@@ -119,7 +119,7 @@ const Businesses: React.FC = () => {
       )}
 
       {/* Search and Filter Bar */}
-      <div className="sticky top-0 bg-white border-b border-green-200 z-10 p-3">
+      <div className="sticky top-0 bg-white border-b border-blue-200 z-10 p-3">
         <div className="flex items-center gap-2">
           <div className="flex-1 relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={16} />
@@ -128,17 +128,17 @@ const Businesses: React.FC = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search businesses..."
-              className="w-full pl-10 pr-3 py-2.5 bg-white rounded-lg border border-green-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 text-xs min-h-[36px]"
+              className="w-full pl-10 pr-3 py-2.5 bg-white rounded-lg border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-xs min-h-[36px]"
             />
           </div>
           <button
             onClick={() => setShowFilters(!showFilters)}
-            className="p-2 bg-white rounded-lg border border-green-300 hover:bg-green-50 min-h-[36px] min-w-[36px] flex items-center justify-center"
+            className="p-2 bg-white rounded-lg border border-blue-300 hover:bg-blue-50 min-h-[36px] min-w-[36px] flex items-center justify-center"
           >
-            <Filter size={16} className="text-green-600" />
+            <Filter size={16} className="text-blue-600" />
           </button>
           {activeFiltersCount > 0 && !showFilters && (
-            <span className="absolute -top-1 -right-1 w-5 h-5 bg-green-600 text-white text-xs rounded-full flex items-center justify-center">
+            <span className="absolute -top-1 -right-1 w-5 h-5 bg-blue-600 text-white text-xs rounded-full flex items-center justify-center">
               {activeFiltersCount}
             </span>
           )}
@@ -147,22 +147,22 @@ const Businesses: React.FC = () => {
 
       {/* Filter Section */}
       {showFilters && (
-        <div className="bg-green-50 border-b border-green-200 p-3 animate-fade-in">
+        <div className="bg-blue-50 border-b border-blue-200 p-3 animate-fade-in">
           <div className="max-w-7xl mx-auto">
             <div className="flex items-center justify-between mb-3">
               <h2 className="font-medium text-gray-900 text-xs">Filters</h2>
-              <button onClick={clearFilters} className="text-xs text-green-600 hover:text-green-700 font-medium">
+              <button onClick={clearFilters} className="text-xs text-blue-600 hover:text-blue-700 font-medium">
                 Clear All
               </button>
             </div>
             <div className="space-y-3">
               <div>
                 <label className="block text-xs text-gray-600 font-medium mb-1">Business Type</label>
-                <div className="flex border border-green-300 rounded-lg overflow-hidden">
+                <div className="flex border border-blue-300 rounded-lg overflow-hidden">
                   <button
                     onClick={() => setSelectedType('all')}
                     className={`flex-1 py-2 text-center font-medium text-xs transition-colors min-h-[36px] ${
-                      selectedType === 'all' ? 'bg-green-600 text-white' : 'bg-white text-gray-700 hover:bg-green-50'
+                      selectedType === 'all' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 hover:bg-blue-50'
                     }`}
                   >
                     All
@@ -170,7 +170,7 @@ const Businesses: React.FC = () => {
                   <button
                     onClick={() => setSelectedType('products')}
                     className={`flex-1 py-2 text-center font-medium text-xs transition-colors min-h-[36px] ${
-                      selectedType === 'products' ? 'bg-green-600 text-white' : 'bg-white text-gray-700 hover:bg-green-50'
+                      selectedType === 'products' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 hover:bg-blue-50'
                     }`}
                   >
                     Products
@@ -178,7 +178,7 @@ const Businesses: React.FC = () => {
                   <button
                     onClick={() => setSelectedType('services')}
                     className={`flex-1 py-2 text-center font-medium text-xs transition-colors min-h-[36px] ${
-                      selectedType === 'services' ? 'bg-green-600 text-white' : 'bg-white text-gray-700 hover:bg-green-50'
+                      selectedType === 'services' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 hover:bg-blue-50'
                     }`}
                   >
                     Services
@@ -190,7 +190,7 @@ const Businesses: React.FC = () => {
                 <select
                   value={selectedLocation}
                   onChange={(e) => setSelectedLocation(e.target.value)}
-                  className="w-full px-3 py-2 bg-white rounded-lg border border-green-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 text-xs min-h-[36px]"
+                  className="w-full px-3 py-2 bg-white rounded-lg border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-xs min-h-[36px]"
                 >
                   <option value="all">All Locations</option>
                   {LOCATION_AXIS.map(location => (
@@ -205,12 +205,12 @@ const Businesses: React.FC = () => {
 
       {/* Active Filters Indicator */}
       {activeFiltersCount > 0 && !showFilters && (
-        <div className="bg-green-50 border-b border-green-200 px-3 py-1.5">
+        <div className="bg-blue-50 border-b border-blue-200 px-3 py-1.5">
           <div className="max-w-7xl mx-auto flex items-center justify-between">
             <div className="flex items-center gap-1 flex-wrap">
               <span className="text-xs text-gray-600">Active filters:</span>
               {selectedType !== 'all' && (
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-green-100 text-green-700 text-xs font-medium rounded-full border border-green-200">
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-blue-100 text-blue-700 text-xs font-medium rounded-full border border-blue-200">
                   {selectedType}
                   <button onClick={() => setSelectedType('all')} className="ml-0.5 p-0.5">
                     <X size={8} />
@@ -218,7 +218,7 @@ const Businesses: React.FC = () => {
                 </span>
               )}
               {selectedLocation !== 'all' && (
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-green-100 text-green-700 text-xs font-medium rounded-full border border-green-200">
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-blue-100 text-blue-700 text-xs font-medium rounded-full border border-blue-200">
                   {selectedLocation}
                   <button onClick={() => setSelectedLocation('all')} className="ml-0.5 p-0.5">
                     <X size={8} />
@@ -226,7 +226,7 @@ const Businesses: React.FC = () => {
                 </span>
               )}
               {searchQuery && (
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-green-100 text-green-700 text-xs font-medium rounded-full border border-green-200">
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-blue-100 text-blue-700 text-xs font-medium rounded-full border border-blue-200">
                   Search: {searchQuery.substring(0, 10)}{searchQuery.length > 10 ? '...' : ''}
                   <button onClick={() => setSearchQuery('')} className="ml-0.5 p-0.5">
                     <X size={8} />
@@ -234,7 +234,7 @@ const Businesses: React.FC = () => {
                 </span>
               )}
             </div>
-            <button onClick={() => setShowFilters(true)} className="text-xs text-green-600 hover:text-green-700 font-medium">
+            <button onClick={() => setShowFilters(true)} className="text-xs text-blue-600 hover:text-blue-700 font-medium">
               Edit
             </button>
           </div>
@@ -245,8 +245,8 @@ const Businesses: React.FC = () => {
       <div className="max-w-7xl mx-auto">
         {businesses.length === 0 ? (
           <div className="p-6 text-center">
-            <div className="w-16 h-16 bg-green-100 rounded-full mx-auto mb-3 flex items-center justify-center border border-green-200">
-              <Store size={24} className="text-green-500" />
+            <div className="w-16 h-16 bg-blue-100 rounded-full mx-auto mb-3 flex items-center justify-center border border-blue-200">
+              <Store size={24} className="text-blue-500" />
             </div>
             <h3 className="text-sm font-semibold text-gray-900 mb-2">No businesses found</h3>
             <p className="text-gray-600 text-xs mb-4">
@@ -256,7 +256,7 @@ const Businesses: React.FC = () => {
               onClick={handleCreateClick}
               className={`px-4 py-2.5 rounded-lg font-medium text-xs min-h-[36px] ${
                 isVerified
-                  ? 'bg-gradient-to-r from-green-600 to-green-700 text-white hover:from-green-700 hover:to-green-800'
+                  ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800'
                   : 'bg-gray-100 text-gray-400 border border-gray-300 cursor-not-allowed'
               }`}
             >
@@ -273,7 +273,7 @@ const Businesses: React.FC = () => {
                 <button
                   onClick={() => fetchNextPage()}
                   disabled={isFetchingNextPage}
-                  className="px-4 py-2 bg-white border border-green-300 text-green-700 rounded-lg text-xs hover:bg-green-50 disabled:opacity-50"
+                  className="px-4 py-2 bg-white border border-blue-300 text-blue-700 rounded-lg text-xs hover:bg-blue-50 disabled:opacity-50"
                 >
                   {isFetchingNextPage ? 'Loading...' : 'Load More'}
                 </button>
@@ -281,7 +281,7 @@ const Businesses: React.FC = () => {
             )}
             {isFetching && !isFetchingNextPage && (
               <div className="text-center py-2">
-                <span className="text-xs text-green-600">Updating...</span>
+                <span className="text-xs text-blue-600">Updating...</span>
               </div>
             )}
           </div>
@@ -292,7 +292,7 @@ const Businesses: React.FC = () => {
       {isVerified && (
         <button
           onClick={handleCreateClick}
-          className="fixed bottom-20 right-4 bg-green-600 text-white p-3 rounded-full shadow-lg hover:bg-green-700 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
+          className="fixed bottom-20 right-4 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
         >
           <Plus size={20} />
         </button>

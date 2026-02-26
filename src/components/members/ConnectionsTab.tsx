@@ -26,8 +26,8 @@ export const ConnectionsTab: React.FC<ConnectionsTabProps> = ({
   if (receivedRequests.length === 0 && friends.length === 0 && sentRequests.length === 0) {
     return (
       <div className="text-center py-12">
-        <div className="w-20 h-20 bg-green-100 rounded-full mx-auto mb-4 flex items-center justify-center">
-          <UserCheck size={32} className="text-green-500" />
+        <div className="w-20 h-20 bg-blue-100 rounded-full mx-auto mb-4 flex items-center justify-center">
+          <UserCheck size={32} className="text-blue-500" />
         </div>
         <h3 className="text-sm font-semibold text-gray-900 mb-2">No connections yet</h3>
         <p className="text-gray-600 text-xs mb-4">Connect with members to build your network</p>
@@ -49,11 +49,11 @@ export const ConnectionsTab: React.FC<ConnectionsTabProps> = ({
                 >
                   {/* Avatar wrapper with relative positioning for the absolute badge */}
                   <div className="relative flex-shrink-0">
-                    <div className="w-14 h-14 bg-gray-100 rounded-full overflow-hidden border-2 border-green-300">
+                    <div className="w-14 h-14 bg-gray-100 rounded-full overflow-hidden border-2 border-blue-300">
                       {request.sender_avatar ? (
                         <img src={request.sender_avatar} alt={request.sender_name} className="w-full h-full object-cover" />
                       ) : (
-                        <div className="w-full h-full flex items-center justify-center bg-green-500 text-white font-bold">
+                        <div className="w-full h-full flex items-center justify-center bg-blue-500 text-white font-bold">
                           {request.sender_name.charAt(0)}
                         </div>
                       )}
@@ -79,7 +79,7 @@ export const ConnectionsTab: React.FC<ConnectionsTabProps> = ({
                 <div className="flex gap-2 pt-3 border-t border-gray-100">
                   <button
                     onClick={() => onAccept(request.id, request.sender_name)}
-                    className="flex-1 py-2.5 text-xs bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 min-h-[36px]"
+                    className="flex-1 py-2.5 text-xs bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 min-h-[36px]"
                   >
                     Accept
                   </button>
@@ -108,11 +108,11 @@ export const ConnectionsTab: React.FC<ConnectionsTabProps> = ({
               >
                 <div className="flex items-center gap-3 mb-4">
                   <div className="relative flex-shrink-0">
-                    <div className="w-14 h-14 bg-gray-100 rounded-full overflow-hidden border-2 border-green-300">
+                    <div className="w-14 h-14 bg-gray-100 rounded-full overflow-hidden border-2 border-blue-300">
                       {friend.user_avatar ? (
                         <img src={friend.user_avatar} alt={friend.user_name} className="w-full h-full object-cover" />
                       ) : (
-                        <div className="w-full h-full flex items-center justify-center bg-green-500 text-white font-bold">
+                        <div className="w-full h-full flex items-center justify-center bg-blue-500 text-white font-bold">
                           {friend.user_name.charAt(0)}
                         </div>
                       )}
@@ -137,7 +137,7 @@ export const ConnectionsTab: React.FC<ConnectionsTabProps> = ({
                     e.stopPropagation();
                     onProfileClick(friend.user_id);
                   }}
-                  className="w-full py-2 text-xs bg-green-100 text-green-700 rounded-lg font-medium hover:bg-green-200 mt-3 min-h-[36px]"
+                  className="w-full py-2 text-xs bg-blue-100 text-blue-700 rounded-lg font-medium hover:bg-blue-200 mt-3 min-h-[36px]"
                 >
                   View Profile
                 </button>
@@ -158,11 +158,11 @@ export const ConnectionsTab: React.FC<ConnectionsTabProps> = ({
                   onClick={() => onProfileClick(request.connected_user_id)}
                 >
                   <div className="relative flex-shrink-0">
-                    <div className="w-14 h-14 bg-gray-100 rounded-full overflow-hidden border-2 border-green-300">
+                    <div className="w-14 h-14 bg-gray-100 rounded-full overflow-hidden border-2 border-blue-300">
                       {request.user_avatar ? (
                         <img src={request.user_avatar} alt={request.user_name} className="w-full h-full object-cover" />
                       ) : (
-                        <div className="w-full h-full flex items-center justify-center bg-green-500 text-white font-bold">
+                        <div className="w-full h-full flex items-center justify-center bg-blue-500 text-white font-bold">
                           {request.user_name.charAt(0)}
                         </div>
                       )}
@@ -191,7 +191,7 @@ export const ConnectionsTab: React.FC<ConnectionsTabProps> = ({
                       e.stopPropagation();
                       onProfileClick(request.connected_user_id);
                     }}
-                    className="flex-1 py-2.5 text-xs bg-green-100 text-green-700 rounded-lg font-medium hover:bg-green-200 min-h-[36px]"
+                    className="flex-1 py-2.5 text-xs bg-blue-100 text-blue-700 rounded-lg font-medium hover:bg-blue-200 min-h-[36px]"
                   >
                     View Profile
                   </button>

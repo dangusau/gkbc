@@ -77,7 +77,7 @@ const AdminOverview: React.FC = () => {
       </div>
 
       {isFetching && (
-        <div className="fixed top-4 right-4 bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs shadow">
+        <div className="fixed top-4 right-4 bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs shadow">
           <Clock size={14} className="inline animate-spin mr-1" /> Updating...
         </div>
       )}
@@ -114,9 +114,9 @@ const AdminOverview: React.FC = () => {
 
       {/* Growth Trend Chart */}
       {trends.length > 0 && (
-        <section className="bg-white rounded-xl border border-green-200 p-4">
+        <section className="bg-white rounded-xl border border-blue-200 p-4">
           <h2 className="text-lg font-semibold text-gray-800 mb-3 flex items-center gap-2">
-            <BarChart2 className="text-green-600" size={20} /> Growth Trends
+            <BarChart2 className="text-blue-600" size={20} /> Growth Trends
           </h2>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={trends}>
@@ -143,8 +143,8 @@ const AdminOverview: React.FC = () => {
 
       {/* Overall Stats – with safe access */}
       <section>
-        <h2 className="text-lg font-semibold text-gray-800 mb-3 border-b border-green-200 pb-2">
-          <Users className="inline text-green-600 mr-2" size={20} /> Users & Connections
+        <h2 className="text-lg font-semibold text-gray-800 mb-3 border-b border-blue-200 pb-2">
+          <Users className="inline text-blue-600 mr-2" size={20} /> Users & Connections
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           <StatCard title="Total Users" value={overall.users?.current ?? 0} previous={overall.users?.previous ?? null} icon={<Users size={20} />} />
@@ -154,7 +154,7 @@ const AdminOverview: React.FC = () => {
       </section>
 
       <section>
-        <h2 className="text-lg font-semibold text-gray-800 mb-3 border-b border-green-200 pb-2">Content</h2>
+        <h2 className="text-lg font-semibold text-gray-800 mb-3 border-b border-blue-200 pb-2">Content</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           <StatCard title="Posts" value={overall.posts?.current ?? 0} previous={overall.posts?.previous ?? null} icon={<FileText size={20} />} />
           <StatCard title="Comments" value={overall.comments?.current ?? 0} previous={overall.comments?.previous ?? null} icon={<MessageCircle size={20} />} />
@@ -163,8 +163,8 @@ const AdminOverview: React.FC = () => {
       </section>
 
       <section>
-        <h2 className="text-lg font-semibold text-gray-800 mb-3 border-b border-green-200 pb-2">
-          <ShoppingBag className="inline text-green-600 mr-2" size={20} /> Marketplace
+        <h2 className="text-lg font-semibold text-gray-800 mb-3 border-b border-blue-200 pb-2">
+          <ShoppingBag className="inline text-blue-600 mr-2" size={20} /> Marketplace
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <StatCard title="Listings" value={overall.marketplace_listings?.current ?? 0} previous={overall.marketplace_listings?.previous ?? null} icon={<ShoppingBag size={20} />} />
@@ -175,8 +175,8 @@ const AdminOverview: React.FC = () => {
       </section>
 
       <section>
-        <h2 className="text-lg font-semibold text-gray-800 mb-3 border-b border-green-200 pb-2">
-          <Briefcase className="inline text-green-600 mr-2" size={20} /> Businesses
+        <h2 className="text-lg font-semibold text-gray-800 mb-3 border-b border-blue-200 pb-2">
+          <Briefcase className="inline text-blue-600 mr-2" size={20} /> Businesses
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <StatCard title="Total Businesses" value={overall.businesses?.total ?? 0} previous={overall.businesses?.previous ?? null} icon={<Briefcase size={20} />} />
@@ -189,8 +189,8 @@ const AdminOverview: React.FC = () => {
       </section>
 
       <section>
-        <h2 className="text-lg font-semibold text-gray-800 mb-3 border-b border-green-200 pb-2">
-          <Calendar className="inline text-green-600 mr-2" size={20} /> Jobs & Events
+        <h2 className="text-lg font-semibold text-gray-800 mb-3 border-b border-blue-200 pb-2">
+          <Calendar className="inline text-blue-600 mr-2" size={20} /> Jobs & Events
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <StatCard title="Jobs" value={overall.jobs?.current ?? 0} previous={overall.jobs?.previous ?? null} icon={<Briefcase size={20} />} />
@@ -201,8 +201,8 @@ const AdminOverview: React.FC = () => {
       </section>
 
       <section>
-        <h2 className="text-lg font-semibold text-gray-800 mb-3 border-b border-green-200 pb-2">
-          <Ticket className="inline text-green-600 mr-2" size={20} /> Support & Communication
+        <h2 className="text-lg font-semibold text-gray-800 mb-3 border-b border-blue-200 pb-2">
+          <Ticket className="inline text-blue-600 mr-2" size={20} /> Support & Communication
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <StatCard title="Total Tickets" value={overall.support_tickets?.total ?? 0} previous={overall.support_tickets?.previous ?? null} icon={<Ticket size={20} />} />

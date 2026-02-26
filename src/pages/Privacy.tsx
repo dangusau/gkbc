@@ -5,47 +5,47 @@ const Privacy: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       {/* Header */}
-      <div className="bg-gradient-to-r from-green-700 to-green-600 text-white py-12 px-4">
+      <div className="bg-gradient-to-r from-blue-700 to-blue-600 text-white py-12 px-4">
         <div className="max-w-4xl mx-auto text-center">
-          <ShieldCheck className="w-16 h-16 mx-auto mb-4 text-green-200" />
+          <ShieldCheck className="w-16 h-16 mx-auto mb-4 text-blue-200" />
           <h1 className="text-3xl md:text-4xl font-bold mb-2">Privacy Policy</h1>
-          <p className="text-green-100">How we protect and handle your data</p>
-          <p className="text-sm text-green-200 mt-4">Effective: December 2025</p>
+          <p className="text-blue-100">How we protect and handle your data</p>
+          <p className="text-sm text-blue-200 mt-4">Effective: December 2025</p>
         </div>
       </div>
 
       {/* Content */}
       <div className="max-w-4xl mx-auto px-4 py-12">
-        <div className="bg-white rounded-2xl shadow-xl border border-green-100 overflow-hidden">
+        <div className="bg-white rounded-2xl shadow-xl border border-blue-100 overflow-hidden">
           <div className="p-8 space-y-8">
             {/* Introduction */}
             <section>
               <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                <span className="w-1 h-8 bg-green-500 rounded-full"></span>
+                <span className="w-1 h-8 bg-blue-500 rounded-full"></span>
                 Our Commitment
               </h2>
               <p className="text-gray-600 leading-relaxed">
-                At Greater Jigawa Business Council (GJBC), we respect your privacy. This Privacy Policy explains 
+                At Greater Kano Business Council (GKBC), we respect your privacy. This Privacy Policy explains 
                 how we collect, use, and safeguard your information when you use our platform.
               </p>
             </section>
 
             <section>
               <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                <span className="w-1 h-8 bg-green-500 rounded-full"></span>
+                <span className="w-1 h-8 bg-blue-500 rounded-full"></span>
                 Information We Collect
               </h2>
               <div className="grid md:grid-cols-2 gap-4 mt-4">
-                <div className="bg-green-50 p-5 rounded-xl border border-green-200">
+                <div className="bg-blue-50 p-5 rounded-xl border border-blue-200">
                   <div className="flex items-center gap-3 mb-2">
-                    <Eye className="text-green-600" size={24} />
+                    <Eye className="text-blue-600" size={24} />
                     <h3 className="font-semibold text-gray-800">Personal Data</h3>
                   </div>
                   <p className="text-sm text-gray-600">Name, email, phone, business details, profile information.</p>
                 </div>
-                <div className="bg-green-50 p-5 rounded-xl border border-green-200">
+                <div className="bg-blue-50 p-5 rounded-xl border border-blue-200">
                   <div className="flex items-center gap-3 mb-2">
-                    <Database className="text-green-600" size={24} />
+                    <Database className="text-blue-600" size={24} />
                     <h3 className="font-semibold text-gray-800">Usage Data</h3>
                   </div>
                   <p className="text-sm text-gray-600">Interactions, posts, messages, device info, IP address.</p>
@@ -55,7 +55,7 @@ const Privacy: React.FC = () => {
 
             <section>
               <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                <span className="w-1 h-8 bg-green-500 rounded-full"></span>
+                <span className="w-1 h-8 bg-blue-500 rounded-full"></span>
                 How We Use Your Information
               </h2>
               <ul className="list-disc list-inside text-gray-600 space-y-2">
@@ -69,7 +69,7 @@ const Privacy: React.FC = () => {
 
             <section>
               <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                <span className="w-1 h-8 bg-green-500 rounded-full"></span>
+                <span className="w-1 h-8 bg-blue-500 rounded-full"></span>
                 Sharing Your Information
               </h2>
               <p className="text-gray-600 leading-relaxed">
@@ -84,21 +84,21 @@ const Privacy: React.FC = () => {
 
             <section>
               <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                <span className="w-1 h-8 bg-green-500 rounded-full"></span>
+                <span className="w-1 h-8 bg-blue-500 rounded-full"></span>
                 Cookies & Tracking
               </h2>
               <div className="flex items-start gap-4 bg-blue-50 p-4 rounded-xl">
-                <Cookie className="text-green-600 flex-shrink-0" size={24} />
+                <Cookie className="text-blue-600 flex-shrink-0" size={24} />
                 <p className="text-gray-700">
                   We use cookies to enhance your experience. You can control cookies through your browser settings. 
-                  By continuing to use GJBC, you consent to our use of cookies.
+                  By continuing to use GKBC, you consent to our use of cookies.
                 </p>
               </div>
             </section>
 
             <section>
               <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                <span className="w-1 h-8 bg-green-500 rounded-full"></span>
+                <span className="w-1 h-8 bg-blue-500 rounded-full"></span>
                 Data Retention
               </h2>
               <p className="text-gray-600 leading-relaxed">
@@ -109,24 +109,24 @@ const Privacy: React.FC = () => {
 
             <section>
               <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                <span className="w-1 h-8 bg-green-500 rounded-full"></span>
+                <span className="w-1 h-8 bg-blue-500 rounded-full"></span>
                 Your Rights
               </h2>
               <div className="grid sm:grid-cols-2 gap-3">
-                <div className="flex items-center gap-2 p-3 border border-green-200 rounded-lg">
-                  <Eye className="text-green-600" size={18} />
+                <div className="flex items-center gap-2 p-3 border border-blue-200 rounded-lg">
+                  <Eye className="text-blue-600" size={18} />
                   <span className="text-sm text-gray-700">Access your data</span>
                 </div>
-                <div className="flex items-center gap-2 p-3 border border-green-200 rounded-lg">
-                  <Database className="text-green-600" size={18} />
+                <div className="flex items-center gap-2 p-3 border border-blue-200 rounded-lg">
+                  <Database className="text-blue-600" size={18} />
                   <span className="text-sm text-gray-700">Correct inaccuracies</span>
                 </div>
-                <div className="flex items-center gap-2 p-3 border border-green-200 rounded-lg">
-                  <Trash2 className="text-green-600" size={18} />
+                <div className="flex items-center gap-2 p-3 border border-blue-200 rounded-lg">
+                  <Trash2 className="text-blue-600" size={18} />
                   <span className="text-sm text-gray-700">Request deletion</span>
                 </div>
-                <div className="flex items-center gap-2 p-3 border border-green-200 rounded-lg">
-                  <Mail className="text-green-600" size={18} />
+                <div className="flex items-center gap-2 p-3 border border-blue-200 rounded-lg">
+                  <Mail className="text-blue-600" size={18} />
                   <span className="text-sm text-gray-700">Opt out of marketing</span>
                 </div>
               </div>
@@ -134,7 +134,7 @@ const Privacy: React.FC = () => {
 
             <section>
               <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                <span className="w-1 h-8 bg-green-500 rounded-full"></span>
+                <span className="w-1 h-8 bg-blue-500 rounded-full"></span>
                 Security
               </h2>
               <p className="text-gray-600 leading-relaxed">
@@ -145,7 +145,7 @@ const Privacy: React.FC = () => {
 
             <section>
               <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                <span className="w-1 h-8 bg-green-500 rounded-full"></span>
+                <span className="w-1 h-8 bg-blue-500 rounded-full"></span>
                 Children’s Privacy
               </h2>
               <p className="text-gray-600 leading-relaxed">
@@ -155,7 +155,7 @@ const Privacy: React.FC = () => {
 
             <section>
               <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                <span className="w-1 h-8 bg-green-500 rounded-full"></span>
+                <span className="w-1 h-8 bg-blue-500 rounded-full"></span>
                 Changes to This Policy
               </h2>
               <p className="text-gray-600 leading-relaxed">
@@ -166,18 +166,18 @@ const Privacy: React.FC = () => {
 
             <section>
               <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                <span className="w-1 h-8 bg-green-500 rounded-full"></span>
+                <span className="w-1 h-8 bg-blue-500 rounded-full"></span>
                 Contact Us
               </h2>
               <p className="text-gray-600 leading-relaxed">
-                If you have questions about this Privacy Policy, please contact our Data Protection Officer at <a href="mailto:support@GJBC.com" className="text-green-600 hover:underline">support@GJBC.com</a>.
+                If you have questions about this Privacy Policy, please contact our Data Protection Officer at <a href="mailto:support@GKBC.com" className="text-blue-600 hover:underline">support@GKBC.com</a>.
               </p>
             </section>
           </div>
 
-          <div className="bg-gray-50 px-8 py-4 border-t border-green-100">
+          <div className="bg-gray-50 px-8 py-4 border-t border-blue-100">
             <p className="text-sm text-gray-500 text-center">
-              © {new Date().getFullYear()} Greater Jigawa Business Council. All rights reserved.
+              © {new Date().getFullYear()} Greater Kano Business Council. All rights reserved.
             </p>
           </div>
         </div>

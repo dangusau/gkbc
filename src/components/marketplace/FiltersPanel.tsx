@@ -34,7 +34,7 @@ const FiltersPanel: React.FC<FiltersPanelProps> = ({
     return (
       <button
         onClick={() => setIsOpen(true)}
-        className="relative p-2 rounded-xl border border-green-200 bg-white text-green-600 hover:bg-green-50 min-h-[36px] min-w-[36px] flex items-center justify-center"
+        className="relative p-2 rounded-xl border border-blue-200 bg-white text-blue-600 hover:bg-blue-50 min-h-[36px] min-w-[36px] flex items-center justify-center"
         aria-label="Open filters"
       >
         <Filter size={16} />
@@ -48,7 +48,7 @@ const FiltersPanel: React.FC<FiltersPanelProps> = ({
   }
 
   return (
-    <div className="bg-white border border-green-200 rounded-xl p-3 shadow-lg animate-slideDown">
+    <div className="bg-white border border-blue-200 rounded-xl p-3 shadow-lg animate-slideDown">
       <div className="flex justify-between items-center mb-3">
         <h3 className="text-sm font-bold text-gray-900">Filters</h3>
         <button
@@ -67,8 +67,8 @@ const FiltersPanel: React.FC<FiltersPanelProps> = ({
             onClick={() => onCategoryChange('All')}
             className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-all ${
               selectedCategory === 'All'
-                ? 'bg-green-600 text-white border-green-600'
-                : 'bg-white text-gray-700 border-green-200 hover:bg-green-50'
+                ? 'bg-blue-600 text-white border-blue-600'
+                : 'bg-white text-gray-700 border-blue-200 hover:bg-blue-50'
             }`}
           >
             All
@@ -79,8 +79,8 @@ const FiltersPanel: React.FC<FiltersPanelProps> = ({
               onClick={() => onCategoryChange(cat)}
               className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-all ${
                 selectedCategory === cat
-                  ? 'bg-green-600 text-white border-green-600'
-                  : 'bg-white text-gray-700 border-green-200 hover:bg-green-50'
+                  ? 'bg-blue-600 text-white border-blue-600'
+                  : 'bg-white text-gray-700 border-blue-200 hover:bg-blue-50'
               }`}
             >
               {cat}
@@ -98,7 +98,7 @@ const FiltersPanel: React.FC<FiltersPanelProps> = ({
             value={filters.minPrice}
             onChange={(e) => onFilterChange('minPrice', e.target.value)}
             placeholder="0"
-            className="w-full p-2 border border-green-200 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-green-500/20"
+            className="w-full p-2 border border-blue-200 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-blue-500/20"
           />
         </div>
         <div>
@@ -109,7 +109,7 @@ const FiltersPanel: React.FC<FiltersPanelProps> = ({
             value={filters.maxPrice}
             onChange={(e) => onFilterChange('maxPrice', e.target.value)}
             placeholder="Any"
-            className="w-full p-2 border border-green-200 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-green-500/20"
+            className="w-full p-2 border border-blue-200 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-blue-500/20"
           />
         </div>
       </div>
@@ -119,7 +119,7 @@ const FiltersPanel: React.FC<FiltersPanelProps> = ({
         <select
           value={filters.condition}
           onChange={(e) => onFilterChange('condition', e.target.value)}
-          className="w-full p-2 border border-green-200 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-green-500/20"
+          className="w-full p-2 border border-blue-200 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-blue-500/20"
         >
           <option value="all">All Conditions</option>
           {conditions.map(cond => (
@@ -131,7 +131,7 @@ const FiltersPanel: React.FC<FiltersPanelProps> = ({
       <div className="flex gap-2">
         <button
           onClick={onApply}
-          className="flex-1 py-2 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-all text-xs"
+          className="flex-1 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-all text-xs"
         >
           Apply Filters
         </button>

@@ -28,7 +28,7 @@ export const MemberCard: React.FC<MemberCardProps> = ({
             {/* Avatar wrapper – no overflow hidden here */}
             <div className="relative w-14 h-14 flex-shrink-0">
               {/* Avatar image container – clips the image to a circle */}
-              <div className="w-full h-full rounded-full overflow-hidden border-2 border-green-200">
+              <div className="w-full h-full rounded-full overflow-hidden border-2 border-blue-200">
                 {member.avatar_url ? (
                   <img
                     src={member.avatar_url}
@@ -37,7 +37,7 @@ export const MemberCard: React.FC<MemberCardProps> = ({
                     loading="lazy"
                   />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-green-500 text-white font-bold">
+                  <div className="w-full h-full flex items-center justify-center bg-blue-500 text-white font-bold">
                     {getUserInitials(member.first_name, member.last_name)}
                   </div>
                 )}
@@ -64,7 +64,7 @@ export const MemberCard: React.FC<MemberCardProps> = ({
         </div>
         {member.business_type && (
           <div className="mb-2">
-            <span className="inline-block px-2 py-1 text-xs bg-green-50 text-green-600 font-medium rounded-full border border-green-200">
+            <span className="inline-block px-2 py-1 text-xs bg-blue-50 text-blue-600 font-medium rounded-full border border-blue-200">
               {member.business_type}
             </span>
           </div>
@@ -72,7 +72,7 @@ export const MemberCard: React.FC<MemberCardProps> = ({
         {member.market_area && (
           <div className="mb-2">
             <div className="flex items-center gap-1.5">
-              <span className="inline-block px-2 py-1 text-xs bg-green-100 text-green-700 font-medium rounded-full border border-green-300 truncate">
+              <span className="inline-block px-2 py-1 text-xs bg-blue-100 text-blue-700 font-medium rounded-full border border-blue-300 truncate">
                 {member.market_area}
               </span>
             </div>

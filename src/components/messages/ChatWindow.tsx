@@ -64,7 +64,7 @@ const MessageBubble: React.FC<{
         <div
           className={`px-4 py-2 rounded-2xl ${
             isOwn
-              ? 'bg-green-600 text-white rounded-br-none'
+              ? 'bg-blue-600 text-white rounded-br-none'
               : 'bg-gray-100 text-gray-900 rounded-bl-none'
           }`}
         >
@@ -75,7 +75,7 @@ const MessageBubble: React.FC<{
           {isOwn && (
             <span>
               {message.is_read ? (
-                <CheckCheck className="w-3 h-3 text-green-500" />
+                <CheckCheck className="w-3 h-3 text-blue-500" />
               ) : (
                 <Check className="w-3 h-3 text-gray-400" />
               )}
@@ -148,7 +148,7 @@ const MediaPreviewModal: React.FC<{
             <button
               onClick={onSend}
               disabled={isUploading}
-              className="flex-1 py-3 bg-green-600 text-white font-medium rounded-xl hover:bg-green-700 disabled:opacity-50 flex items-center justify-center gap-2"
+              className="flex-1 py-3 bg-blue-600 text-white font-medium rounded-xl hover:bg-blue-700 disabled:opacity-50 flex items-center justify-center gap-2"
             >
               {isUploading ? (
                 <>
@@ -414,7 +414,7 @@ const ChatWindow: React.FC = () => {
           <div className="flex items-center gap-2">
             {/* Avatar with badge outside the frame */}
             <div className="relative flex-shrink-0">
-              <div className="w-10 h-10 rounded-full overflow-hidden bg-gradient-to-br from-green-500 to-green-600">
+              <div className="w-10 h-10 rounded-full overflow-hidden bg-gradient-to-br from-blue-500 to-blue-600">
                 {otherUser.avatar ? (
                   <img src={otherUser.avatar} alt={otherUser.name} className="w-full h-full object-cover" />
                 ) : (
@@ -455,7 +455,7 @@ const ChatWindow: React.FC = () => {
           <button
             onClick={handleLoadMore}
             disabled={isFetchingNextPage}
-            className="w-full py-2 text-sm text-green-600 hover:text-green-700 disabled:opacity-50"
+            className="w-full py-2 text-sm text-blue-600 hover:text-blue-700 disabled:opacity-50"
           >
             {isFetchingNextPage ? 'Loading...' : 'Load older messages'}
           </button>
@@ -503,13 +503,13 @@ const ChatWindow: React.FC = () => {
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
             placeholder="Type a message..."
-            className="flex-1 px-4 py-2.5 bg-gray-100 rounded-xl border focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-400"
+            className="flex-1 px-4 py-2.5 bg-gray-100 rounded-xl border focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400"
             disabled={isCreating}
           />
           <button
             type="submit"
             disabled={!newMessage.trim() || isCreating}
-            className="p-3 bg-green-600 text-white rounded-xl hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="p-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isCreating ? (
               <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />

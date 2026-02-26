@@ -122,11 +122,11 @@ export const ProfileTabs: React.FC<ProfileTabsProps> = ({
             key={tab}
             onClick={() => onTabChange(tab)}
             className={`flex-1 py-4 text-sm font-medium capitalize transition-all relative ${
-              activeTab === tab ? 'text-green-600 bg-white' : 'text-gray-500 hover:text-gray-700'
+              activeTab === tab ? 'text-blue-600 bg-white' : 'text-gray-500 hover:text-gray-700'
             }`}
           >
             {tab}
-            {activeTab === tab && <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-green-600" />}
+            {activeTab === tab && <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600" />}
           </button>
         ))}
       </div>

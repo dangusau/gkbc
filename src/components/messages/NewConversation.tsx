@@ -226,7 +226,7 @@ const NewConversation: React.FC = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder={activeTab === 'connections' ? 'Search connections...' : 'Search verified users...'}
-            className="w-full pl-10 pr-4 py-2.5 bg-gray-100 rounded-xl border focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-400"
+            className="w-full pl-10 pr-4 py-2.5 bg-gray-100 rounded-xl border focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400"
           />
         </div>
       </div>
@@ -237,7 +237,7 @@ const NewConversation: React.FC = () => {
             onClick={() => setActiveTab('connections')}
             className={`flex-1 py-3 border-b-2 transition-colors ${
               activeTab === 'connections'
-                ? 'border-green-600 text-green-600'
+                ? 'border-blue-600 text-blue-600'
                 : 'border-transparent text-gray-500'
             }`}
           >
@@ -245,7 +245,7 @@ const NewConversation: React.FC = () => {
               <UserCheck className="w-4 h-4" />
               <span className="font-medium">Connections</span>
               {connections.length > 0 && (
-                <span className="bg-green-100 text-green-700 text-xs px-2 py-0.5 rounded-full">
+                <span className="bg-blue-100 text-blue-700 text-xs px-2 py-0.5 rounded-full">
                   {connections.length}
                 </span>
               )}
@@ -255,7 +255,7 @@ const NewConversation: React.FC = () => {
             onClick={() => setActiveTab('discover')}
             className={`flex-1 py-3 border-b-2 transition-colors ${
               activeTab === 'discover'
-                ? 'border-green-600 text-green-600'
+                ? 'border-blue-600 text-blue-600'
                 : 'border-transparent text-gray-500'
             }`}
           >
@@ -284,7 +284,7 @@ const NewConversation: React.FC = () => {
           </div>
         ) : searching ? (
           <div className="text-center py-8">
-            <div className="animate-spin w-8 h-8 border-4 border-green-500 border-t-transparent rounded-full mx-auto"></div>
+            <div className="animate-spin w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full mx-auto"></div>
             <p className="mt-2 text-gray-600">Searching...</p>
           </div>
         ) : displayedUsers.length === 0 ? (
@@ -318,7 +318,7 @@ const NewConversation: React.FC = () => {
                   <div className="flex items-center gap-3 min-w-0 flex-1">
                     {/* Avatar with verification badge outside the frame */}
                     <div className="relative flex-shrink-0">
-                      <div className="w-12 h-12 rounded-full overflow-hidden bg-gradient-to-br from-green-500 to-green-600">
+                      <div className="w-12 h-12 rounded-full overflow-hidden bg-gradient-to-br from-blue-500 to-blue-600">
                         {u.avatar_url ? (
                           <img src={u.avatar_url} alt={u.username} className="w-full h-full object-cover" />
                         ) : (
@@ -355,7 +355,7 @@ const NewConversation: React.FC = () => {
                     {u.connection_status === 'connected' ? (
                       <button
                         onClick={() => handleStartConversation(u.id)}
-                        className="px-4 py-2 bg-green-600 text-white font-medium rounded-xl hover:bg-green-700 whitespace-nowrap"
+                        className="px-4 py-2 bg-blue-600 text-white font-medium rounded-xl hover:bg-blue-700 whitespace-nowrap"
                       >
                         Message
                       </button>

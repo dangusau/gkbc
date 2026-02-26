@@ -181,7 +181,7 @@ const MarketplaceDetail: React.FC = () => {
           <h2 className="text-lg font-bold text-gray-900">Listing not found</h2>
           <button
             onClick={() => navigate('/marketplace')}
-            className="mt-4 px-4 py-2 bg-green-600 text-white rounded-xl"
+            className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-xl"
           >
             Back to Marketplace
           </button>
@@ -214,14 +214,14 @@ const MarketplaceDetail: React.FC = () => {
       />
 
       {/* Header */}
-      <div className="sticky top-0 z-30 bg-white border-b border-green-200 px-4 py-3">
+      <div className="sticky top-0 z-30 bg-white border-b border-blue-200 px-4 py-3">
         <div className="max-w-7xl mx-auto flex items-center gap-4">
           <button
             onClick={() => navigate('/marketplace')}
-            className="p-2 hover:bg-green-50 rounded-full transition-colors"
+            className="p-2 hover:bg-blue-50 rounded-full transition-colors"
             aria-label="Go back"
           >
-            <ArrowLeft size={20} className="text-green-600" />
+            <ArrowLeft size={20} className="text-blue-600" />
           </button>
           <h1 className="text-sm font-bold text-gray-900">Listing Details</h1>
         </div>
@@ -231,7 +231,7 @@ const MarketplaceDetail: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Left column - Images */}
           <div className="space-y-3">
-            <div className="aspect-square bg-white rounded-xl overflow-hidden border border-green-200">
+            <div className="aspect-square bg-white rounded-xl overflow-hidden border border-blue-200">
               <img
                 src={currentImage}
                 alt={safeListing.title}
@@ -245,7 +245,7 @@ const MarketplaceDetail: React.FC = () => {
                     key={idx}
                     onClick={() => setSelectedImage(idx)}
                     className={`w-20 h-20 rounded-lg overflow-hidden border-2 flex-shrink-0 ${
-                      selectedImage === idx ? 'border-green-600' : 'border-transparent'
+                      selectedImage === idx ? 'border-blue-600' : 'border-transparent'
                     }`}
                   >
                     <img src={img} alt={`Thumbnail ${idx + 1}`} className="w-full h-full object-cover" />
@@ -262,14 +262,14 @@ const MarketplaceDetail: React.FC = () => {
               <div className="flex items-start justify-between">
                 <div>
                   <h1 className="text-xl font-bold text-gray-900">{safeListing.title}</h1>
-                  <p className="text-2xl font-bold text-green-600 mt-1">
+                  <p className="text-2xl font-bold text-blue-600 mt-1">
                     ₦{safeListing.price.toLocaleString()}
                   </p>
                 </div>
                 {!isOwner && (
                   <button
                     onClick={handleFavorite}
-                    className="p-3 bg-white rounded-full shadow border border-green-200 hover:bg-green-50 transition-colors"
+                    className="p-3 bg-white rounded-full shadow border border-blue-200 hover:bg-blue-50 transition-colors"
                     aria-label={safeListing.is_favorited ? 'Remove from favorites' : 'Add to favorites'}
                   >
                     <Heart
@@ -294,11 +294,11 @@ const MarketplaceDetail: React.FC = () => {
             </div>
 
             {/* Seller info */}
-            <div className="border-t border-green-200 pt-4">
+            <div className="border-t border-blue-200 pt-4">
               <h2 className="font-semibold text-gray-900 mb-2">Seller Information</h2>
               <div className="flex items-center gap-3">
                 <div className="relative">
-                  <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white font-bold overflow-hidden">
+                  <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold overflow-hidden">
                     {safeListing.seller_avatar ? (
                       <img src={safeListing.seller_avatar} alt={safeListing.seller_name} className="w-full h-full object-cover" />
                     ) : (
@@ -306,7 +306,7 @@ const MarketplaceDetail: React.FC = () => {
                     )}
                   </div>
                   {safeListing.seller_verified && (
-                    <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-green-500 rounded-full flex items-center justify-center border-2 border-white">
+                    <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center border-2 border-white">
                       <Shield size={8} className="text-white" />
                     </div>
                   )}
@@ -319,7 +319,7 @@ const MarketplaceDetail: React.FC = () => {
             </div>
 
             {/* Description */}
-            <div className="border-t border-green-200 pt-4">
+            <div className="border-t border-blue-200 pt-4">
               <h2 className="font-semibold text-gray-900 mb-2">Description</h2>
               <p className="text-sm text-gray-700 whitespace-pre-line">
                 {safeListing.description || 'No description provided.'}
@@ -327,7 +327,7 @@ const MarketplaceDetail: React.FC = () => {
             </div>
 
             {/* Details grid */}
-            <div className="grid grid-cols-2 gap-4 border-t border-green-200 pt-4">
+            <div className="grid grid-cols-2 gap-4 border-t border-blue-200 pt-4">
               <div>
                 <span className="text-xs text-gray-500">Category</span>
                 <p className="font-medium text-sm">{safeListing.category}</p>
@@ -354,7 +354,7 @@ const MarketplaceDetail: React.FC = () => {
               {!isOwner && (
                 <button
                   onClick={handleContact}
-                  className="flex-1 py-3 bg-green-600 text-white rounded-xl font-medium hover:bg-green-700 transition-colors flex items-center justify-center gap-2"
+                  className="flex-1 py-3 bg-blue-600 text-white rounded-xl font-medium hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
                 >
                   <MessageCircle size={18} />
                   Contact Seller
@@ -364,7 +364,7 @@ const MarketplaceDetail: React.FC = () => {
                 <>
                   <button
                     onClick={() => navigate(`/marketplace/edit/${listing.id}`)}
-                    className="flex-1 py-3 bg-white text-green-600 rounded-xl font-medium border border-green-200 hover:bg-green-50 transition-colors"
+                    className="flex-1 py-3 bg-white text-blue-600 rounded-xl font-medium border border-blue-200 hover:bg-blue-50 transition-colors"
                   >
                     Edit
                   </button>
@@ -382,11 +382,11 @@ const MarketplaceDetail: React.FC = () => {
         </div>
 
         {/* Reviews Section (unchanged) */}
-        <div className="mt-8 border-t border-green-200 pt-6">
+        <div className="mt-8 border-t border-blue-200 pt-6">
           <h2 className="text-lg font-bold text-gray-900 mb-4">Reviews ({reviews.length})</h2>
 
           {user && !isOwner && !userHasReviewed && (
-            <form onSubmit={handleAddReview} className="bg-white rounded-xl p-4 border border-green-200 mb-6">
+            <form onSubmit={handleAddReview} className="bg-white rounded-xl p-4 border border-blue-200 mb-6">
               {/* ... review form ... */}
             </form>
           )}
@@ -400,7 +400,7 @@ const MarketplaceDetail: React.FC = () => {
           ) : (
             <div className="space-y-4">
               {reviews.map(review => (
-                <div key={review.id} className="bg-white rounded-xl p-4 border border-green-200">
+                <div key={review.id} className="bg-white rounded-xl p-4 border border-blue-200">
                   {/* ... review item ... */}
                 </div>
               ))}

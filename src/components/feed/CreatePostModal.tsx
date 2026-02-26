@@ -93,8 +93,8 @@ export const CreatePostModal: React.FC<CreatePostModalProps> = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} />
-      <div className="relative w-full max-w-lg bg-white rounded-xl max-h-[90vh] overflow-hidden border-t border-green-200 shadow">
-        <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-green-50 to-green-50">
+      <div className="relative w-full max-w-lg bg-white rounded-xl max-h-[90vh] overflow-hidden border-t border-blue-200 shadow">
+        <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-blue-50 to-blue-50">
           <div className="flex items-center justify-between">
             <h2 className="text-sm font-bold text-gray-900">Create Post</h2>
             <button
@@ -133,7 +133,7 @@ export const CreatePostModal: React.FC<CreatePostModalProps> = ({
             value={content}
             onChange={(e) => setContent(e.target.value)}
             placeholder="What's on your mind?"
-            className="w-full h-32 p-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 resize-none text-xs"
+            className="w-full h-32 p-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none text-xs"
             maxLength={2000}
           />
           <div className="text-right text-xs text-gray-500 mt-1.5">{content.length}/2000</div>
@@ -148,14 +148,14 @@ export const CreatePostModal: React.FC<CreatePostModalProps> = ({
                 onChange={handleFileSelect}
                 className="hidden"
               />
-              <div className="flex items-center justify-center gap-2 p-3 bg-gradient-to-r from-green-50 to-green-100 rounded-lg hover:from-green-100 hover:to-green-200 transition-all cursor-pointer border border-green-200">
-                <ImageIcon size={20} className="text-green-600" />
-                <span className="text-xs font-medium text-green-700">Photo/Video</span>
+              <div className="flex items-center justify-center gap-2 p-3 bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg hover:from-blue-100 hover:to-blue-200 transition-all cursor-pointer border border-blue-200">
+                <ImageIcon size={20} className="text-blue-600" />
+                <span className="text-xs font-medium text-blue-700">Photo/Video</span>
               </div>
             </label>
-            <button className="flex-1 flex items-center justify-center gap-2 p-3 bg-gradient-to-r from-green-50 to-green-100 rounded-lg hover:from-green-100 hover:to-green-200 transition-all border border-green-200">
-              <MapPin size={20} className="text-green-600" />
-              <span className="text-xs font-medium text-green-700">Location</span>
+            <button className="flex-1 flex items-center justify-center gap-2 p-3 bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg hover:from-blue-100 hover:to-blue-200 transition-all border border-blue-200">
+              <MapPin size={20} className="text-blue-600" />
+              <span className="text-xs font-medium text-blue-700">Location</span>
             </button>
           </div>
         </div>
@@ -164,7 +164,7 @@ export const CreatePostModal: React.FC<CreatePostModalProps> = ({
           <button
             onClick={handleSubmit}
             disabled={isPosting || (!content.trim() && files.length === 0)}
-            className="w-full py-3 bg-gradient-to-r from-green-600 to-green-600 text-white rounded-lg font-bold hover:from-green-700 hover:to-green-700 disabled:opacity-50"
+            className="w-full py-3 bg-gradient-to-r from-blue-600 to-blue-600 text-white rounded-lg font-bold hover:from-blue-700 hover:to-blue-700 disabled:opacity-50"
           >
             {isPosting ? (
               <div className="flex items-center justify-center gap-2">

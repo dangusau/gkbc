@@ -38,7 +38,7 @@ export const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
           <button
             onClick={onConfirm}
             className={`flex-1 py-3 text-xs rounded-lg font-medium text-white min-h-[36px] ${
-              isDanger ? 'bg-red-600 hover:bg-red-700' : 'bg-green-600 hover:bg-green-700'
+              isDanger ? 'bg-red-600 hover:bg-red-700' : 'bg-blue-600 hover:bg-blue-700'
             }`}
           >
             {confirmText}

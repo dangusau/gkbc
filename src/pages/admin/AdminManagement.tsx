@@ -80,7 +80,7 @@ const AdminManagement: React.FC = () => {
   if (isLoadingAdmins) {
     return (
       <div className="p-6 flex items-center justify-center min-h-screen">
-        <Loader2 className="animate-spin text-green-600" size={32} />
+        <Loader2 className="animate-spin text-blue-600" size={32} />
       </div>
     );
   }
@@ -92,17 +92,17 @@ const AdminManagement: React.FC = () => {
   return (
     <div className="p-6 space-y-8 bg-gray-50 min-h-screen">
       <div className="flex items-center gap-2">
-        <Shield className="text-green-600" size={28} />
+        <Shield className="text-blue-600" size={28} />
         <h1 className="text-2xl font-bold text-gray-900">Admin Management</h1>
       </div>
 
       {/* Current Admins Section */}
       <section>
         <h2 className="text-lg font-semibold text-gray-800 mb-4">Current Admins</h2>
-        <div className="bg-white rounded-xl border border-green-200 overflow-hidden">
+        <div className="bg-white rounded-xl border border-blue-200 overflow-hidden">
           <div className="overflow-x-auto">
             <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-green-50">
+              <thead className="bg-blue-50">
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Admin</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Email</th>
@@ -115,12 +115,12 @@ const AdminManagement: React.FC = () => {
                 {admins.map((admin) => (
                   <React.Fragment key={admin.id}>
                     <tr
-                      className={`hover:bg-gray-50 cursor-pointer ${expandedAdminId === admin.id ? 'bg-green-50' : ''}`}
+                      className={`hover:bg-gray-50 cursor-pointer ${expandedAdminId === admin.id ? 'bg-blue-50' : ''}`}
                       onClick={() => setExpandedAdminId(expandedAdminId === admin.id ? null : admin.id)}
                     >
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center">
-                          <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center text-green-700 font-bold mr-3">
+                          <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center text-blue-700 font-bold mr-3">
                             {admin.profile.avatar_url ? (
                               <img src={admin.profile.avatar_url} alt="" className="w-8 h-8 rounded-full object-cover" />
                             ) : (
@@ -155,7 +155,7 @@ const AdminManagement: React.FC = () => {
                     </tr>
                     {expandedAdminId === admin.id && (
                       <tr>
-                        <td colSpan={5} className="px-6 py-4 bg-green-50">
+                        <td colSpan={5} className="px-6 py-4 bg-blue-50">
                           <div className="space-y-1 text-sm">
                             <p><span className="font-medium">Permissions:</span> {admin.permissions ? JSON.stringify(admin.permissions) : 'None'}</p>
                             <p><span className="font-medium">Admin ID:</span> {admin.id}</p>
@@ -184,13 +184,13 @@ const AdminManagement: React.FC = () => {
               onChange={(e) => setSearchInput(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Search users by name or email..."
-              className="w-full pl-9 pr-4 py-2 border border-gray-300 rounded-lg text-sm bg-white focus:ring-2 focus:ring-green-500"
+              className="w-full pl-9 pr-4 py-2 border border-gray-300 rounded-lg text-sm bg-white focus:ring-2 focus:ring-blue-500"
             />
             <Search className="absolute left-3 top-2.5 text-gray-400" size={16} />
           </div>
           <button
             onClick={handleSearch}
-            className="px-4 py-2 bg-green-600 text-white rounded-lg text-sm hover:bg-green-700"
+            className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700"
           >
             Search
           </button>
@@ -198,16 +198,16 @@ const AdminManagement: React.FC = () => {
 
         {isLoadingNonAdmin ? (
           <div className="flex justify-center py-8">
-            <Loader2 className="animate-spin text-green-600" size={24} />
+            <Loader2 className="animate-spin text-blue-600" size={24} />
           </div>
         ) : nonAdminError ? (
           <div className="text-red-600">Error loading users</div>
         ) : (
           <>
-            <div className="bg-white rounded-xl border border-green-200 overflow-hidden">
+            <div className="bg-white rounded-xl border border-blue-200 overflow-hidden">
               <div className="overflow-x-auto">
                 <table className="min-w-full divide-y divide-gray-200">
-                  <thead className="bg-green-50">
+                  <thead className="bg-blue-50">
                     <tr>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">User</th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Email</th>
@@ -227,7 +227,7 @@ const AdminManagement: React.FC = () => {
                         <tr key={user.id}>
                           <td className="px-6 py-4 whitespace-nowrap">
                             <div className="flex items-center">
-                              <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center text-green-700 font-bold mr-3">
+                              <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center text-blue-700 font-bold mr-3">
                                 {user.avatar_url ? (
                                   <img src={user.avatar_url} alt="" className="w-8 h-8 rounded-full object-cover" />
                                 ) : (
@@ -242,7 +242,7 @@ const AdminManagement: React.FC = () => {
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{user.email}</td>
                           <td className="px-6 py-4 whitespace-nowrap">
                             <span className={`px-2 py-1 text-xs rounded-full ${
-                              user.user_status === 'verified' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
+                              user.user_status === 'verified' ? 'bg-blue-100 text-blue-800' : 'bg-gray-100 text-gray-800'
                             }`}>
                               {user.user_status}
                             </span>
@@ -250,7 +250,7 @@ const AdminManagement: React.FC = () => {
                           <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                             <button
                               onClick={() => handleAddAdmin(user)}
-                              className="p-1 text-green-600 hover:bg-green-50 rounded"
+                              className="p-1 text-blue-600 hover:bg-blue-50 rounded"
                               title="Promote to admin"
                               disabled={addAdmin.isPending}
                             >

@@ -116,7 +116,7 @@ const AdminTickets: React.FC = () => {
     switch (status) {
       case 'pending': return 'bg-yellow-100 text-yellow-800';
       case 'in_progress': return 'bg-blue-100 text-blue-800';
-      case 'resolved': return 'bg-green-100 text-green-800';
+      case 'resolved': return 'bg-blue-100 text-blue-800';
       case 'closed': return 'bg-gray-100 text-gray-800';
       default: return 'bg-gray-100 text-gray-800';
     }
@@ -125,7 +125,7 @@ const AdminTickets: React.FC = () => {
   if (isLoading) {
     return (
       <div className="p-6 flex items-center justify-center min-h-screen">
-        <Loader2 className="animate-spin text-green-600" size={32} />
+        <Loader2 className="animate-spin text-blue-600" size={32} />
       </div>
     );
   }
@@ -139,7 +139,7 @@ const AdminTickets: React.FC = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-          <Ticket className="text-green-600" size={24} /> Support Tickets
+          <Ticket className="text-blue-600" size={24} /> Support Tickets
         </h1>
       </div>
 
@@ -153,13 +153,13 @@ const AdminTickets: React.FC = () => {
               onChange={(e) => setSearchInput(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Search by subject or user..."
-              className="w-full pl-9 pr-4 py-2 border border-gray-300 rounded-lg text-sm bg-white focus:ring-2 focus:ring-green-500"
+              className="w-full pl-9 pr-4 py-2 border border-gray-300 rounded-lg text-sm bg-white focus:ring-2 focus:ring-blue-500"
             />
             <Search className="absolute left-3 top-2.5 text-gray-400" size={16} />
           </div>
           <button
             onClick={handleSearch}
-            className="px-4 py-2 bg-green-600 text-white rounded-lg text-sm hover:bg-green-700"
+            className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700"
           >
             Search
           </button>
@@ -193,16 +193,16 @@ const AdminTickets: React.FC = () => {
       </div>
 
       {isFetching && (
-        <div className="fixed top-4 right-4 bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs shadow flex items-center gap-2">
+        <div className="fixed top-4 right-4 bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs shadow flex items-center gap-2">
           <Loader2 size={14} className="animate-spin" /> Updating tickets...
         </div>
       )}
 
       {/* Tickets Table */}
-      <div className="bg-white rounded-xl border border-green-200 overflow-hidden">
+      <div className="bg-white rounded-xl border border-blue-200 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-green-50">
+            <thead className="bg-blue-50">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Subject</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">User</th>
@@ -218,7 +218,7 @@ const AdminTickets: React.FC = () => {
               {tickets.map((ticket) => (
                 <React.Fragment key={ticket.id}>
                   <tr
-                    className={`hover:bg-gray-50 cursor-pointer ${expandedTicketId === ticket.id ? 'bg-green-50' : ''}`}
+                    className={`hover:bg-gray-50 cursor-pointer ${expandedTicketId === ticket.id ? 'bg-blue-50' : ''}`}
                     onClick={() => setExpandedTicketId(expandedTicketId === ticket.id ? null : ticket.id)}
                   >
                     <td className="px-6 py-4">
@@ -227,7 +227,7 @@ const AdminTickets: React.FC = () => {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
-                        <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center text-green-700 font-bold text-xs mr-2">
+                        <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center text-blue-700 font-bold text-xs mr-2">
                           {ticket.user.avatar_url ? (
                             <img src={ticket.user.avatar_url} alt="" className="w-6 h-6 rounded-full object-cover" />
                           ) : (
@@ -266,7 +266,7 @@ const AdminTickets: React.FC = () => {
                         {ticket.status !== 'closed' && (
                           <button
                             onClick={() => setConfirmAction({ isOpen: true, type: 'close', ticket })}
-                            className="p-1 text-green-600 hover:bg-green-50 rounded"
+                            className="p-1 text-blue-600 hover:bg-blue-50 rounded"
                             title="Close ticket"
                           >
                             <CheckCircle size={18} />
@@ -285,12 +285,12 @@ const AdminTickets: React.FC = () => {
                   </tr>
                   {expandedTicketId === ticket.id && (
                     <tr>
-                      <td colSpan={8} className="px-6 py-4 bg-green-50">
+                      <td colSpan={8} className="px-6 py-4 bg-blue-50">
                         <div className="space-y-4">
                           {/* Original message */}
-                          <div className="bg-white rounded-lg border border-green-200 p-3">
+                          <div className="bg-white rounded-lg border border-blue-200 p-3">
                             <div className="flex items-start gap-3">
-                              <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center text-green-700 font-bold">
+                              <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center text-blue-700 font-bold">
                                 {ticket.user.avatar_url ? (
                                   <img src={ticket.user.avatar_url} alt="" className="w-8 h-8 rounded-full object-cover" />
                                 ) : (
@@ -310,14 +310,14 @@ const AdminTickets: React.FC = () => {
                           {/* Conversation */}
                           {isLoadingConversation ? (
                             <div className="flex justify-center py-4">
-                              <Loader2 size={20} className="animate-spin text-green-600" />
+                              <Loader2 size={20} className="animate-spin text-blue-600" />
                             </div>
                           ) : (
                             <div className="space-y-3 max-h-96 overflow-y-auto pr-2">
                               {conversation.map((reply) => (
                                 <div key={reply.id} className={`flex gap-3 ${reply.is_admin ? 'flex-row-reverse' : ''}`}>
                                   <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold ${
-                                    reply.is_admin ? 'bg-green-600 text-white' : 'bg-gray-200 text-gray-700'
+                                    reply.is_admin ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700'
                                   }`}>
                                     {reply.user.avatar_url ? (
                                       <img src={reply.user.avatar_url} alt="" className="w-8 h-8 rounded-full object-cover" />
@@ -327,7 +327,7 @@ const AdminTickets: React.FC = () => {
                                   </div>
                                   <div className={`flex-1 max-w-[80%] ${reply.is_admin ? 'text-right' : ''}`}>
                                     <div className={`inline-block rounded-lg p-3 ${
-                                      reply.is_admin ? 'bg-green-100' : 'bg-white border border-gray-200'
+                                      reply.is_admin ? 'bg-blue-100' : 'bg-white border border-gray-200'
                                     }`}>
                                       <p className="text-sm text-gray-700">{reply.message}</p>
                                       {reply.attachments && reply.attachments.length > 0 && (
@@ -350,13 +350,13 @@ const AdminTickets: React.FC = () => {
                                 value={replyText}
                                 onChange={(e) => setReplyText(e.target.value)}
                                 placeholder="Type your reply..."
-                                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm bg-white focus:ring-2 focus:ring-green-500"
+                                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm bg-white focus:ring-2 focus:ring-blue-500"
                                 rows={3}
                               />
                               <button
                                 onClick={() => handleReply(ticket.id)}
                                 disabled={!replyText.trim()}
-                                className="px-4 py-2 bg-green-600 text-white rounded-lg text-sm hover:bg-green-700 disabled:opacity-50 self-end"
+                                className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700 disabled:opacity-50 self-end"
                               >
                                 <Send size={16} />
                               </button>

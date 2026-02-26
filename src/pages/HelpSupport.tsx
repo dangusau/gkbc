@@ -44,7 +44,7 @@ const HelpSupport: React.FC = () => {
     switch (status) {
       case 'resolved':
       case 'in_progress':
-        return <Clock className="text-green-500" size={16} />;
+        return <Clock className="text-blue-500" size={16} />;
       case 'closed':
         return <CheckCircle className="text-gray-500" size={16} />;
       default:
@@ -56,7 +56,7 @@ const HelpSupport: React.FC = () => {
     switch (status) {
       case 'resolved':
       case 'in_progress':
-        return 'bg-green-100 text-green-800';
+        return 'bg-blue-100 text-blue-800';
       case 'closed':
         return 'bg-gray-100 text-gray-800';
       default:
@@ -69,18 +69,18 @@ const HelpSupport: React.FC = () => {
       {/* Success Message */}
       {showSuccess && (
         <div className="fixed top-20 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-md">
-          <div className="mx-4 bg-green-50 border border-green-200 rounded-xl p-4 shadow-lg">
+          <div className="mx-4 bg-blue-50 border border-blue-200 rounded-xl p-4 shadow-lg">
             <div className="flex items-center gap-3">
-              <CheckCircle className="text-green-600" size={24} />
+              <CheckCircle className="text-blue-600" size={24} />
               <div className="flex-1">
-                <h3 className="font-bold text-green-800">Ticket Submitted Successfully!</h3>
-                <p className="text-green-700 text-sm">We'll get back to you soon.</p>
+                <h3 className="font-bold text-blue-800">Ticket Submitted Successfully!</h3>
+                <p className="text-blue-700 text-sm">We'll get back to you soon.</p>
               </div>
               <button
                 onClick={() => setShowSuccess(false)}
-                className="p-1 hover:bg-green-100 rounded-full transition-colors"
+                className="p-1 hover:bg-blue-100 rounded-full transition-colors"
               >
-                <X size={20} className="text-green-600" />
+                <X size={20} className="text-blue-600" />
               </button>
             </div>
           </div>
@@ -95,8 +95,8 @@ const HelpSupport: React.FC = () => {
       <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Header */}
         <div className="text-center mb-10">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-green-100 to-green-200 rounded-2xl mb-4">
-            <HelpCircle className="text-green-600" size={32} />
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl mb-4">
+            <HelpCircle className="text-blue-600" size={32} />
           </div>
           <h1 className="text-3xl font-bold text-gray-900 mb-3">Help & Support</h1>
           <p className="text-gray-600 max-w-2xl mx-auto">
@@ -110,7 +110,7 @@ const HelpSupport: React.FC = () => {
             <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
               <div className="p-6 border-b border-gray-200">
                 <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2">
-                  <MessageSquare size={20} className="text-green-600" />
+                  <MessageSquare size={20} className="text-blue-600" />
                   Submit a Request
                 </h2>
                 <p className="text-gray-600 text-sm mt-1">Fill out the form below and we'll respond within 24 hours.</p>
@@ -128,7 +128,7 @@ const HelpSupport: React.FC = () => {
                     value={formData.subject}
                     onChange={handleChange}
                     placeholder="Briefly describe your issue"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
                     required
                     maxLength={200}
                   />
@@ -147,7 +147,7 @@ const HelpSupport: React.FC = () => {
                       name="category"
                       value={formData.category}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
                     >
                       <option value="general">General Inquiry</option>
                       <option value="technical">Technical Issue</option>
@@ -166,7 +166,7 @@ const HelpSupport: React.FC = () => {
                       name="priority"
                       value={formData.priority}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
                     >
                       <option value="low">Low</option>
                       <option value="normal">Normal</option>
@@ -187,7 +187,7 @@ const HelpSupport: React.FC = () => {
                     onChange={handleChange}
                     placeholder="Please provide detailed information about your issue..."
                     rows={6}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all resize-none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all resize-none"
                     required
                   />
                   <div className="text-sm text-gray-500 mt-1">
@@ -200,7 +200,7 @@ const HelpSupport: React.FC = () => {
                   <button
                     type="submit"
                     disabled={submitMutation.isPending}
-                    className="w-full py-4 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-xl font-bold flex items-center justify-center gap-2 hover:from-green-700 hover:to-green-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg"
+                    className="w-full py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl font-bold flex items-center justify-center gap-2 hover:from-blue-700 hover:to-blue-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg"
                   >
                     {submitMutation.isPending ? (
                       <>
@@ -251,7 +251,7 @@ const HelpSupport: React.FC = () => {
                       <button
                         key={ticket.id}
                         onClick={() => setSelectedTicket(ticket)}
-                        className="w-full text-left p-4 border border-gray-200 rounded-xl hover:border-green-300 hover:bg-green-50 transition-all"
+                        className="w-full text-left p-4 border border-gray-200 rounded-xl hover:border-blue-300 hover:bg-blue-50 transition-all"
                       >
                         <div className="flex items-start justify-between mb-2">
                           <h3 className="font-medium text-gray-900 line-clamp-1">
@@ -279,26 +279,26 @@ const HelpSupport: React.FC = () => {
             </div>
 
             {/* Help Tips */}
-            <div className="mt-6 bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-6 border border-green-200">
-              <h3 className="font-bold text-green-900 mb-3 flex items-center gap-2">
+            <div className="mt-6 bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-6 border border-blue-200">
+              <h3 className="font-bold text-blue-900 mb-3 flex items-center gap-2">
                 <HelpCircle size={18} />
                 Quick Tips
               </h3>
               <ul className="space-y-2">
-                <li className="text-green-800 text-sm flex items-start gap-2">
-                  <div className="w-1.5 h-1.5 bg-green-500 rounded-full mt-1.5"></div>
+                <li className="text-blue-800 text-sm flex items-start gap-2">
+                  <div className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-1.5"></div>
                   Be specific about your issue
                 </li>
-                <li className="text-green-800 text-sm flex items-start gap-2">
-                  <div className="w-1.5 h-1.5 bg-green-500 rounded-full mt-1.5"></div>
+                <li className="text-blue-800 text-sm flex items-start gap-2">
+                  <div className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-1.5"></div>
                   Include error messages if any
                 </li>
-                <li className="text-green-800 text-sm flex items-start gap-2">
-                  <div className="w-1.5 h-1.5 bg-green-500 rounded-full mt-1.5"></div>
+                <li className="text-blue-800 text-sm flex items-start gap-2">
+                  <div className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-1.5"></div>
                   Check FAQ before submitting
                 </li>
-                <li className="text-green-800 text-sm flex items-start gap-2">
-                  <div className="w-1.5 h-1.5 bg-green-500 rounded-full mt-1.5"></div>
+                <li className="text-blue-800 text-sm flex items-start gap-2">
+                  <div className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-1.5"></div>
                   Response time: 24-48 hours
                 </li>
               </ul>

@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQueryClient, useMutation } from '@tanstack/react-query';
-import { ChevronLeft, MoreVertical, Edit3, Share2, LogOut, AlertCircle, UserPlus, UserMinus, Check, Clock, X } from 'lucide-react';
+import { ChevronLeft, MoreVertical, Edit3, Share2, logout, AlertCircle, UserPlus, UserMinus, Check, Clock, X } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { useProfile, useProfilePosts, profileKeys } from '../hooks/useProfile';
 import { useConnectionsData } from '../hooks/useConnectionsData';
@@ -253,7 +253,7 @@ const Profile: React.FC = () => {
       return (
         <button
           onClick={handleEditProfile}
-          className="w-full max-w-xs mx-auto py-4 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-xl font-bold flex items-center justify-center gap-2 shadow-lg hover:from-green-700 hover:to-green-800 active:scale-[0.98] transition-all min-h-[52px] border border-green-800"
+          className="w-full max-w-xs mx-auto py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl font-bold flex items-center justify-center gap-2 shadow-lg hover:from-blue-700 hover:to-blue-800 active:scale-[0.98] transition-all min-h-[52px] border border-blue-800"
         >
           <Edit3 size={20} />
           Edit Profile
@@ -289,7 +289,7 @@ const Profile: React.FC = () => {
         <div className="w-full max-w-xs mx-auto flex gap-3">
           <button
             onClick={handleAccept}
-            className="flex-1 py-3 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-xl font-bold flex items-center justify-center gap-2 shadow-lg hover:from-green-600 hover:to-emerald-600 active:scale-[0.98] transition-all min-h-[52px] border border-green-700"
+            className="flex-1 py-3 bg-gradient-to-r from-blue-500 to-emerald-500 text-white rounded-xl font-bold flex items-center justify-center gap-2 shadow-lg hover:from-blue-600 hover:to-emerald-600 active:scale-[0.98] transition-all min-h-[52px] border border-blue-700"
           >
             <Check size={20} />
             Accept
@@ -307,7 +307,7 @@ const Profile: React.FC = () => {
     return (
       <button
         onClick={handleConnect}
-        className="w-full max-w-xs mx-auto py-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl font-bold flex items-center justify-center gap-2 shadow-lg hover:from-green-600 hover:to-emerald-700 active:scale-[0.98] transition-all min-h-[52px] border border-green-800"
+        className="w-full max-w-xs mx-auto py-4 bg-gradient-to-r from-blue-500 to-emerald-600 text-white rounded-xl font-bold flex items-center justify-center gap-2 shadow-lg hover:from-blue-600 hover:to-emerald-700 active:scale-[0.98] transition-all min-h-[52px] border border-blue-800"
       >
         <UserPlus size={20} />
         Connect
@@ -345,8 +345,8 @@ const Profile: React.FC = () => {
                     </button>
                     <div className="border-t border-gray-200 my-2"></div>
                     <button onClick={() => { setShowOptionsMenu(false); }} className="w-full px-4 py-3 text-left flex items-center gap-3 text-red-600 hover:bg-red-50">
-                      <LogOut size={18} />
-                      <span className="font-medium">Logout</span>
+                      <logout size={18} />
+                      <span className="font-medium">logout</span>
                     </button>
                   </>
                 ) : (
@@ -458,7 +458,7 @@ const Profile: React.FC = () => {
                 <X size={20} />
               </button>
             </div>
-            <button onClick={shareProfile} className="w-full py-4 bg-green-50 text-green-700 rounded-xl font-bold flex items-center justify-center gap-3 border-2 border-green-200 hover:bg-green-100">
+            <button onClick={shareProfile} className="w-full py-4 bg-blue-50 text-blue-700 rounded-xl font-bold flex items-center justify-center gap-3 border-2 border-blue-200 hover:bg-blue-100">
               <Share2 size={20} />
               Copy Profile Link
             </button>

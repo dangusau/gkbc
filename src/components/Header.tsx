@@ -78,7 +78,7 @@ const Header: React.FC<HeaderProps> = ({
     getCurrentUser();
   }, []);
 
-  const handleLogout = async () => {
+  const handlelogout = async () => {
     try {
       await supabase.auth.signOut();
       // ADDED: clear all React Query cache
@@ -103,7 +103,7 @@ const Header: React.FC<HeaderProps> = ({
   const profileMenuItems = [
     { label: 'My Profile', path: '/profile', icon: User },
     { label: 'Help & Support', path: '/HelpSupport', icon: HelpCircle },
-    { label: 'Logout', action: handleLogout, icon: LogOut },
+    { label: 'logout', action: handlelogout, icon: LogOut },
   ];
 
   const displayName = profileData 
@@ -111,7 +111,7 @@ const Header: React.FC<HeaderProps> = ({
     : userName;
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-green-700 via-green-600 to-green-700 shadow-xl w-full pt-safe">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-blue-700 via-blue-600 to-blue-700 shadow-xl w-full pt-safe">
       <div className="px-4 py-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -136,22 +136,22 @@ const Header: React.FC<HeaderProps> = ({
               >
                 <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center overflow-hidden">
                   <img 
-                    src="/GJBCLOGO.png" 
-                    alt="GJBC Logo" 
+                    src="/GKBClogo.png" 
+                    alt="GKBC logo" 
                     className="w-9 h-9 object-contain"
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
                       target.style.display = 'none';
                       const parent = target.parentElement;
                       if (parent) {
-                        parent.innerHTML = '<div class="text-green-700 font-black text-lg tracking-wider">GJBC</div>';
+                        parent.innerHTML = '<div class="text-blue-700 font-black text-lg tracking-wider">GKBC</div>';
                       }
                     }}
                   />
                 </div>
                 <div className="hidden sm:block">
-                  <h3 className="text-xl font-black text-white tracking-tight drop-shadow-md">GJBC</h3>
-                  <p className="text-white/90 text-xs font-medium">Greater Jigawa</p>
+                  <h3 className="text-xl font-black text-white tracking-tight drop-shadow-md">GKBC</h3>
+                  <p className="text-white/90 text-xs font-medium">Greater Kano</p>
                 </div>
               </div>
             )}
@@ -203,7 +203,7 @@ const Header: React.FC<HeaderProps> = ({
                         className="w-full h-full object-cover"
                       />
                     ) : (
-                      <span className="text-green-700 font-bold text-sm">
+                      <span className="text-blue-700 font-bold text-sm">
                         {userInitials}
                       </span>
                     )}
@@ -236,7 +236,7 @@ const Header: React.FC<HeaderProps> = ({
                     role="presentation"
                   />
                   <div className="absolute right-0 top-full mt-2 w-56 bg-white rounded-xl shadow-2xl border border-gray-200 z-50 overflow-hidden">
-                    <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-green-50 to-green-50">
+                    <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-blue-50 to-blue-50">
                       <div className="flex items-center gap-3">
                         {/* Avatar container with relative positioning for badge */}
                         <div className="relative w-10 h-10">
@@ -248,7 +248,7 @@ const Header: React.FC<HeaderProps> = ({
                                 className="w-full h-full object-cover"
                               />
                             ) : (
-                              <span className="text-green-700 font-bold text-sm">
+                              <span className="text-blue-700 font-bold text-sm">
                                 {userInitials}
                               </span>
                             )}
@@ -285,7 +285,7 @@ const Header: React.FC<HeaderProps> = ({
                               navigate(item.path);
                             }
                           }}
-                          className="w-full flex items-center gap-3 px-4 py-3 text-left text-gray-700 hover:bg-green-50 transition-colors hover:text-green-700 min-h-[44px]"
+                          className="w-full flex items-center gap-3 px-4 py-3 text-left text-gray-700 hover:bg-blue-50 transition-colors hover:text-blue-700 min-h-[44px]"
                           aria-label={item.label}
                         >
                           <item.icon size={16} className="text-gray-500" />

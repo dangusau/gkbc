@@ -13,7 +13,7 @@ const BottomNav: React.FC = () => {
 
   return (
     // ADDED: w-full and overflow-hidden
-    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-gradient-to-r from-green-700 via-green-600 to-green-700 shadow-xl w-full pt-2">
+    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-gradient-to-r from-blue-700 via-blue-600 to-blue-700 shadow-xl w-full pt-2">
       <div className="flex justify-between items-center w-full px-1.5">
         {navItems.map((item) => (
           <NavLink

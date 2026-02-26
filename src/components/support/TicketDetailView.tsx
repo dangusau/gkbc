@@ -31,7 +31,7 @@ export const TicketDetailView: React.FC<TicketDetailViewProps> = ({ ticket, onCl
     switch (status) {
       case 'resolved':
       case 'in_progress':
-        return 'bg-green-100 text-green-800';
+        return 'bg-blue-100 text-blue-800';
       case 'closed':
         return 'bg-gray-100 text-gray-800';
       default:
@@ -97,8 +97,8 @@ export const TicketDetailView: React.FC<TicketDetailViewProps> = ({ ticket, onCl
           {/* Original Message */}
           <div className="mb-8">
             <div className="flex items-center gap-2 mb-3">
-              <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-                <User size={16} className="text-green-600" />
+              <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                <User size={16} className="text-blue-600" />
               </div>
               <div>
                 <div className="font-medium">You</div>
@@ -114,7 +114,7 @@ export const TicketDetailView: React.FC<TicketDetailViewProps> = ({ ticket, onCl
           <div className="space-y-6">
             {repliesLoading ? (
               <div className="text-center py-8">
-                <div className="w-8 h-8 border-2 border-green-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
+                <div className="w-8 h-8 border-2 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
                 <p className="text-gray-500 mt-2">Loading replies...</p>
               </div>
             ) : replies.length === 0 ? (
@@ -125,20 +125,20 @@ export const TicketDetailView: React.FC<TicketDetailViewProps> = ({ ticket, onCl
               </div>
             ) : (
               replies.map((reply) => (
-                <div key={reply.id} className={`${reply.is_admin ? 'border-l-4 border-green-500 pl-4' : ''}`}>
+                <div key={reply.id} className={`${reply.is_admin ? 'border-l-4 border-blue-500 pl-4' : ''}`}>
                   <div className="flex items-center gap-2 mb-3">
-                    <div className={`w-8 h-8 ${reply.is_admin ? 'bg-green-100' : 'bg-green-100'} rounded-full flex items-center justify-center`}>
+                    <div className={`w-8 h-8 ${reply.is_admin ? 'bg-blue-100' : 'bg-blue-100'} rounded-full flex items-center justify-center`}>
                       {reply.is_admin ? (
-                        <Mail size={16} className="text-green-600" />
+                        <Mail size={16} className="text-blue-600" />
                       ) : (
-                        <User size={16} className="text-green-600" />
+                        <User size={16} className="text-blue-600" />
                       )}
                     </div>
                     <div>
                       <div className="font-medium">
                         {reply.is_admin ? 'Support Team' : 'You'}
                         {reply.is_admin && (
-                          <span className="ml-2 text-xs bg-green-100 text-green-800 px-2 py-0.5 rounded-full">
+                          <span className="ml-2 text-xs bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full">
                             Admin
                           </span>
                         )}
@@ -146,7 +146,7 @@ export const TicketDetailView: React.FC<TicketDetailViewProps> = ({ ticket, onCl
                       <div className="text-sm text-gray-500">{formatDate(reply.created_at)}</div>
                     </div>
                   </div>
-                  <div className={`rounded-xl p-4 ml-10 ${reply.is_admin ? 'bg-green-50' : 'bg-gray-50'}`}>
+                  <div className={`rounded-xl p-4 ml-10 ${reply.is_admin ? 'bg-blue-50' : 'bg-gray-50'}`}>
                     <p className="text-gray-700 whitespace-pre-wrap">{reply.message}</p>
                   </div>
                 </div>
@@ -166,7 +166,7 @@ export const TicketDetailView: React.FC<TicketDetailViewProps> = ({ ticket, onCl
                   onChange={(e) => setReplyText(e.target.value)}
                   placeholder="Type your reply here..."
                   rows={3}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all resize-none"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all resize-none"
                 />
                 <div className="flex justify-end gap-3 mt-3">
                   <button
@@ -179,7 +179,7 @@ export const TicketDetailView: React.FC<TicketDetailViewProps> = ({ ticket, onCl
                   <button
                     type="submit"
                     disabled={addReplyMutation.isPending || !replyText.trim()}
-                    className="px-4 py-2 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
+                    className="px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
                   >
                     {addReplyMutation.isPending ? (
                       <>

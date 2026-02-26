@@ -67,25 +67,25 @@ const ForgotPassword: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-green-50 flex flex-col justify-center items-center px-3 safe-area">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-blue-50 flex flex-col justify-center items-center px-3 safe-area">
       <div className="w-full max-w-md">
         <div className="flex flex-col items-center mb-6">
           <div className="relative mb-3">
-            <div className="w-16 h-16 rounded-xl flex items-center justify-center shadow-lg shadow-green-500/20 overflow-hidden border border-green-100">
-              <div className="w-full h-full bg-gradient-to-br from-green-600 to-green-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-base">GJBC</span>
+            <div className="w-16 h-16 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20 overflow-hidden border border-blue-100">
+              <div className="w-full h-full bg-gradient-to-br from-blue-600 to-blue-600 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-base">GKBC</span>
               </div>
             </div>
           </div>
           
           <div className="mb-4">
             <h1 className="text-2xl font-black text-gray-900 text-center">
-              <span className="bg-gradient-to-r from-green-600 to-green-600 bg-clip-text text-transparent">
-                GJBC
+              <span className="bg-gradient-to-r from-blue-600 to-blue-600 bg-clip-text text-transparent">
+                GKBC
               </span>
             </h1>
             <p className="text-xs text-gray-500 text-center font-medium mt-0.5">
-              Driving Economic Growth
+              Africa's Emerging Economic Vanguard
             </p>
           </div>
         </div>
@@ -94,17 +94,17 @@ const ForgotPassword: React.FC = () => {
           <div className="p-4">
             {showSuccess ? (
               <div className="text-center">
-                <div className="w-12 h-12 bg-gradient-to-br from-green-100 to-green-50 rounded-full flex items-center justify-center mx-auto mb-3 border border-green-200">
-                  <CheckCircle className="text-green-600" size={24} />
+                <div className="w-12 h-12 bg-gradient-to-br from-blue-100 to-blue-50 rounded-full flex items-center justify-center mx-auto mb-3 border border-blue-200">
+                  <CheckCircle className="text-blue-600" size={24} />
                 </div>
                 <h2 className="text-lg font-bold text-gray-900 mb-1.5">Reset Link Sent</h2>
                 <p className="text-gray-500 text-xs mb-3">
-                  We've sent a password reset link to <span className="font-semibold text-green-600">{email}</span>.
+                  We've sent a password reset link to <span className="font-semibold text-blue-600">{email}</span>.
                   Please check your email inbox.
                 </p>
                 <button
                   onClick={handleBackToLogin}
-                  className="w-full bg-gradient-to-r from-green-600 to-green-700 text-white font-bold py-2.5 rounded-lg hover:from-green-700 hover:to-green-800 transition-all min-h-[44px]"
+                  className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold py-2.5 rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all min-h-[44px]"
                 >
                   Back to Login
                 </button>
@@ -112,8 +112,8 @@ const ForgotPassword: React.FC = () => {
             ) : (
               <>
                 <div className="text-center mb-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-green-100 to-green-50 rounded-full flex items-center justify-center mx-auto mb-3 border border-green-200">
-                    <Mail className="text-green-600" size={22} />
+                  <div className="w-12 h-12 bg-gradient-to-br from-blue-100 to-blue-50 rounded-full flex items-center justify-center mx-auto mb-3 border border-blue-200">
+                    <Mail className="text-blue-600" size={22} />
                   </div>
                   <h2 className="text-lg font-bold text-gray-900 mb-1.5">Reset Your Password</h2>
                   <p className="text-gray-500 text-xs">
@@ -148,7 +148,7 @@ const ForgotPassword: React.FC = () => {
                         type="email"
                         value={email}
                         onChange={handleEmailChange}
-                        className="w-full pl-10 pr-3 py-2.5 bg-white border border-green-200 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-green-500/20 focus:border-green-500 transition-all"
+                        className="w-full pl-10 pr-3 py-2.5 bg-white border border-blue-200 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
                         placeholder="your@email.com"
                         required
                         autoComplete="email"
@@ -159,7 +159,7 @@ const ForgotPassword: React.FC = () => {
                   <button
                     type="submit"
                     disabled={isLoading}
-                    className="w-full bg-gradient-to-r from-green-600 to-green-700 text-white font-bold py-2.5 rounded-lg hover:from-green-700 hover:to-green-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-1.5 min-h-[44px]"
+                    className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold py-2.5 rounded-lg hover:from-blue-700 hover:to-blue-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-1.5 min-h-[44px]"
                   >
                     {isLoading ? (
                       <>
@@ -183,7 +183,7 @@ const ForgotPassword: React.FC = () => {
 
                 <button
                   onClick={handleBackToLogin}
-                  className="w-full border border-gray-300 text-gray-700 font-bold py-2.5 rounded-lg hover:border-green-500 hover:text-green-600 hover:bg-green-50 transition-all flex items-center justify-center gap-1.5 min-h-[44px]"
+                  className="w-full border border-gray-300 text-gray-700 font-bold py-2.5 rounded-lg hover:border-blue-500 hover:text-blue-600 hover:bg-blue-50 transition-all flex items-center justify-center gap-1.5 min-h-[44px]"
                 >
                   <ArrowLeft size={16} />
                   Back to Login

@@ -97,7 +97,7 @@ const AdminUsers: React.FC = () => {
   if (isLoading) {
     return (
       <div className="p-6 flex items-center justify-center min-h-screen">
-        <Loader2 className="animate-spin text-green-600" size={32} />
+        <Loader2 className="animate-spin text-blue-600" size={32} />
       </div>
     );
   }
@@ -111,7 +111,7 @@ const AdminUsers: React.FC = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <h1 className="text-xl sm:text-2xl font-bold text-gray-900 flex items-center gap-2">
-          <Users className="text-green-600" size={24} /> User Management
+          <Users className="text-blue-600" size={24} /> User Management
         </h1>
         <div className="flex w-full sm:w-auto items-center gap-2">
           <div className="relative flex-1 sm:flex-none">
@@ -121,13 +121,13 @@ const AdminUsers: React.FC = () => {
               onChange={(e) => setSearchInput(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Search..."
-              className="w-full pl-9 pr-4 py-2 border border-gray-300 rounded-lg text-sm bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500"
+              className="w-full pl-9 pr-4 py-2 border border-gray-300 rounded-lg text-sm bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
             <Search className="absolute left-3 top-2.5 text-gray-400" size={16} />
           </div>
           <button
             onClick={handleSearch}
-            className="px-4 py-2 bg-green-600 text-white rounded-lg text-sm hover:bg-green-700 whitespace-nowrap"
+            className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700 whitespace-nowrap"
           >
             Search
           </button>
@@ -135,7 +135,7 @@ const AdminUsers: React.FC = () => {
       </div>
 
       {isFetching && (
-        <div className="fixed top-4 right-4 bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs shadow flex items-center gap-2 z-50">
+        <div className="fixed top-4 right-4 bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs shadow flex items-center gap-2 z-50">
           <Loader2 size={14} className="animate-spin" /> Updating...
         </div>
       )}
@@ -163,9 +163,9 @@ const AdminUsers: React.FC = () => {
       </div>
 
       {/* Users Table – responsive wrapper */}
-      <div className="bg-white rounded-xl border border-green-200 overflow-x-auto">
+      <div className="bg-white rounded-xl border border-blue-200 overflow-x-auto">
         <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-green-50">
+          <thead className="bg-blue-50">
             <tr>
               <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">User</th>
               <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
@@ -179,12 +179,12 @@ const AdminUsers: React.FC = () => {
             {users.map((user) => (
               <React.Fragment key={user.id}>
                 <tr
-                  className={`hover:bg-gray-50 cursor-pointer ${expandedUserId === user.id ? 'bg-green-50' : ''}`}
+                  className={`hover:bg-gray-50 cursor-pointer ${expandedUserId === user.id ? 'bg-blue-50' : ''}`}
                   onClick={() => setExpandedUserId(expandedUserId === user.id ? null : user.id)}
                 >
                   <td className="px-4 sm:px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
-                      <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center text-green-700 font-bold mr-3 flex-shrink-0">
+                      <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center text-blue-700 font-bold mr-3 flex-shrink-0">
                         {user.avatar_url ? (
                           <img src={user.avatar_url} alt="" className="w-8 h-8 rounded-full object-cover" />
                         ) : (
@@ -202,7 +202,7 @@ const AdminUsers: React.FC = () => {
                   <td className="px-4 sm:px-6 py-4 whitespace-nowrap">
                     <span className={`px-2 py-1 text-xs rounded-full ${
                       user.user_status === 'verified'
-                        ? 'bg-green-100 text-green-800'
+                        ? 'bg-blue-100 text-blue-800'
                         : 'bg-gray-100 text-gray-800'
                     }`}>
                       {user.user_status}
@@ -234,7 +234,7 @@ const AdminUsers: React.FC = () => {
                       ) : (
                         <button
                           onClick={() => handleVerify(user)}
-                          className="p-1 text-green-600 hover:bg-green-50 rounded"
+                          className="p-1 text-blue-600 hover:bg-blue-50 rounded"
                           title="Verify"
                         >
                           <UserCheck size={18} />
@@ -259,7 +259,7 @@ const AdminUsers: React.FC = () => {
                 </tr>
                 {expandedUserId === user.id && (
                   <tr>
-                    <td colSpan={6} className="px-4 sm:px-6 py-4 bg-green-50">
+                    <td colSpan={6} className="px-4 sm:px-6 py-4 bg-blue-50">
                       {isLoadingDetails ? (
                         <div className="flex items-center gap-2 text-sm text-gray-600">
                           <Loader2 size={16} className="animate-spin" /> Loading details...

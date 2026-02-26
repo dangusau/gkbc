@@ -32,7 +32,7 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
     {/* Cover + Avatar container – relative to anchor the avatar */}
     <div className="relative">
       {/* Cover */}
-      <div className="h-36 bg-gradient-to-r from-green-400 to-green-600">
+      <div className="h-36 bg-gradient-to-r from-blue-400 to-blue-600">
         {profile.header_image_url && (
           <img src={profile.header_image_url} alt="Cover" className="w-full h-full object-cover" />
         )}
@@ -57,7 +57,7 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
               className="w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:bg-white disabled:opacity-50"
             >
               {uploadingHeader ? (
-                <div className="w-5 h-5 border-2 border-green-600 border-t-transparent rounded-full animate-spin" />
+                <div className="w-5 h-5 border-2 border-blue-600 border-t-transparent rounded-full animate-spin" />
               ) : (
                 <Camera size={20} />
               )}
@@ -69,11 +69,11 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
       {/* Avatar – absolutely positioned relative to the container */}
       <div className="absolute -bottom-12 left-4 sm:left-1/2 sm:transform sm:-translate-x-1/2">
         <div className="relative">
-          <div className="w-24 h-24 bg-gradient-to-br from-green-100 to-green-200 rounded-full border-4 border-white shadow-xl overflow-hidden">
+          <div className="w-24 h-24 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full border-4 border-white shadow-xl overflow-hidden">
             {profile.avatar_url ? (
               <img src={profile.avatar_url} alt={profile.first_name} className="w-full h-full object-cover" />
             ) : (
-              <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-green-500 to-green-600 text-white text-3xl font-bold">
+              <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-500 to-blue-600 text-white text-3xl font-bold">
                 {profile.first_name?.charAt(0)}
               </div>
             )}
@@ -101,7 +101,7 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
               <button
                 onClick={() => avatarInputRef.current?.click()}
                 disabled={uploadingAvatar}
-                className="w-8 h-8 bg-gradient-to-br from-green-500 to-green-600 text-white rounded-full flex items-center justify-center shadow-lg hover:from-green-600 hover:to-green-700 disabled:opacity-50"
+                className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-full flex items-center justify-center shadow-lg hover:from-blue-600 hover:to-blue-700 disabled:opacity-50"
               >
                 {uploadingAvatar ? (
                   <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -133,7 +133,7 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
       </div>
 
       {profile.bio && (
-        <div className="mt-6 bg-white/50 backdrop-blur-sm rounded-xl p-4 border border-green-100 max-w-2xl mx-auto">
+        <div className="mt-6 bg-white/50 backdrop-blur-sm rounded-xl p-4 border border-blue-100 max-w-2xl mx-auto">
           <p className="text-gray-600 leading-relaxed text-sm">{profile.bio}</p>
         </div>
       )}
@@ -144,7 +144,7 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
           {profile.email && (
             <a
               href={`mailto:${profile.email}`}
-              className="flex items-center gap-2 text-gray-500 hover:text-green-600 px-3 py-2 bg-gray-50 rounded-lg border border-gray-200 hover:border-green-300"
+              className="flex items-center gap-2 text-gray-500 hover:text-blue-600 px-3 py-2 bg-gray-50 rounded-lg border border-gray-200 hover:border-blue-300"
             >
               <Mail size={16} />
               <span className="text-sm">Email</span>
@@ -153,7 +153,7 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
           {profile.phone && (
             <a
               href={`tel:${profile.phone}`}
-              className="flex items-center gap-2 text-gray-500 hover:text-green-600 px-3 py-2 bg-gray-50 rounded-lg border border-gray-200 hover:border-green-300"
+              className="flex items-center gap-2 text-gray-500 hover:text-blue-600 px-3 py-2 bg-gray-50 rounded-lg border border-gray-200 hover:border-blue-300"
             >
               <Phone size={16} />
               <span className="text-sm">Call</span>
@@ -170,7 +170,7 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
               href={profile.website}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-green-600 hover:text-green-700 px-3 py-2 bg-green-50 rounded-lg border border-green-200 hover:border-green-300"
+              className="flex items-center gap-2 text-blue-600 hover:text-blue-700 px-3 py-2 bg-blue-50 rounded-lg border border-blue-200 hover:border-blue-300"
             >
               <Globe size={16} />
               <span className="text-sm">Website</span>
