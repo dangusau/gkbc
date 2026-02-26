@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import {
   Menu, X, LayoutDashboard, Users, ShoppingBag, Briefcase,
-  Calendar, Ticket, Megaphone, Settings, logout, Loader2
+  Calendar, Ticket, Megaphone, Settings, LogOut, Loader2
 } from 'lucide-react';
 import { supabase } from '../../services/supabase';
 
@@ -115,7 +115,7 @@ const AdminLayout: React.FC = () => {
               {loggingOut ? (
                 <Loader2 size={18} className="animate-spin" />
               ) : (
-                <logout size={18} />
+                <LogOut size={18} />
               )}
               <span>{loggingOut ? 'Logging out...' : 'logout'}</span>
             </button>

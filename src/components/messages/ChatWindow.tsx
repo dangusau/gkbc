@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Send, Paperclip, X, Check, CheckCheck, Clock, Store, User } from 'lucide-react';
+import { ArrowLeft, Send, Paperclip, X, Check, CheckCheck, Store } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useMessages } from '../../hooks/useMessages';
 import { useSendMessage } from '../../hooks/useSendMessage';
@@ -238,11 +238,12 @@ const ChatWindow: React.FC = () => {
       setIsCreating(true);
       try {
         const newConversationId = await messagingService.getOrCreateConversation(
-          user.id,
-          targetUser.id,
-          context,
-          undefined
-        );
+  user.id,
+  targetUser.id,
+  context,
+  
+  location.state?.listing?.id
+);
 
         await messagingService.sendMessage(
           newConversationId,
@@ -302,11 +303,12 @@ const ChatWindow: React.FC = () => {
       setIsCreating(true);
       try {
         const newConversationId = await messagingService.getOrCreateConversation(
-          user.id,
-          targetUser.id,
-          context,
-          undefined
-        );
+  user.id,
+  targetUser.id,
+  context,
+  
+  location.state?.listing?.id
+);
         const mediaUrl = await messagingService.uploadMedia(newConversationId, selectedFile);
         const messageType = selectedFile.type.startsWith('image/')
           ? 'image'

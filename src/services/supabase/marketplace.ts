@@ -165,13 +165,14 @@ export const marketplaceService = {
   },
 
   // Increment view count (public, called when viewing a listing)
-  async incrementViews(listingId: string): Promise<void> {
-    try {
-      await supabase.rpc('increment_listing_views', {
-        p_listing_id: listingId
-      });
-    } catch (error) {
-      console.error('Error incrementing views:', error);
-    }
+async incrementViews(listingId: string, userId: string): Promise<void> {
+  try {
+    await supabase.rpc('increment_listing_views', {
+      p_listing_id: listingId,
+      p_user_id: userId
+    });
+  } catch (error) {
+    console.error('Error incrementing views:', error);
   }
+}
 };

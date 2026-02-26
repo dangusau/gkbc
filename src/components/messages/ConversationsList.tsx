@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { MessageCircle, Store, Users, Search, Plus, RefreshCw, Bell, Clock } from 'lucide-react';
+import { MessageCircle, Store, Users, Search, Plus, RefreshCw, Clock } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useConversations } from '../../hooks/useConversations';
 import { useUnreadCounts } from '../../hooks/useUnreadCounts';
@@ -206,7 +206,7 @@ const ConversationsList: React.FC = () => {
                 : 'border-transparent text-gray-500 hover:text-blue-600'
             }`}
           >
-            <Store className="w-4 h-4" />
+           
             <span className="font-medium">Marketplace</span>
             {getUnreadForTab('marketplace') > 0 && (
               <span className="bg-red-100 text-red-600 text-xs px-1.5 py-0.5 rounded-full">
@@ -296,7 +296,6 @@ const ConversationsList: React.FC = () => {
                     </div>
                       {conv.context === 'marketplace' && (
                         <span className="inline-flex items-center gap-1 bg-orange-100 text-orange-700 text-xs px-2 py-0.5 rounded-full">
-                          <Store className="w-3 h-3" />
                         </span>
                       )}
                     </div>

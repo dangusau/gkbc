@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQueryClient, useMutation } from '@tanstack/react-query';
-import { ChevronLeft, MoreVertical, Edit3, Share2, logout, AlertCircle, UserPlus, UserMinus, Check, Clock, X } from 'lucide-react';
+import { ChevronLeft, MoreVertical, Edit3, Share2, LogOut, AlertCircle, UserPlus, UserMinus, Check, Clock, X } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { useProfile, useProfilePosts, profileKeys } from '../hooks/useProfile';
 import { useConnectionsData } from '../hooks/useConnectionsData';
@@ -345,7 +345,7 @@ const Profile: React.FC = () => {
                     </button>
                     <div className="border-t border-gray-200 my-2"></div>
                     <button onClick={() => { setShowOptionsMenu(false); }} className="w-full px-4 py-3 text-left flex items-center gap-3 text-red-600 hover:bg-red-50">
-                      <logout size={18} />
+                      <LogOut size={18} />
                       <span className="font-medium">logout</span>
                     </button>
                   </>

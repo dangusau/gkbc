@@ -3,11 +3,47 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { useMarketplaceData } from '../hooks/useMarketplaceData';
 import { useMarketplaceMutations } from '../hooks/useMarketplaceMutations';
-import { Heart, MapPin, Eye, User, Shield, Star, ArrowLeft, MessageCircle } from 'lucide-react';
+import { Heart, MapPin, Eye, Shield, Star, ArrowLeft, MessageCircle } from 'lucide-react';
 import { formatTimeAgo } from '../utils/formatters';
 import { marketplaceService } from '../services/supabase/marketplace';
+import { messagingService } from '../services/supabase/messaging';
 import { ConfirmationDialog } from '../components/shared/ConfirmationDialogue';
 import { FeedbackToast } from '../components/shared/FeedbackToast';
+
+// Simple star rating components
+const StarRatingInput: React.FC<{ value: number; onChange: (rating: number) => void }> = ({ value, onChange }) => {
+  return (
+    <div className="flex items-center gap-1">
+      {[1, 2, 3, 4, 5].map((star) => (
+        <button
+          key={star}
+          type="button"
+          onClick={() => onChange(star)}
+          className="focus:outline-none"
+        >
+          <Star
+            size={20}
+            className={star <= value ? 'text-yellow-400 fill-current' : 'text-gray-300'}
+          />
+        </button>
+      ))}
+    </div>
+  );
+};
+
+const StarRatingDisplay: React.FC<{ rating: number }> = ({ rating }) => {
+  return (
+    <div className="flex items-center gap-0.5">
+      {[1, 2, 3, 4, 5].map((star) => (
+        <Star
+          key={star}
+          size={14}
+          className={star <= rating ? 'text-yellow-400 fill-current' : 'text-gray-300'}
+        />
+      ))}
+    </div>
+  );
+};
 
 const MarketplaceDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -36,7 +72,7 @@ const MarketplaceDetail: React.FC = () => {
     refetch: refetchReviews,
   } = useReviews(id!);
 
-  // Safe defaults – added seller_avatar
+  // Safe defaults
   const safeListing = {
     id: listing?.id || '',
     seller_id: listing?.seller_id || '',
@@ -51,7 +87,7 @@ const MarketplaceDetail: React.FC = () => {
     created_at: listing?.created_at || new Date().toISOString(),
     seller_name: listing?.seller_name || 'Unknown',
     seller_verified: listing?.seller_verified || false,
-    seller_avatar: listing?.seller_avatar || null,  // <-- added
+    seller_avatar: listing?.seller_avatar || null,
     is_favorited: listing?.is_favorited || false,
     favorite_count: listing?.favorite_count || 0,
     is_sold: listing?.is_sold || false,
@@ -62,12 +98,12 @@ const MarketplaceDetail: React.FC = () => {
   const isOwner = user?.id === safeListing.seller_id;
   const userHasReviewed = reviews.some(r => r.reviewer_id === user?.id);
 
-  // Increment view count
+  // Increment view count (only once per user)
   useEffect(() => {
-    if (listing) {
-      marketplaceService.incrementViews(listing.id).catch(console.error);
+    if (listing && user) {
+      marketplaceService.incrementViews(listing.id, user.id).catch(console.error);
     }
-  }, [listing]);
+  }, [listing, user]);
 
   const showFeedback = (message: string, type: 'success' | 'error') => {
     setFeedback({ message, type });
@@ -82,7 +118,6 @@ const MarketplaceDetail: React.FC = () => {
     if (listing) {
       try {
         await toggleFavorite.mutateAsync(listing.id);
-        // No need for feedback here, the UI updates instantly and invalidates queries
       } catch (error: any) {
         showFeedback(error.message || 'Failed to update favorite', 'error');
       }
@@ -121,7 +156,7 @@ const MarketplaceDetail: React.FC = () => {
     try {
       await deleteListing.mutateAsync(listing.id);
       showFeedback('Listing deleted successfully', 'success');
-      setTimeout(() => navigate('/marketplace'), 1500); // Brief delay to show feedback
+      setTimeout(() => navigate('/marketplace'), 1500);
     } catch (error: any) {
       showFeedback(error.message || 'Failed to delete listing', 'error');
       setDeleting(false);
@@ -130,28 +165,37 @@ const MarketplaceDetail: React.FC = () => {
     }
   };
 
-  // NEW: Contact seller handler
-  const handleContact = () => {
+  const handleContact = async () => {
     if (!user) {
       showFeedback('Please sign in to contact the seller', 'error');
       return;
     }
-    // Navigate to the messages page with state for a new conversation
-    navigate('/messages/new/chat', {
-      state: {
-        otherUser: {
-          id: safeListing.seller_id,
-          name: safeListing.seller_name,
-          avatar: safeListing.seller_avatar,
-          status: safeListing.seller_verified ? 'verified' : 'member',
+    try {
+      const conversationId = await messagingService.getOrCreateConversation(
+        user.id,
+        safeListing.seller_id,
+        'marketplace',
+        safeListing.id
+      );
+      navigate(`/messages/${conversationId}`, {
+        state: {
+          otherUser: {
+            id: safeListing.seller_id,
+            name: safeListing.seller_name,
+            avatar: safeListing.seller_avatar,
+            status: safeListing.seller_verified ? 'verified' : 'member',
+          },
+          context: 'marketplace',
+          listing: {
+            id: safeListing.id,
+            title: safeListing.title,
+          },
         },
-        context: 'marketplace',
-        listing: {
-          id: safeListing.id,
-          title: safeListing.title,
-        },
-      },
-    });
+      });
+    } catch (error) {
+      console.error('Error getting/creating conversation:', error);
+      showFeedback('Failed to start conversation', 'error');
+    }
   };
 
   if (listingLoading) {
@@ -313,7 +357,7 @@ const MarketplaceDetail: React.FC = () => {
                 </div>
                 <div>
                   <p className="font-medium text-gray-900">{safeListing.seller_name}</p>
-                  <p className="text-xs text-gray-500">Member since {formatTimeAgo(safeListing.created_at)}</p>
+                  <p className="text-xs text-gray-500">Listed {formatTimeAgo(safeListing.created_at)}</p>
                 </div>
               </div>
             </div>
@@ -349,7 +393,7 @@ const MarketplaceDetail: React.FC = () => {
               </div>
             </div>
 
-            {/* Action Buttons with Delete */}
+            {/* Action Buttons */}
             <div className="flex gap-3 pt-4">
               {!isOwner && (
                 <button
@@ -381,27 +425,73 @@ const MarketplaceDetail: React.FC = () => {
           </div>
         </div>
 
-        {/* Reviews Section (unchanged) */}
+        {/* Reviews Section */}
         <div className="mt-8 border-t border-blue-200 pt-6">
           <h2 className="text-lg font-bold text-gray-900 mb-4">Reviews ({reviews.length})</h2>
 
           {user && !isOwner && !userHasReviewed && (
             <form onSubmit={handleAddReview} className="bg-white rounded-xl p-4 border border-blue-200 mb-6">
-              {/* ... review form ... */}
+              <h3 className="font-medium text-gray-900 mb-3">Write a Review</h3>
+              <div className="mb-4">
+                <label className="block text-sm text-gray-600 mb-1">Rating</label>
+                <StarRatingInput value={reviewRating} onChange={setReviewRating} />
+              </div>
+              <div className="mb-4">
+                <label className="block text-sm text-gray-600 mb-1">Comment</label>
+                <textarea
+                  value={reviewComment}
+                  onChange={(e) => setReviewComment(e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  rows={3}
+                  placeholder="Share your experience with this product..."
+                  required
+                />
+              </div>
+              <button
+                type="submit"
+                disabled={submittingReview}
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
+              >
+                {submittingReview ? 'Submitting...' : 'Submit Review'}
+              </button>
             </form>
           )}
 
           {reviewsLoading ? (
             <div className="space-y-3">
-              {/* ... skeletons ... */}
+              {[...Array(3)].map((_, i) => (
+                <div key={i} className="bg-white rounded-xl p-4 border border-blue-200 animate-pulse">
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="w-8 h-8 bg-gray-200 rounded-full"></div>
+                    <div className="h-4 bg-gray-200 rounded w-24"></div>
+                  </div>
+                  <div className="h-3 bg-gray-200 rounded w-full mb-2"></div>
+                  <div className="h-3 bg-gray-200 rounded w-2/3"></div>
+                </div>
+              ))}
             </div>
           ) : reviews.length === 0 ? (
             <p className="text-center text-gray-500 py-8">No reviews yet.</p>
           ) : (
             <div className="space-y-4">
-              {reviews.map(review => (
+              {reviews.map((review) => (
                 <div key={review.id} className="bg-white rounded-xl p-4 border border-blue-200">
-                  {/* ... review item ... */}
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-2">
+                      <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm font-bold overflow-hidden">
+                        {review.reviewer_avatar ? (
+                          <img src={review.reviewer_avatar} alt={review.reviewer_name} className="w-full h-full object-cover" />
+                        ) : (
+                          review.reviewer_name?.charAt(0).toUpperCase() || 'U'
+                        )}
+                      </div>
+                      <span className="font-medium text-gray-900">{review.reviewer_name}</span>
+                      {/* Verified badge removed because review.reviewer_verified doesn't exist */}
+                    </div>
+                    <StarRatingDisplay rating={review.rating} />
+                  </div>
+                  <p className="text-sm text-gray-700 mb-2">{review.comment}</p>
+                  <p className="text-xs text-gray-500">{formatTimeAgo(review.created_at)}</p>
                 </div>
               ))}
             </div>

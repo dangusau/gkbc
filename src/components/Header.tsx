@@ -222,7 +222,7 @@ const Header: React.FC<HeaderProps> = ({
                     </p>
                     {userStatus === 'verified' && <VerifiedBadge size={12} className="ml-1" />}
                   </div>
-                  <p className="text-white/80 text-xs">
+                  <p className="text-white/80 text-s">
                     {userStatus === 'verified' ? 'Verified Member' : 'Member'}
                   </p>
                 </div>
@@ -248,7 +248,7 @@ const Header: React.FC<HeaderProps> = ({
                                 className="w-full h-full object-cover"
                               />
                             ) : (
-                              <span className="text-blue-700 font-bold text-sm">
+                              <span className="text-blue-700 font-bold text-m">
                                 {userInitials}
                               </span>
                             )}
@@ -262,10 +262,10 @@ const Header: React.FC<HeaderProps> = ({
                         </div>
                         <div>
                           <div className="flex items-center gap-2">
-                            <h3 className="font-bold text-gray-900">{displayName}</h3>
+                            <h3 className="font-medium text-gray-900">{displayName}</h3>
                             {userStatus === 'verified' && <VerifiedBadge size={15} />}
                           </div>
-                          <p className="text-xs text-gray-600">
+                          <p className="text-s text-gray-600">
                             {currentUser?.email?.split('@')[0] || 'member'}
                             {userStatus === 'verified' && ' • Verified'}
                           </p>

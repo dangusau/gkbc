@@ -54,8 +54,8 @@ const VerifiedBadge: React.FC<VerifiedBadgeProps> = ({
               y2="24"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stopColor="#10B981" />  {/* blue-500 */}
-              <stop offset="1" stopColor="#059669" />  {/* blue-600 */}
+              <stop stopColor="#4a39e0" />  {/* blue-500 */}
+              <stop offset="1" stopColor="#4a39e0" />  {/* blue-600 */}
             </linearGradient>
           </defs>
         </svg>

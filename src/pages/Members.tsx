@@ -8,16 +8,11 @@ import { ConnectionsTab } from '../components/members/ConnectionsTab';
 import { ConfirmationDialog } from '../components/shared/ConfirmationDialogue';
 import { FeedbackToast } from '../components/shared/FeedbackToast';
 import { formatTimeAgo } from '../utils/formatters';
-import { useAuth } from '../contexts/AuthContext'; // <-- import
+import { useAuth } from '../contexts/AuthContext';
 
 const Members: React.FC = () => {
   const navigate = useNavigate();
-  const { user } = useAuth(); // <-- get current user
-
-  useEffect(() => {
-    console.log('📦 MembersPage MOUNTED');
-    return () => console.log('🗑️ MembersPage UNMOUNTED');
-  }, []);
+  const { user } = useAuth();
 
   const [activeTab, setActiveTab] = useState<'all' | 'connections'>('all');
   const [inputValue, setInputValue] = useState('');
@@ -54,20 +49,6 @@ const Members: React.FC = () => {
     isFetching,
   } = useConnectionsData(search, businessType, marketArea);
 
-  console.log('🖥️ Members render:', {
-    isLoading,
-    isFetching,
-    membersPagesLength: membersPages.length,
-    totalMembers: membersPages.flat().length,
-    search,
-    businessType,
-    marketArea,
-    activeTab,
-    receivedCount: receivedRequests.length,
-    sentCount: sentRequests.length,
-    friendsCount: friends.length,
-  });
-
   // Debounce effect
   useEffect(() => {
     const handler = setTimeout(() => {
@@ -85,7 +66,6 @@ const Members: React.FC = () => {
 
   const filteredMembers = useMemo(() => {
     return members.filter(member => {
-      // Exclude current user if logged in
       if (user?.id && member.id === user.id) return false;
       const isFriend = friends.some(f => f.user_id === member.id);
       if (isFriend) return false;
@@ -126,7 +106,6 @@ const Members: React.FC = () => {
         'Request withdrawn', 'success'
       );
     } catch (error: any) {
-      // Show actual error message from the backend
       const errorMessage = error?.message || `Failed to ${confirm.type} connection`;
       showFeedback(errorMessage, 'error');
     } finally {
@@ -159,21 +138,10 @@ const Members: React.FC = () => {
   };
 
   const handleProfileClick = (memberId: string, e: React.MouseEvent) => {
-  console.log('handleProfileClick called with memberId:', memberId);
-  console.log('Event target:', e.target);
-  const button = (e.target as HTMLElement).closest('button');
-  if (button) {
-    console.log('Click on button, aborting navigation');
-    return;
-  }
-  console.log('Current path before navigate:', window.location.pathname);
-  try {
+    const button = (e.target as HTMLElement).closest('button');
+    if (button) return;
     navigate(`/profile/${memberId}`);
-    console.log('navigate executed, expected new URL:', `/profile/${memberId}`);
-  } catch (error) {
-    console.error('Navigation error:', error);
-  }
-};
+  };
 
   const getUserInitials = (firstName?: string, lastName?: string): string => {
     const first = firstName?.charAt(0) || '';
@@ -249,7 +217,6 @@ const Members: React.FC = () => {
 
   // --- Skeleton condition: only when there is no data at all ---
   if (isLoading && membersPages.length === 0) {
-    console.log('🟡 Showing skeleton because isLoading =', isLoading, 'and no data');
     return (
       <div className="min-h-screen bg-gray-50">
         <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-4">
@@ -448,7 +415,17 @@ const Members: React.FC = () => {
       <div className="max-w-7xl mx-auto p-4">
         {activeTab === 'all' && (
           <>
-            {filteredMembers.length === 0 && membersPages.length > 0 ? (
+            {search.trim() === '' ? (
+              // No search term: show placeholder
+              <div className="text-center py-12">
+                <div className="w-20 h-20 bg-blue-100 rounded-full mx-auto mb-4 flex items-center justify-center">
+                  <Search size={32} className="text-blue-500" />
+                </div>
+                <h3 className="text-sm font-semibold text-gray-900 mb-2">Start typing to search</h3>
+                <p className="text-gray-600 text-xs">Enter a name or business to find members</p>
+              </div>
+            ) : filteredMembers.length === 0 && membersPages.length > 0 ? (
+              // Search term present but no results
               <div className="text-center py-12">
                 <div className="w-20 h-20 bg-blue-100 rounded-full mx-auto mb-4 flex items-center justify-center">
                   <Building size={32} className="text-blue-500" />
@@ -463,6 +440,7 @@ const Members: React.FC = () => {
                 </button>
               </div>
             ) : filteredMembers.length > 0 ? (
+              // Search term present and results exist
               <>
                 {isFetching && (
                   <div className="text-center py-2">
