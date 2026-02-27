@@ -92,7 +92,7 @@ function App() {
             <Route path="/Login" element={<Login />} />
             <Route path="/Signup" element={<Signup />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
-            <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="/ResetPassword" element={<ResetPassword />} />
             <Route path="/Terms" element={<Terms />} />
             <Route path="/Privacy" element={<Privacy />} />
             <Route path="/admin/login" element={<AdminLogin />} />
@@ -133,7 +133,7 @@ function App() {
             <Route path="/support/:id" element={<Layout><HelpSupport /></Layout>} />
 
             {/* Fallback */}
-            <Route path="*" element={<Navigate to="/Home" replace />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </QueryProvider>
       </AuthProvider>
