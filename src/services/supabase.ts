@@ -53,7 +53,7 @@ export const getUserStatus = async (): Promise<'verified' | 'member' | null> => 
  */
 export const sendPasswordResetEmail = async (
   email: string, 
-  redirectTo: string = `${window.location.origin}/reset-password`
+  redirectTo: string = `${window.location.origin}/ResetPassword`
 ) => {
   try {
     const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), {
