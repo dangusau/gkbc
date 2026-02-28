@@ -414,8 +414,8 @@ const SignUp: React.FC = () => {
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-blue-50 flex flex-col justify-center items-center px-3 py-6 safe-area">
         {/* Background Elements */}
         <div className="absolute top-0 left-0 right-0 h-48 bg-gradient-to-b from-blue-600/10 to-transparent" />
-        <div className="absolute top-1/4 -right-12 w-48 h-48 bg-blue-500/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 -left-12 w-48 h-48 bg-indigo-400/5 rounded-full blur-3xl" />
+       <div className="absolute top-1/4 right-0 w-48 h-48 bg-blue-500/5 rounded-full blur-3xl overflow-hidden" />
+       <div className="absolute bottom-1/4 left-0 w-48 h-48 bg-blue-400/5 rounded-full blur-3xl overflow-hidden" />
         
         {/* Main Container */}
         <div className="w-full max-w-md relative z-10">
