@@ -133,7 +133,7 @@ function App() {
             <Route path="/support/:id" element={<Layout><HelpSupport /></Layout>} />
 
             {/* Fallback */}
-            <Route path="*" element={<Navigate to="/" replace />} />
+            <Route path="*" element={<Navigate to="/login" replace />} />
           </Routes>
         </QueryProvider>
       </AuthProvider>
