@@ -10,7 +10,7 @@ interface Props {
 
 const BusinessCard: React.FC<Props> = ({ business }) => {
   return (
-    <Link to={`/business/${business.id}`} className="block">
+    <Link to={`/Business/${business.id}`} className="block">
       <div className="bg-white rounded-xl border border-blue-200 overflow-hidden hover:border-blue-400 transition-shadow">
         {/* Banner */}
         <div className="h-24 bg-gradient-to-r from-gray-100 to-gray-200 relative">
