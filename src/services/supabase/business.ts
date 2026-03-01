@@ -115,7 +115,7 @@ export const businessService = {
 
   async getBusinessDetails(businessId: string): Promise<{ business: Business; reviews: Review[] } | null> {
     try {
-      const { data, error } = await supabase.rpc('get_business_details', {
+      const { data, error } = await supabase.rpc('get_business_detail', {
         p_business_id: businessId,
       });
       if (error) throw error;
