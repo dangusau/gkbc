@@ -117,7 +117,7 @@ function App() {
             <Route path="/Marketplace/edit/:id" element={<Layout><MarketplaceEdit /></Layout>} />
             <Route path="/Explore" element={<Layout><Explore /></Layout>} />
             <Route path="/Businesses" element={<Layout><Businesses /></Layout>} />
-            <Route path="/Business/:id" element={<Layout><BusinessDetails /></Layout>} />
+            <Route path="/Businesses/:id" element={<Layout><BusinessDetails /></Layout>} />
             <Route path="/Profile/:userId?" element={<Layout><Profile /></Layout>} />
             <Route path="/messages" element={<Layout><ConversationsList /></Layout>} />
             <Route path="/messages/new/chat" element={<ChatWindow />} />
