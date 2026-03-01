@@ -167,10 +167,6 @@ const BusinessDetails: React.FC = () => {
               {business.owner_verified && <VerifiedBadge size={10} />}
               {business.is_registered && business.verification_status === 'approved' && (
                 <div className="flex-shrink-0">
-                  <div className="px-2 py-0.5 bg-gradient-to-r from-blue-500 to-blue-600 text-white text-xs font-bold rounded-full border border-blue-600 flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 bg-white rounded-full"></span>
-                    ...
-                  </div>
                 </div>
               )}
             </div>
