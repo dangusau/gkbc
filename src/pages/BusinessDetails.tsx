@@ -163,13 +163,13 @@ const BusinessDetails: React.FC = () => {
           </div>
           <div className="flex-1">
             <div className="flex items-center gap-1 mb-1">
-              <h1 className="text-s font-bold text-gray-900 truncate">{business.name}</h1>
+              <h1 className="text-s font-bold text-gray-100 truncate">{business.name}</h1>
               {business.owner_verified && <VerifiedBadge size={10} />}
               {business.is_registered && business.verification_status === 'approved' && (
                 <div className="flex-shrink-0">
                   <div className="px-2 py-0.5 bg-gradient-to-r from-blue-500 to-blue-600 text-white text-xs font-bold rounded-full border border-blue-600 flex items-center gap-1">
                     <span className="w-1.5 h-1.5 bg-white rounded-full"></span>
-                    Verified
+                    ...
                   </div>
                 </div>
               )}
