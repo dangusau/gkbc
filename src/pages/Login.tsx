@@ -217,20 +217,20 @@ const Login: React.FC = () => {
   };
 
   const handleResendVerification = async () => {
-    try {
-      const { error } = await supabase.auth.resend({
-        type: 'signup',
-        email: formData.email.trim(),
-      });
-      if (error) throw error;
-      setMessage('Verification email sent! Please check your inbox.');
-      setMessageType('success');
-      setShowStatusModal(false);
-    } catch (err: any) {
-      setMessage('Failed to resend verification. Please try again later.');
-      setMessageType('error');
-    }
-  };
+  try {
+    const { error } = await supabase.auth.resend({
+      type: 'signup',
+      email: formData.email.trim(),
+    });
+    if (error) throw error;
+    setMessage('Verification email sent! Please check your inbox.');
+    setMessageType('success');
+    setShowStatusModal(false);
+  } catch (err: any) {
+    setMessage('Failed to resend verification. Please try again later.');
+    setMessageType('error');
+  }
+};
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
