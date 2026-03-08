@@ -456,13 +456,14 @@ const SignUp: React.FC = () => {
         redirectSeconds={redirectSeconds}
       />
       
-      {/* Fixed: added overflow-x-hidden to clip background elements */}
-      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-blue-50 flex flex-col justify-center items-center px-3 py-6 safe-area overflow-x-hidden">
+      {/* FIX: Added 'relative' so absolute children are positioned inside this container */}
+      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-blue-50 flex flex-col justify-center items-center px-3 py-6 safe-area overflow-x-hidden relative">
         <div className="absolute top-0 left-0 right-0 h-48 bg-gradient-to-b from-blue-600/10 to-transparent" />
         <div className="absolute top-1/4 -right-12 w-48 h-48 bg-blue-500/5 rounded-full blur-3xl" />
         <div className="absolute bottom-1/4 -left-12 w-48 h-48 bg-indigo-400/5 rounded-full blur-3xl" />
         
         <div className="w-full max-w-md relative z-10">
+          {/* Rest of the content (unchanged) */}
           <div className="flex flex-col items-center mb-6">
             <div className="relative mb-3">
               <div className="w-20 h-20 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20 overflow-hidden border border-blue-100">
@@ -516,6 +517,7 @@ const SignUp: React.FC = () => {
               )}
 
               <form onSubmit={handleSubmit} className="space-y-4">
+                {/* Name Fields, Email, Phone, User Type Selection, etc. - identical to your original */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div className="space-y-1.5">
                     <label className="block text-xs font-medium text-gray-700 pl-1">
