@@ -40,7 +40,7 @@ import AdminJobsEvents from './pages/admin/AdminJobsEvents';
 import AdminTickets from './pages/admin/AdminTickets';
 import AdminAnnouncements from './pages/admin/AdminAnnouncements';
 import AdminManagement from './pages/admin/AdminManagement';
-
+import AdminVerificationReqyuests from './pages/admin/AdminVerificationRequests.tsx';
 // Presence tracker component – must be inside AuthProvider
 const PresenceTracker: React.FC = () => {
   usePresence();
@@ -107,6 +107,7 @@ function App() {
               <Route path="tickets" element={<AdminTickets />} />
               <Route path="announcements" element={<AdminAnnouncements />} />
               <Route path="manage-admins" element={<AdminManagement />} />
+              <Route path="Verifications" element={<AdminVerificationRequests />} />
             </Route>
 
             {/* Protected pages - with main layout */}
