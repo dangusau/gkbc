@@ -217,65 +217,6 @@ const Login: React.FC = () => {
   };
 
   const handleResendVerification = async () => {
-  try {
-    const { error } = await supabase.auth.resend({
-      type: 'signup',
-      email: formData.email.trim(),
-    });
-    if (error) throw error;
-    setMessage('Verification email sent! Please check your inbox.');
-    setMessageType('success');
-    setShowStatusModal(false);
-  } catch (err: any) {
-    setMessage('Failed to resend verification. Please try again later.');
-    setMessageType('error');
-  }
-};
-
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!formData.email.trim() || !formData.password.trim()) {
-      setMessage('Please enter both email and password');
-      setMessageType('error');
-      return;
-    }
-
-    setIsLoading(true);
-    setMessage(null);
-
-    try {
-      const email = formData.email.trim();
-      const password = formData.password.trim();
-
-      const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
-
-      if (authError) {
-        if (authError.message.includes('Invalid login credentials')) {
-          const { data: existingProfile } = await supabase
-            .from('profiles')
-            .select('email')
-            .eq('email', email.toLowerCase())
-            .maybeSingle();
-
-          if (!existingProfile) {
-            setLoginStatus('no_account');
-            setShowStatusModal(true);
-          } else {
-            setLoginStatus('credentials_incorrect');
-            setShowStatusModal(true);
-          }
-        } else if (authError.message.includes('Email not confirmed')) {
-          setLoginStatus('unverified');
-          setShowStatusModal(true);
-        } else {
-          setMessage(authError.message);
-          setMessageType('error');
-        }
-        setIsLoading {
     try {
       const { error } = await supabase.auth.resend({
         type: 'signup',
@@ -335,7 +276,6 @@ const Login: React.FC = () => {
           setMessageType('error');
         }
         setIsLoading(false);
-(false);
         return;
       }
 
@@ -435,6 +375,7 @@ const Login: React.FC = () => {
       console.error('Login error:', err);
       setMessage(err.message || 'Login failed. Please try again.');
       setMessageType('error');
+      setIsLoading(false);
     } finally {
       setIsLoading(false);
     }
@@ -468,139 +409,7 @@ const Login: React.FC = () => {
                   onError={e => {
                     const target = e.target as HTMLImageElement;
                     target.style.display = 'none';
-                    target.parentElement!.        return;
-      }
-
-      if (!authData.user) {
-        setMessage('Authentication failed. Please try again.');
-        setMessageType('error');
-        setIsLoading(false);
-        return;
-      }
-
-      if (!authData.user.email_confirmed_at) {
-        setLoginStatus('unverified');
-        setShowStatusModal(true);
-        setIsLoading(false);
-        return;
-      }
-
-      const { data: profile, error: profileError } = await supabase
-        .from('profiles')
-        .select('user_status')
-        .eq('id', authData.user.id)
-        .single();
-
-      if (profileError) {
-        setMessage('Account error. Please contact support.');
-        setMessageType('error');
-        setIsLoading(false);
-        return;
-      }
-
-      if (profile?.user_status === 'banned') {
-        setLoginStatus('banned');
-        setShowStatusModal(true);
-        setIsLoading(false);
-        return;
-      }
-
-      // Small delay for session propagation
-      await new Promise(resolve => setTimeout(resolve, 100));
-
-      // Process pending verification
-      const pending = localStorage.getItem('pendingVerification');
-      if (pending) {
-        try {
-          const { userId, receiptData, fileName, fileType } = JSON.parse(pending);
-          if (userId === authData.user.id) {
-            const response = await fetch(receiptData);
-            const blob = await response.blob();
-            const file = new File([blob], fileName, { type: fileType });
-
-            const fileExt = fileName.split('.').pop() || 'jpg';
-            const newFileName = `receipt-${userId}-${Date.now()}.${fileExt}`;
-            const filePath = `${userId}/${newFileName}`;
-
-            const { error: uploadError } = await supabase.storage
-              .from('verification-receipts')
-              .upload(filePath, file);
-
-            if (uploadError) throw uploadError;
-
-            const { data: urlData } = supabase.storage
-              .from('verification-receipts')
-              .getPublicUrl(filePath);
-            const receiptUrl = urlData.publicUrl;
-
-            const { error: insertError } = await supabase
-              .from('verified_user_requests')
-              .insert({
-                user_id: userId,
-                receipt_url: receiptUrl,
-                status: 'pending',
-                created_at: new Date().toISOString(),
-              });
-
-            if (insertError) throw insertError;
-
-            localStorage.removeItem('pendingVerification');
-            setMessage('Verification request submitted successfully!');
-            setMessageType('success');
-          } else {
-            localStorage.removeItem('pendingVerification');
-          }
-        } catch (err: any) {
-          console.error('Failed to process pending verification:', err);
-          setMessage('Your verification request could not be submitted. Please contact support.');
-          setMessageType('error');
-        }
-      }
-
-      // Background tasks
-      supabase.rpc('check_rsvp_reminders').then(({ error }) => {
-        if (error) console.error('RSVP reminder check failed:', error);
-      });
-
-      navigate('/Home');
-    } catch (err: any) {
-      console.error('Login error:', err);
-      setMessage(err.message || 'Login failed. Please try again.');
-      setMessageType('error');
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  return (
-    <>
-      <LoginStatusModal
-        isOpen={showStatusModal}
-        onClose={handleModalClose}
-        email={formData.email}
-        status={loginStatus}
-        onSignupClick={handleSignupFromModal}
-        onTryAgain={loginStatus === 'unverified' ? handleResendVerification : handleTryAgain}
-        onForgotPassword={handleForgotPassword}
-      />
-
-      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-blue-50 flex flex-col justify-center items-center px-3 relative overflow-hidden safe-area">
-        <div className="absolute top-0 left-0 right-0 h-48 bg-gradient-to-b from-blue-600/10 to-transparent" />
-        <div className="absolute top-1/4 -right-12 w-48 h-48 bg-blue-500/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 -left-12 w-48 h-48 bg-blue-400/5 rounded-full blur-3xl" />
-
-        <div className="w-full max-w-md relative z-10">
-          <div className="flex flex-col items-center mb-6">
-            <div className="relative mb-3">
-              <div className="w-20 h-20 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20 overflow-hidden border border-blue-100">
-                <img
-                  src="/GKBClogo.png"
-                  alt="GKBC logo"
-                  className="w-full h-full object-contain p-1"
-                  onError={e => {
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                    target.parentElement!.innerHTMLinnerHTML = `
+                    target.parentElement!.innerHTML = `
                       <div class="w-full h-full bg-gradient-to-br from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center">
                         <span class="text-white font-bold text-base">GKBC</span>
                       </div>
