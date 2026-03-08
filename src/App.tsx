@@ -40,7 +40,7 @@ import AdminJobsEvents from './pages/admin/AdminJobsEvents';
 import AdminTickets from './pages/admin/AdminTickets';
 import AdminAnnouncements from './pages/admin/AdminAnnouncements';
 import AdminManagement from './pages/admin/AdminManagement';
-import AdminVerificationReqyuests from './pages/admin/AdminVerificationRequests.tsx';
+import AdminVerificationRequests from './pages/admin/AdminVerificationRequests.tsx';
 // Presence tracker component – must be inside AuthProvider
 const PresenceTracker: React.FC = () => {
   usePresence();
