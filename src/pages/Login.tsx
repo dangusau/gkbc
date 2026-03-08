@@ -349,12 +349,63 @@ const Login: React.FC = () => {
         return;
       }
       
-      // STEP 5: Successful login
+      // STEP 5: Process any pending verification request (deferred from signup)
+      const pending = localStorage.getItem('pendingVerification');
+      if (pending) {
+        try {
+          const { userId, receiptData, fileName, fileType } = JSON.parse(pending);
+          // Ensure the stored userId matches the logged-in user
+          if (userId === authData.user.id) {
+            // Convert base64 to File
+            const response = await fetch(receiptData);
+            const blob = await response.blob();
+            const file = new File([blob], fileName, { type: fileType });
+            
+            // Upload to storage
+            const fileExt = fileName.split('.').pop() || 'jpg';
+            const newFileName = `receipt-${userId}-${Date.now()}.${fileExt}`;
+            const filePath = `${userId}/${newFileName}`;
+            
+            const { error: uploadError } = await supabase.storage
+              .from('verification-receipts')
+              .upload(filePath, file);
+            
+            if (uploadError) throw uploadError;
+            
+            // Get public URL
+            const { data: urlData } = supabase.storage
+              .from('verification-receipts')
+              .getPublicUrl(filePath);
+            const receiptUrl = urlData.publicUrl;
+            
+            // Insert into verified_user_requests
+            const { error: insertError } = await supabase
+              .from('verified_user_requests')
+              .insert({
+                user_id: userId,
+                receipt_url: receiptUrl,
+                status: 'pending',
+                created_at: new Date().toISOString(),
+              });
+            
+            if (insertError) throw insertError;
+            
+            // Success – remove pending data
+            localStorage.removeItem('pendingVerification');
+          } else {
+            // User ID mismatch – discard invalid pending data
+            localStorage.removeItem('pendingVerification');
+          }
+        } catch (err: any) {
+          console.error('Failed to process pending verification:', err);
+          // Set an error message but continue with login
+          setError('Your verification request could not be submitted. Please contact support.');
+        }
+      }
 
-      // STEP 5: Successful login
-// Trigger RSVP reminders check in the background (does not delay navigation)
+      // STEP 6: Trigger RSVP reminders (background, don't await)
       supabase.rpc('check_rsvp_reminders').then(({ error }) => {
-       if (error) console.error('RSVP reminder check failed:', error);
+        if (error) console.error('RSVP reminder check failed:', error);
       });
 
       navigate('/Home'); 
