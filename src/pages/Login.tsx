@@ -1,8 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {
-  Mail, Lock, Eye, EyeOff, ArrowRight, Loader2, AlertCircle,
-  Shield, Smartphone, Building, CheckCircle, UserX, X
+  Mail,
+  Lock,
+  Eye,
+  EyeOff,
+  ArrowRight,
+  Loader2,
+  AlertCircle,
+  Shield,
+  Smartphone,
+  Building,
+  CheckCircle,
+  UserX,
+  X
 } from 'lucide-react';
 import { supabase } from '../services/supabase';
 
@@ -11,7 +22,7 @@ interface LoginFormData {
   password: string;
 }
 
-// LoginStatusModal – same as before (keep unchanged)
+// LoginStatusModal Component
 const LoginStatusModal: React.FC<{
   isOpen: boolean;
   onClose: () => void;
@@ -22,8 +33,140 @@ const LoginStatusModal: React.FC<{
   onForgotPassword?: () => void;
 }> = ({ isOpen, onClose, email, status, onSignupClick, onTryAgain, onForgotPassword }) => {
   if (!isOpen) return null;
-  // ... same as before (no changes needed)
-  return <div>{/* ... */}</div>;
+
+  const getModalConfig = () => {
+    switch (status) {
+      case 'unverified':
+        return {
+          title: 'Email Not Verified',
+          icon: <AlertCircle className="text-yellow-600" size={24} />,
+          iconBg: 'from-yellow-100 to-yellow-50',
+          iconBorder: 'border-yellow-200',
+          message: (
+            <>
+              <p className="text-gray-600 mb-2 text-sm">
+                Your email <span className="font-semibold text-blue-600">{email}</span> has not been verified yet.
+              </p>
+              <p className="text-gray-600 text-sm">
+                Please check your inbox for the verification link. If you didn't receive it, check your spam folder.
+              </p>
+            </>
+          ),
+          primaryButton: 'Resend Verification',
+          secondaryButton: 'Close',
+          primaryAction: onTryAgain,
+          secondaryAction: onClose,
+        };
+      case 'banned':
+        return {
+          title: 'Account Restricted',
+          icon: <UserX className="text-red-600" size={24} />,
+          iconBg: 'from-red-100 to-red-50',
+          iconBorder: 'border-red-200',
+          message: (
+            <>
+              <p className="text-gray-600 mb-2 text-sm">Your account has been restricted.</p>
+              <p className="text-gray-600 text-sm">Please contact support@GKBC.com for assistance.</p>
+            </>
+          ),
+          primaryButton: 'Contact Support',
+          secondaryButton: 'Close',
+          primaryAction: () => window.open('mailto:support@GKBC.com', '_blank'),
+          secondaryAction: onClose,
+        };
+      case 'no_account':
+        return {
+          title: 'No Account Found',
+          icon: <UserX className="text-blue-600" size={24} />,
+          iconBg: 'from-blue-100 to-blue-50',
+          iconBorder: 'border-blue-200',
+          message: (
+            <>
+              <p className="text-gray-600 mb-2 text-sm">
+                No account found with email <span className="font-semibold text-blue-600">{email}</span>.
+              </p>
+              <p className="text-gray-600 text-sm">
+                Please sign up to create a new account and join our business community.
+              </p>
+            </>
+          ),
+          primaryButton: 'Sign Up',
+          secondaryButton: 'Try Different Email',
+          primaryAction: onSignupClick,
+          secondaryAction: onClose,
+        };
+      case 'credentials_incorrect':
+        return {
+          title: 'Incorrect Credentials',
+          icon: <AlertCircle className="text-red-600" size={24} />,
+          iconBg: 'from-red-100 to-red-50',
+          iconBorder: 'border-red-200',
+          message: (
+            <>
+              <p className="text-gray-600 mb-2 text-sm">The email or password you entered is incorrect.</p>
+              <p className="text-gray-600 text-sm">Please check your credentials and try again.</p>
+            </>
+          ),
+          primaryButton: 'Try Again',
+          secondaryButton: 'Forgot Password?',
+          primaryAction: onTryAgain,
+          secondaryAction: onForgotPassword,
+        };
+    }
+  };
+
+  const config = getModalConfig();
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 bg-black/50 backdrop-blur-sm">
+      <div className="relative w-full max-w-md bg-white rounded-xl shadow-lg border border-gray-200">
+        <div className="p-4 border-b border-gray-100">
+          <div className="flex items-center justify-center mb-3">
+            <div
+              className={`w-12 h-12 bg-gradient-to-br ${config.iconBg} rounded-full flex items-center justify-center border ${config.iconBorder}`}
+            >
+              {config.icon}
+            </div>
+          </div>
+          <h3 className="text-lg font-bold text-gray-900 text-center">{config.title}</h3>
+        </div>
+
+        <div className="p-4">
+          <div className="text-center mb-4">{config.message}</div>
+
+          <div className="space-y-2">
+            <button
+              onClick={config.primaryAction}
+              className={`w-full ${
+                status === 'banned'
+                  ? 'bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800'
+                  : status === 'unverified'
+                  ? 'bg-gradient-to-r from-yellow-600 to-orange-600 hover:from-yellow-700 hover:to-orange-700'
+                  : status === 'no_account'
+                  ? 'bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800'
+                  : 'bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800'
+              } text-white font-bold py-2.5 rounded-lg hover:shadow transition-all duration-200 min-h-[44px]`}
+            >
+              {config.primaryButton}
+            </button>
+            <button
+              onClick={config.secondaryAction}
+              className="w-full border border-gray-300 text-gray-700 font-bold py-2.5 rounded-lg hover:border-blue-500 hover:text-blue-600 hover:bg-blue-50 transition-all duration-200 min-h-[44px]"
+            >
+              {config.secondaryButton}
+            </button>
+          </div>
+        </div>
+
+        <button
+          onClick={onClose}
+          className="absolute top-2 right-2 w-8 h-8 flex items-center justify-center text-gray-400 hover:text-gray-600 rounded-full hover:bg-gray-100 transition-colors"
+        >
+          <X size={16} />
+        </button>
+      </div>
+    </div>
+  );
 };
 
 const Login: React.FC = () => {
@@ -35,31 +178,63 @@ const Login: React.FC = () => {
     email: prefilledEmail,
     password: '',
   });
+
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
-  // Separate state for UI messages
   const [message, setMessage] = useState<string | null>((location.state as any)?.message || null);
   const [messageType, setMessageType] = useState<'success' | 'error' | null>((location.state as any)?.messageType || null);
-
   const [showStatusModal, setShowStatusModal] = useState(false);
   const [loginStatus, setLoginStatus] = useState<'unverified' | 'banned' | 'no_account' | 'credentials_incorrect'>('credentials_incorrect');
 
-  // Clear message on input change
   const handleInputChange = (field: keyof LoginFormData, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
     if (message) setMessage(null);
   };
 
-  // Modal handlers (same as before)
-  const handleModalClose = () => { /* ... */ };
-  const handleSignupFromModal = () => { /* ... */ };
-  const handleTryAgain = () => { /* ... */ };
-  const handleForgotPassword = () => { /* ... */ };
-  const handleResendVerification = async () => { /* ... */ };
+  const handleModalClose = () => {
+    setShowStatusModal(false);
+    if (loginStatus === 'credentials_incorrect') {
+      setFormData(prev => ({ ...prev, password: '' }));
+    }
+    if (loginStatus === 'no_account') {
+      setFormData(prev => ({ ...prev, email: '' }));
+    }
+  };
+
+  const handleSignupFromModal = () => {
+    setShowStatusModal(false);
+    navigate('/Signup', { state: { prefilledEmail: formData.email } });
+  };
+
+  const handleTryAgain = () => {
+    setShowStatusModal(false);
+    setFormData(prev => ({ ...prev, password: '' }));
+  };
+
+  const handleForgotPassword = () => {
+    setShowStatusModal(false);
+    navigate('/forgot-password');
+  };
+
+  const handleResendVerification = async () => {
+    try {
+      const { error } = await supabase.auth.resend({
+        type: 'signup',
+        email: formData.email.trim(),
+      });
+      if (error) throw error;
+      setMessage('Verification email sent! Please check your inbox.');
+      setMessageType('success');
+      setShowStatusModal(false);
+    } catch (err: any) {
+      setMessage('Failed to resend verification. Please try again later.');
+      setMessageType('error');
+    }
+  };
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+
     if (!formData.email.trim() || !formData.password.trim()) {
       setMessage('Please enter both email and password');
       setMessageType('error');
@@ -73,7 +248,6 @@ const Login: React.FC = () => {
       const email = formData.email.trim();
       const password = formData.password.trim();
 
-      // 1. Sign in with password (Supabase official pattern [citation:9])
       const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
         email,
         password,
@@ -81,7 +255,65 @@ const Login: React.FC = () => {
 
       if (authError) {
         if (authError.message.includes('Invalid login credentials')) {
-          // Check if email exists
+          const { data: existingProfile } = await supabase
+            .from('profiles')
+            .select('email')
+            .eq('email', email.toLowerCase())
+            .maybeSingle();
+
+          if (!existingProfile) {
+            setLoginStatus('no_account');
+            setShowStatusModal(true);
+          } else {
+            setLoginStatus('credentials_incorrect');
+            setShowStatusModal(true);
+          }
+        } else if (authError.message.includes('Email not confirmed')) {
+          setLoginStatus('unverified');
+          setShowStatusModal(true);
+        } else {
+          setMessage(authError.message);
+          setMessageType('error');
+        }
+        setIsLoading {
+    try {
+      const { error } = await supabase.auth.resend({
+        type: 'signup',
+        email: formData.email.trim(),
+      });
+      if (error) throw error;
+      setMessage('Verification email sent! Please check your inbox.');
+      setMessageType('success');
+      setShowStatusModal(false);
+    } catch (err: any) {
+      setMessage('Failed to resend verification. Please try again later.');
+      setMessageType('error');
+    }
+  };
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!formData.email.trim() || !formData.password.trim()) {
+      setMessage('Please enter both email and password');
+      setMessageType('error');
+      return;
+    }
+
+    setIsLoading(true);
+    setMessage(null);
+
+    try {
+      const email = formData.email.trim();
+      const password = formData.password.trim();
+
+      const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (authError) {
+        if (authError.message.includes('Invalid login credentials')) {
           const { data: existingProfile } = await supabase
             .from('profiles')
             .select('email')
@@ -103,6 +335,7 @@ const Login: React.FC = () => {
           setMessageType('error');
         }
         setIsLoading(false);
+(false);
         return;
       }
 
@@ -113,7 +346,6 @@ const Login: React.FC = () => {
         return;
       }
 
-      // 2. Check email confirmation
       if (!authData.user.email_confirmed_at) {
         setLoginStatus('unverified');
         setShowStatusModal(true);
@@ -121,7 +353,6 @@ const Login: React.FC = () => {
         return;
       }
 
-      // 3. Get profile to check user_status
       const { data: profile, error: profileError } = await supabase
         .from('profiles')
         .select('user_status')
@@ -142,21 +373,19 @@ const Login: React.FC = () => {
         return;
       }
 
-      // 4. Small delay for session propagation (fixes RLS issues)
+      // Small delay for session propagation
       await new Promise(resolve => setTimeout(resolve, 100));
 
-      // 5. Process any pending verification request (deferred upload)
+      // Process pending verification
       const pending = localStorage.getItem('pendingVerification');
       if (pending) {
         try {
           const { userId, receiptData, fileName, fileType } = JSON.parse(pending);
           if (userId === authData.user.id) {
-            // Convert base64 to File
             const response = await fetch(receiptData);
             const blob = await response.blob();
             const file = new File([blob], fileName, { type: fileType });
 
-            // Upload to storage (policy now allows this)
             const fileExt = fileName.split('.').pop() || 'jpg';
             const newFileName = `receipt-${userId}-${Date.now()}.${fileExt}`;
             const filePath = `${userId}/${newFileName}`;
@@ -196,12 +425,11 @@ const Login: React.FC = () => {
         }
       }
 
-      // 6. Trigger background tasks (RSVP reminders) – don't await
+      // Background tasks
       supabase.rpc('check_rsvp_reminders').then(({ error }) => {
         if (error) console.error('RSVP reminder check failed:', error);
       });
 
-      // 7. Navigate to home
       navigate('/Home');
     } catch (err: any) {
       console.error('Login error:', err);
@@ -223,25 +451,194 @@ const Login: React.FC = () => {
         onTryAgain={loginStatus === 'unverified' ? handleResendVerification : handleTryAgain}
         onForgotPassword={handleForgotPassword}
       />
+
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-blue-50 flex flex-col justify-center items-center px-3 relative overflow-hidden safe-area">
-        {/* Background elements – same as before */}
         <div className="absolute top-0 left-0 right-0 h-48 bg-gradient-to-b from-blue-600/10 to-transparent" />
         <div className="absolute top-1/4 -right-12 w-48 h-48 bg-blue-500/5 rounded-full blur-3xl" />
         <div className="absolute bottom-1/4 -left-12 w-48 h-48 bg-blue-400/5 rounded-full blur-3xl" />
 
         <div className="w-full max-w-md relative z-10">
-          {/* Header – same as before */}
-          <div className="flex flex-col items-center mb-6">{/* ... */}</div>
+          <div className="flex flex-col items-center mb-6">
+            <div className="relative mb-3">
+              <div className="w-20 h-20 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20 overflow-hidden border border-blue-100">
+                <img
+                  src="/GKBClogo.png"
+                  alt="GKBC logo"
+                  className="w-full h-full object-contain p-1"
+                  onError={e => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    target.parentElement!.        return;
+      }
+
+      if (!authData.user) {
+        setMessage('Authentication failed. Please try again.');
+        setMessageType('error');
+        setIsLoading(false);
+        return;
+      }
+
+      if (!authData.user.email_confirmed_at) {
+        setLoginStatus('unverified');
+        setShowStatusModal(true);
+        setIsLoading(false);
+        return;
+      }
+
+      const { data: profile, error: profileError } = await supabase
+        .from('profiles')
+        .select('user_status')
+        .eq('id', authData.user.id)
+        .single();
+
+      if (profileError) {
+        setMessage('Account error. Please contact support.');
+        setMessageType('error');
+        setIsLoading(false);
+        return;
+      }
+
+      if (profile?.user_status === 'banned') {
+        setLoginStatus('banned');
+        setShowStatusModal(true);
+        setIsLoading(false);
+        return;
+      }
+
+      // Small delay for session propagation
+      await new Promise(resolve => setTimeout(resolve, 100));
+
+      // Process pending verification
+      const pending = localStorage.getItem('pendingVerification');
+      if (pending) {
+        try {
+          const { userId, receiptData, fileName, fileType } = JSON.parse(pending);
+          if (userId === authData.user.id) {
+            const response = await fetch(receiptData);
+            const blob = await response.blob();
+            const file = new File([blob], fileName, { type: fileType });
+
+            const fileExt = fileName.split('.').pop() || 'jpg';
+            const newFileName = `receipt-${userId}-${Date.now()}.${fileExt}`;
+            const filePath = `${userId}/${newFileName}`;
+
+            const { error: uploadError } = await supabase.storage
+              .from('verification-receipts')
+              .upload(filePath, file);
+
+            if (uploadError) throw uploadError;
+
+            const { data: urlData } = supabase.storage
+              .from('verification-receipts')
+              .getPublicUrl(filePath);
+            const receiptUrl = urlData.publicUrl;
+
+            const { error: insertError } = await supabase
+              .from('verified_user_requests')
+              .insert({
+                user_id: userId,
+                receipt_url: receiptUrl,
+                status: 'pending',
+                created_at: new Date().toISOString(),
+              });
+
+            if (insertError) throw insertError;
+
+            localStorage.removeItem('pendingVerification');
+            setMessage('Verification request submitted successfully!');
+            setMessageType('success');
+          } else {
+            localStorage.removeItem('pendingVerification');
+          }
+        } catch (err: any) {
+          console.error('Failed to process pending verification:', err);
+          setMessage('Your verification request could not be submitted. Please contact support.');
+          setMessageType('error');
+        }
+      }
+
+      // Background tasks
+      supabase.rpc('check_rsvp_reminders').then(({ error }) => {
+        if (error) console.error('RSVP reminder check failed:', error);
+      });
+
+      navigate('/Home');
+    } catch (err: any) {
+      console.error('Login error:', err);
+      setMessage(err.message || 'Login failed. Please try again.');
+      setMessageType('error');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <>
+      <LoginStatusModal
+        isOpen={showStatusModal}
+        onClose={handleModalClose}
+        email={formData.email}
+        status={loginStatus}
+        onSignupClick={handleSignupFromModal}
+        onTryAgain={loginStatus === 'unverified' ? handleResendVerification : handleTryAgain}
+        onForgotPassword={handleForgotPassword}
+      />
+
+      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-blue-50 flex flex-col justify-center items-center px-3 relative overflow-hidden safe-area">
+        <div className="absolute top-0 left-0 right-0 h-48 bg-gradient-to-b from-blue-600/10 to-transparent" />
+        <div className="absolute top-1/4 -right-12 w-48 h-48 bg-blue-500/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 -left-12 w-48 h-48 bg-blue-400/5 rounded-full blur-3xl" />
+
+        <div className="w-full max-w-md relative z-10">
+          <div className="flex flex-col items-center mb-6">
+            <div className="relative mb-3">
+              <div className="w-20 h-20 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20 overflow-hidden border border-blue-100">
+                <img
+                  src="/GKBClogo.png"
+                  alt="GKBC logo"
+                  className="w-full h-full object-contain p-1"
+                  onError={e => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    target.parentElement!.innerHTMLinnerHTML = `
+                      <div class="w-full h-full bg-gradient-to-br from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-base">GKBC</span>
+                      </div>
+                    `;
+                  }}
+                />
+              </div>
+            </div>
+
+            <div className="mb-3">
+              <h1 className="text-2xl font-black text-gray-900 text-center">
+                <span className="bg-gradient-to-r from-blue-600 to-blue-600 bg-clip-text text-transparent">
+                  GKBC
+                </span>
+              </h1>
+              <p className="text-xs text-gray-500 text-center font-medium mt-0.5">
+                Africa's Emerging Economic Vanguard
+              </p>
+            </div>
+
+            <div className="text-center">
+              <h2 className="text-lg font-bold text-gray-900 mb-1">Welcome Back</h2>
+              <p className="text-xs text-gray-500 font-medium max-w-xs mx-auto">
+                Sign in to access your business network
+              </p>
+            </div>
+          </div>
 
           <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg border border-gray-200/80 overflow-hidden mb-4">
             <div className="p-4">
-              {/* Dynamic message banner – success in blue, error in red */}
               {message && (
-                <div className={`mb-4 p-3 rounded-lg ${
-                  messageType === 'success'
-                    ? 'bg-blue-50 border border-blue-100'
-                    : 'bg-red-50 border border-red-100'
-                }`}>
+                <div
+                  className={`mb-4 p-3 rounded-lg ${
+                    messageType === 'success'
+                      ? 'bg-blue-50 border border-blue-100'
+                      : 'bg-red-50 border border-red-100'
+                  }`}
+                >
                   <div className="flex items-start gap-2">
                     <div className="flex-shrink-0">
                       {messageType === 'success' ? (
@@ -251,9 +648,11 @@ const Login: React.FC = () => {
                       )}
                     </div>
                     <div className="flex-1">
-                      <p className={`font-medium text-xs ${
-                        messageType === 'success' ? 'text-blue-800' : 'text-red-800'
-                      }`}>
+                      <p
+                        className={`font-medium text-xs ${
+                          messageType === 'success' ? 'text-blue-800' : 'text-red-800'
+                        }`}
+                      >
                         {message}
                       </p>
                     </div>
@@ -262,7 +661,6 @@ const Login: React.FC = () => {
               )}
 
               <form onSubmit={handleLogin} className="space-y-4">
-                {/* Email field – same */}
                 <div className="space-y-1.5">
                   <label className="block text-xs font-medium text-gray-700 pl-1">Email Address *</label>
                   <div className="relative">
@@ -272,7 +670,7 @@ const Login: React.FC = () => {
                     <input
                       type="email"
                       value={formData.email}
-                      onChange={(e) => handleInputChange('email', e.target.value)}
+                      onChange={e => handleInputChange('email', e.target.value)}
                       className="w-full pl-10 pr-3 py-2.5 bg-white border border-blue-200 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
                       placeholder="your@email.com"
                       required
@@ -281,11 +679,14 @@ const Login: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Password field – same */}
                 <div className="space-y-1.5">
                   <div className="flex items-center justify-between pl-1">
                     <label className="block text-xs font-medium text-gray-700">Password *</label>
-                    <button type="button" onClick={() => setShowPassword(!showPassword)} className="text-xs text-blue-600 hover:text-blue-700 font-medium flex items-center gap-0.5">
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="text-xs text-blue-600 hover:text-blue-700 font-medium flex items-center gap-0.5"
+                    >
                       {showPassword ? 'Hide' : 'Show'}
                     </button>
                   </div>
@@ -296,14 +697,18 @@ const Login: React.FC = () => {
                     <input
                       type={showPassword ? 'text' : 'password'}
                       value={formData.password}
-                      onChange={(e) => handleInputChange('password', e.target.value)}
+                      onChange={e => handleInputChange('password', e.target.value)}
                       className="w-full pl-10 pr-10 py-2.5 bg-white border border-blue-200 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
                       placeholder="Enter your password"
                       required
                       autoComplete="current-password"
                     />
                     <div className="absolute right-0 top-0 bottom-0 w-10 flex items-center justify-center">
-                      <button type="button" onClick={() => setShowPassword(!showPassword)} className="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-gray-600">
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-gray-600"
+                      >
                         {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                       </button>
                     </div>
@@ -329,22 +734,47 @@ const Login: React.FC = () => {
                 </button>
               </form>
 
-              {/* Footer links – same */}
               <div className="mt-4 space-y-2">
-                <button onClick={() => navigate('/Signup')} className="w-full text-center text-blue-600 hover:text-blue-700 font-medium text-xs py-2 rounded-md hover:bg-blue-50 transition-colors">
+                <button
+                  onClick={() => navigate('/Signup')}
+                  className="w-full text-center text-blue-600 hover:text-blue-700 font-medium text-xs py-2 rounded-md hover:bg-blue-50 transition-colors"
+                >
                   Don't have an account? Sign Up
                 </button>
-                <button onClick={() => navigate('/forgot-password')} className="w-full text-center text-gray-500 hover:text-gray-700 text-xs py-2 rounded-md hover:bg-gray-50 transition-colors">
+
+                <button
+                  onClick={() => navigate('/forgot-password')}
+                  className="w-full text-center text-gray-500 hover:text-gray-700 text-xs py-2 rounded-md hover:bg-gray-50 transition-colors"
+                >
                   Forgot your password?
                 </button>
               </div>
             </div>
           </div>
 
-          {/* Security footer – same */}
           <div className="bg-gradient-to-r from-white/80 to-white/60 backdrop-blur-sm rounded-lg border border-gray-200/60 p-3">
-            <div className="flex items-center justify-center gap-4">{/* ... */}</div>
+            <div className="flex items-center justify-center gap-4">
+              <div className="flex flex-col items-center">
+                <div className="w-6 h-6 bg-gradient-to-br from-blue-500 to-blue-600 rounded-md flex items-center justify-center mb-0.5">
+                  <Shield size={12} className="text-white" />
+                </div>
+                <span className="text-xs text-gray-600 font-medium">Secure</span>
+              </div>
+              <div className="flex flex-col items-center">
+                <div className="w-6 h-6 bg-gradient-to-br from-blue-500 to-blue-600 rounded-md flex items-center justify-center mb-0.5">
+                  <Building size={12} className="text-white" />
+                </div>
+                <span className="text-xs text-gray-600 font-medium">Verified</span>
+              </div>
+              <div className="flex flex-col items-center">
+                <div className="w-6 h-6 bg-gradient-to-br from-purple-500 to-purple-600 rounded-md flex items-center justify-center mb-0.5">
+                  <Smartphone size={12} className="text-white" />
+                </div>
+                <span className="text-xs text-gray-600 font-medium">GKBC</span>
+              </div>
+            </div>
           </div>
+
           <div className="text-center mt-3">
             <p className="text-xs text-gray-400">GKBC Network v1.0</p>
           </div>
