@@ -14,9 +14,7 @@ import {
   Shield,
   Building,
   Smartphone,
-  Check,
   X,
-  Clock,
   UserCheck,
   Upload
 } from 'lucide-react';
@@ -33,7 +31,7 @@ interface FormData {
   agreeToTerms: boolean;
 }
 
-// Status Modal Component (kept as in your original GKBC component)
+// Status Modal Component
 const StatusModal: React.FC<{
   isOpen: boolean;
   onClose: () => void;
@@ -48,7 +46,6 @@ const StatusModal: React.FC<{
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 bg-black/50 backdrop-blur-sm">
       <div className="relative w-full max-w-md bg-white rounded-xl shadow-lg border border-gray-200">
-        {/* Modal Header */}
         <div className="p-4 border-b border-gray-100">
           <div className="flex items-center justify-center mb-3">
             <div className={`w-12 h-12 rounded-full flex items-center justify-center border ${
@@ -68,7 +65,6 @@ const StatusModal: React.FC<{
           </h3>
         </div>
 
-        {/* Modal Body */}
         <div className="p-4">
           <div className="text-center mb-4">
             {isAlreadyRegistered ? (
@@ -99,15 +95,14 @@ const StatusModal: React.FC<{
                   <p className="text-xs text-gray-700">
                     <span className="font-semibold">⚠️ Be patient</span> before trying to sign up again.
                   </p>
-                   <p className="text-xs text-gray-700">
-                    <span className="font-semibold">Verified User?</span> Verification can take upto 24hrs after that contact support.
+                  <p className="text-xs text-gray-700">
+                    <span className="font-semibold">Verified User?</span> Verification can take up to 24hrs after that contact support.
                   </p>
                 </div>
               </>
             )}
           </div>
 
-          {/* Progress Bar */}
           <div className="mt-4">
             <div className="flex items-center justify-between mb-1">
               <span className="text-xs font-medium text-gray-700">
@@ -147,9 +142,9 @@ const SignUp: React.FC = () => {
     agreeToTerms: false,
   });
   
-  // NEW: User type state
+  // User type state
   const [userType, setUserType] = useState<'regular' | 'verified'>('regular');
-  // NEW: Receipt upload state
+  // Receipt upload state
   const [receiptFile, setReceiptFile] = useState<File | null>(null);
   const [receiptUploading, setReceiptUploading] = useState(false);
   
@@ -166,7 +161,6 @@ const SignUp: React.FC = () => {
   const [redirectSeconds, setRedirectSeconds] = useState(10);
   const [modalEmail, setModalEmail] = useState('');
 
-  // Handle input changes (unchanged)
   const handleInputChange = (field: keyof FormData, value: string | boolean) => {
     if (field === 'firstName' || field === 'lastName') {
       const stringValue = value as string;
@@ -199,7 +193,6 @@ const SignUp: React.FC = () => {
     }
   };
 
-  // Validate Nigerian phone number
   const validateNigerianPhone = (phone: string): boolean => {
     const cleaned = phone.replace(/[^\d+]/g, '');
     
@@ -223,7 +216,6 @@ const SignUp: React.FC = () => {
     return true;
   };
 
-  // Validate form
   const validateForm = (): boolean => {
     const errors: {[key: string]: string} = {};
     
@@ -280,7 +272,6 @@ const SignUp: React.FC = () => {
     return Object.keys(errors).length === 0;
   };
 
-  // Check if user exists
   const checkUserExists = async (email: string): Promise<boolean> => {
     try {
       const { data } = await supabase
@@ -298,7 +289,6 @@ const SignUp: React.FC = () => {
     }
   };
 
-  // Create new user (modified to return user)
   const createNewUser = async (): Promise<{ user: any; session: any }> => {
     try {
       const { data, error } = await supabase.auth.signUp({
@@ -315,7 +305,7 @@ const SignUp: React.FC = () => {
       });
       
       if (error) throw error;
-      return data; // contains user and session
+      return data;
       
     } catch (error: any) {
       if (error.message?.includes('network') || error.message?.includes('Failed to fetch')) {
@@ -325,13 +315,11 @@ const SignUp: React.FC = () => {
     }
   };
 
-  // NEW: Upload receipt and create verification request
   const submitVerificationRequest = async (userId: string) => {
     if (!receiptFile) throw new Error('No receipt file selected');
 
     setReceiptUploading(true);
     try {
-      // 1. Upload file to storage bucket (e.g., 'verification-receipts')
       const fileExt = receiptFile.name.split('.').pop();
       const fileName = `receipt-${userId}-${Date.now()}.${fileExt}`;
       const filePath = `${userId}/${fileName}`;
@@ -342,13 +330,11 @@ const SignUp: React.FC = () => {
 
       if (uploadError) throw uploadError;
 
-      // 2. Get public URL (if bucket is public) or store path
       const { data: urlData } = supabase.storage
         .from('verification-receipts')
         .getPublicUrl(filePath);
       const receiptUrl = urlData.publicUrl;
 
-      // 3. Insert record into verified_user_requests table
       const { error: insertError } = await supabase
         .from('verified_user_requests')
         .insert({
@@ -368,14 +354,11 @@ const SignUp: React.FC = () => {
     }
   };
 
-  // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Validate main form
     if (!validateForm()) return;
 
-    // Additional validation for verified user
     if (userType === 'verified' && !receiptFile) {
       setValidationErrors(prev => ({
         ...prev,
@@ -390,17 +373,14 @@ const SignUp: React.FC = () => {
     try {
       const email = formData.email.trim();
       
-      // Check if user already exists
       const userExists = await checkUserExists(email);
       
       if (userExists) {
-        // Show "already registered" modal
         setModalEmail(email);
         setModalType('already_registered');
         setRedirectSeconds(3);
         setShowStatusModal(true);
         
-        // Start countdown for redirect
         const countdown = setInterval(() => {
           setRedirectSeconds(prev => {
             if (prev <= 1) {
@@ -414,10 +394,8 @@ const SignUp: React.FC = () => {
           });
         }, 1000);
       } else {
-        // Create new user
         const { user } = await createNewUser();
         
-        // If user is verified, submit verification request
         if (userType === 'verified' && user) {
           try {
             await submitVerificationRequest(user.id);
@@ -426,13 +404,11 @@ const SignUp: React.FC = () => {
           }
         }
 
-        // Show success modal
         setModalEmail(email);
         setModalType('new_user_success');
         setRedirectSeconds(10);
         setShowStatusModal(true);
         
-        // Start countdown
         const countdown = setInterval(() => {
           setRedirectSeconds(prev => {
             if (prev <= 1) {
@@ -472,7 +448,6 @@ const SignUp: React.FC = () => {
 
   return (
     <>
-      {/* Status Modal */}
       <StatusModal
         isOpen={showStatusModal}
         onClose={() => setShowStatusModal(false)}
@@ -481,17 +456,14 @@ const SignUp: React.FC = () => {
         redirectSeconds={redirectSeconds}
       />
       
-      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-blue-50 flex flex-col justify-center items-center px-3 py-6 safe-area">
-        {/* Background Elements */}
+      {/* Fixed: added overflow-x-hidden to clip background elements */}
+      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-blue-50 flex flex-col justify-center items-center px-3 py-6 safe-area overflow-x-hidden">
         <div className="absolute top-0 left-0 right-0 h-48 bg-gradient-to-b from-blue-600/10 to-transparent" />
         <div className="absolute top-1/4 -right-12 w-48 h-48 bg-blue-500/5 rounded-full blur-3xl" />
         <div className="absolute bottom-1/4 -left-12 w-48 h-48 bg-indigo-400/5 rounded-full blur-3xl" />
         
-        {/* Main Container */}
         <div className="w-full max-w-md relative z-10">
-          {/* Header */}
           <div className="flex flex-col items-center mb-6">
-            {/* Logo Container */}
             <div className="relative mb-3">
               <div className="w-20 h-20 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20 overflow-hidden border border-blue-100">
                 <img 
@@ -511,7 +483,6 @@ const SignUp: React.FC = () => {
               </div>
             </div>
             
-            {/* GKBC Title */}
             <div className="mb-4">
               <h1 className="text-2xl font-black text-gray-900 text-center">
                 <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
@@ -523,7 +494,6 @@ const SignUp: React.FC = () => {
               </p>
             </div>
             
-            {/* Form Header */}
             <div className="text-center mb-2">
               <h2 className="text-xl font-bold text-gray-900 mb-1">Create Your Account</h2>
               <p className="text-xs text-gray-500 font-medium max-w-xs mx-auto">
@@ -532,10 +502,8 @@ const SignUp: React.FC = () => {
             </div>
           </div>
 
-          {/* Signup Card */}
           <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg border border-gray-200/80 overflow-hidden mb-4">
             <div className="p-4">
-              {/* Server Error Display */}
               {serverError && (
                 <div className="mb-4 p-3 bg-red-50 border border-red-100 rounded-lg">
                   <div className="flex items-start gap-2">
@@ -547,11 +515,8 @@ const SignUp: React.FC = () => {
                 </div>
               )}
 
-              {/* Signup Form */}
               <form onSubmit={handleSubmit} className="space-y-4">
-                {/* Name Fields */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {/* First Name */}
                   <div className="space-y-1.5">
                     <label className="block text-xs font-medium text-gray-700 pl-1">
                       First Name *
@@ -581,7 +546,6 @@ const SignUp: React.FC = () => {
                     )}
                   </div>
 
-                  {/* Last Name */}
                   <div className="space-y-1.5">
                     <label className="block text-xs font-medium text-gray-700 pl-1">
                       Last Name *
@@ -607,7 +571,6 @@ const SignUp: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Email */}
                 <div className="space-y-1.5">
                   <label className="block text-xs font-medium text-gray-700 pl-1">
                     Email *
@@ -637,7 +600,6 @@ const SignUp: React.FC = () => {
                   )}
                 </div>
 
-                {/* Phone */}
                 <div className="space-y-1.5">
                   <label className="block text-xs font-medium text-gray-700 pl-1">
                     Phone Number (Optional)
@@ -669,13 +631,11 @@ const SignUp: React.FC = () => {
                   </p>
                 </div>
 
-                {/* ===== NEW: User Type Selection ===== */}
                 <div className="space-y-2">
                   <label className="block text-xs font-medium text-gray-700 pl-1">
                     Account Type *
                   </label>
                   
-                  {/* Professional Note with Bullet Points - Blue Theme */}
                   <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 text-xs text-blue-800">
                     <p className="font-bold text-sm mb-2">Why become a Verified Member?</p>
                     <ul className="space-y-1.5 list-disc pl-4">
@@ -714,17 +674,14 @@ const SignUp: React.FC = () => {
                   </div>
                 </div>
 
-                {/* ===== NEW: Verified User Fields (conditional) ===== */}
                 {userType === 'verified' && (
                   <div className="space-y-3 p-3 bg-gray-50 border border-gray-200 rounded-lg">
                     <h3 className="text-sm font-bold text-gray-800">Verified Member Application</h3>
                     
-                    {/* Fee Display */}
                     <div className="bg-blue-50 border border-blue-200 rounded-lg p-2 text-xs">
                       <p className="font-semibold text-blue-800">Annual Fee: ₦12,000</p>
                     </div>
 
-                    {/* Bank Details - From image */}
                     <div className="space-y-1 text-xs">
                       <p><span className="font-medium">Bank Name:</span> Kayi Microfinance Bank</p>
                       <p><span className="font-medium">Account Name:</span> GREATER KANO BUSINESS COUNCIL</p>
@@ -732,7 +689,6 @@ const SignUp: React.FC = () => {
                       <p><span className="font-medium">WhatsApp:</span> <a href="https://wa.me/2348023104333" className="text-blue-600 underline" target="_blank" rel="noopener">+234 802 310 4333</a></p>
                     </div>
 
-                    {/* Receipt Upload */}
                     <div className="space-y-1.5">
                       <label className="block text-xs font-medium text-gray-700">
                         Upload Payment Receipt *
@@ -758,7 +714,6 @@ const SignUp: React.FC = () => {
                   </div>
                 )}
 
-                {/* Password */}
                 <div className="space-y-2">
                   <div className="flex items-center justify-between pl-1">
                     <label className="block text-xs font-medium text-gray-700">
@@ -800,7 +755,6 @@ const SignUp: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Password Strength */}
                   {formData.password && (
                     <div className="space-y-1.5">
                       <div className="flex items-center justify-between text-xs">
@@ -833,7 +787,6 @@ const SignUp: React.FC = () => {
                   )}
                 </div>
 
-                {/* Confirm Password */}
                 <div className="space-y-1.5">
                   <label className="block text-xs font-medium text-gray-700 pl-1">
                     Confirm Password *
@@ -858,7 +811,6 @@ const SignUp: React.FC = () => {
                   )}
                 </div>
 
-                {/* Terms Agreement */}
                 <div className="pt-1">
                   <label className="flex items-start gap-2 cursor-pointer">
                     <div className="relative mt-0.5 flex-shrink-0">
@@ -894,7 +846,6 @@ const SignUp: React.FC = () => {
                   </label>
                 </div>
 
-                {/* Submit Button */}
                 <button
                   type="submit"
                   disabled={isLoading || receiptUploading}
@@ -916,14 +867,12 @@ const SignUp: React.FC = () => {
                 </button>
               </form>
 
-              {/* Divider */}
               <div className="flex items-center my-4">
                 <div className="flex-1 border-t border-gray-300"></div>
                 <span className="px-3 text-xs text-gray-500 font-medium">Already have an account?</span>
                 <div className="flex-1 border-t border-gray-300"></div>
               </div>
 
-              {/* Login Link */}
               <button
                 onClick={() => navigate('/login')}
                 className="w-full border border-gray-300 text-gray-700 font-bold py-2.5 rounded-lg hover:border-blue-500 hover:text-blue-600 hover:bg-blue-50 transition-all duration-200 min-h-[44px]"
@@ -933,7 +882,6 @@ const SignUp: React.FC = () => {
             </div>
           </div>
 
-          {/* Security Footer */}
           <div className="bg-gradient-to-r from-white/80 to-white/60 backdrop-blur-sm rounded-lg border border-gray-200/60 p-3">
             <div className="flex items-center justify-center gap-4">
               <div className="flex flex-col items-center">
