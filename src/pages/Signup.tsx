@@ -1,9 +1,22 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import {
-  Mail, Lock, Eye, EyeOff, ArrowRight, Phone, User,
-  CheckCircle, AlertCircle, Loader2, Shield, Building,
-  Smartphone, X, UserCheck, Upload
+  Mail,
+  Lock,
+  Eye,
+  EyeOff,
+  ArrowRight,
+  Phone,
+  User,
+  CheckCircle,
+  AlertCircle,
+  Loader2,
+  Shield,
+  Building,
+  Smartphone,
+  X,
+  UserCheck,
+  Upload
 } from 'lucide-react';
 import { supabase } from '../services/supabase';
 
@@ -17,28 +30,49 @@ interface FormData {
   agreeToTerms: boolean;
 }
 
-// Status Modal Component (unchanged – keep as is)
-const StatusModal: React.FC<{ isOpen: boolean; onClose: () => void; email: string; type: 'already_registered' | 'new_user_success'; redirectSeconds: number; }> = ({ isOpen, onClose, email, type, redirectSeconds }) => {
+// Status Modal Component
+const StatusModal: React.FC<{
+  isOpen: boolean;
+  onClose: () => void;
+  email: string;
+  type: 'already_registered' | 'new_user_success';
+  redirectSeconds: number;
+}> = ({ isOpen, onClose, email, type, redirectSeconds }) => {
   if (!isOpen) return null;
+
   const isAlreadyRegistered = type === 'already_registered';
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 bg-black/50 backdrop-blur-sm">
       <div className="relative w-full max-w-md bg-white rounded-xl shadow-lg border border-gray-200">
         <div className="p-4 border-b border-gray-100">
           <div className="flex items-center justify-center mb-3">
-            <div className={`w-12 h-12 rounded-full flex items-center justify-center border ${isAlreadyRegistered ? 'bg-blue-100 border-blue-200' : 'bg-green-100 border-green-200'}`}>
-              {isAlreadyRegistered ? <UserCheck className="text-blue-600" size={24} /> : <CheckCircle className="text-green-600" size={24} />}
+            <div
+              className={`w-12 h-12 rounded-full flex items-center justify-center border ${
+                isAlreadyRegistered
+                  ? 'bg-blue-100 border-blue-200'
+                  : 'bg-green-100 border-green-200'
+              }`}
+            >
+              {isAlreadyRegistered ? (
+                <UserCheck className="text-blue-600" size={24} />
+              ) : (
+                <CheckCircle className="text-green-600" size={24} />
+              )}
             </div>
           </div>
           <h3 className="text-lg font-bold text-gray-900 text-center">
             {isAlreadyRegistered ? 'Account Already Registered' : 'Check Your Email!'}
           </h3>
         </div>
+
         <div className="p-4">
           <div className="text-center mb-4">
             {isAlreadyRegistered ? (
               <>
-                <p className="text-gray-600 mb-2 text-sm">An account with email <span className="font-semibold text-blue-600">{email}</span> already exists.</p>
+                <p className="text-gray-600 mb-2 text-sm">
+                  An account with email <span className="font-semibold text-blue-600">{email}</span> already exists.
+                </p>
                 <p className="text-gray-600 text-sm">Redirecting you to login...</p>
               </>
             ) : (
@@ -46,22 +80,48 @@ const StatusModal: React.FC<{ isOpen: boolean; onClose: () => void; email: strin
                 <p className="text-gray-600 mb-2 text-sm">A verification link has been sent to:</p>
                 <p className="font-semibold text-blue-600 text-base mb-3">{email}</p>
                 <div className="text-left bg-blue-50 border border-blue-200 rounded-lg p-3 mb-3">
-                  <p className="text-xs text-gray-700 mb-1"><span className="font-semibold">📧 Check your inbox or spam folder</span> for an email titled <span className="font-mono bg-blue-100 px-1 py-0.5 rounded">"Greater Kano Business Council Registeration"</span></p>
-                  <p className="text-xs text-gray-700 mb-1"><span className="font-semibold">🔗 Click the link</span> to verify your email. You'll be redirected to login.</p>
-                  <p className="text-xs text-gray-700 mb-1"><span className="font-semibold">⏱️ Link expires in 10 minutes.</span> Sometimes emails take a little longer to arrive.</p>
-                  <p className="text-xs text-gray-700"><span className="font-semibold">⚠️ Be patient</span> before trying to sign up again.</p>
-                  <p className="text-xs text-gray-700"><span className="font-semibold">Verified User?</span> After verification, you will be prompted to complete your application.</p>
+                  <p className="text-xs text-gray-700 mb-1">
+                    <span className="font-semibold">📧 Check your inbox or spam folder</span> for an email titled{' '}
+                    <span className="font-mono bg-blue-100 px-1 py-0.5 rounded">
+                      "Greater Kano Business Council Registeration"
+                    </span>
+                  </p>
+                  <p className="text-xs text-gray-700 mb-1">
+                    <span className="font-semibold">🔗 Click the link</span> to verify your email. You'll be redirected
+                    to login.
+                  </p>
+                  <p className="text-xs text-gray-700 mb-1">
+                    <span className="font-semibold">⏱️ Link expires in 10 minutes.</span> Sometimes emails take a little
+                    longer to arrive.
+                  </p>
+                  <p className="text-xs text-gray-700">
+                    <span className="font-semibold">⚠️ Be patient</span> before trying to sign up again.
+                  </p>
+                  <p className="text-xs text-gray-700">
+                    <span className="font-semibold">Verified User?</span> After verification, you will be prompted to
+                    complete your application.
+                  </p>
                 </div>
               </>
             )}
           </div>
+
           <div className="mt-4">
             <div className="flex items-center justify-between mb-1">
-              <span className="text-xs font-medium text-gray-700">{isAlreadyRegistered ? 'Redirecting to login...' : 'Redirecting in...'}</span>
+              <span className="text-xs font-medium text-gray-700">
+                {isAlreadyRegistered ? 'Redirecting to login...' : 'Redirecting in...'}
+              </span>
               <span className="text-xs font-medium text-blue-600">{redirectSeconds}s</span>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-1.5">
-              <div className={`h-1.5 rounded-full ${isAlreadyRegistered ? 'bg-blue-500' : 'bg-green-500'}`} style={{ width: `${100 - (redirectSeconds / (isAlreadyRegistered ? 4 : 10) * 100)}%` }} />
+              <div
+                className={`h-1.5 rounded-full ${
+                  isAlreadyRegistered ? 'bg-blue-500' : 'bg-green-500'
+                }`}
+                style={{
+                  width: `${100 - (redirectSeconds / (isAlreadyRegistered ? 4 : 10)) * 100}%`,
+                }}
+              />
             </div>
           </div>
         </div>
@@ -70,11 +130,21 @@ const StatusModal: React.FC<{ isOpen: boolean; onClose: () => void; email: strin
   );
 };
 
+// Main SignUp Component
 const SignUp: React.FC = () => {
   const navigate = useNavigate();
+
+  // Form state
   const [formData, setFormData] = useState<FormData>({
-    firstName: '', lastName: '', email: '', phone: '', password: '', confirmPassword: '', agreeToTerms: false,
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    password: '',
+    confirmPassword: '',
+    agreeToTerms: false,
   });
+
   const [userType, setUserType] = useState<'regular' | 'verified'>('regular');
   const [receiptFile, setReceiptFile] = useState<File | null>(null);
   const [isStoringReceipt, setIsStoringReceipt] = useState(false);
@@ -88,26 +158,157 @@ const SignUp: React.FC = () => {
   const [redirectSeconds, setRedirectSeconds] = useState(10);
   const [modalEmail, setModalEmail] = useState('');
 
-  // Validation helpers (unchanged – keep from your original)
-  const validateNigerianPhone = (phone: string): boolean => { /* ... */ return true; };
-  const validateForm = (): boolean => { /* ... */ return true; };
-  const checkUserExists = async (email: string): Promise<boolean> => { /* ... */ return false; };
-  const createNewUser = async (): Promise<{ user: any; session: any }> => { /* ... */ return { user: null, session: null }; };
-  const handleInputChange = (field: keyof FormData, value: string | boolean) => { /* ... */ };
+  const handleInputChange = (field: keyof FormData, value: string | boolean) => {
+    if (field === 'firstName' || field === 'lastName') {
+      const stringValue = value as string;
+      if (/^[a-zA-Z\s\-]*$/.test(stringValue) || stringValue === '') {
+        setFormData(prev => ({ ...prev, [field]: stringValue }));
+      }
+    } else {
+      setFormData(prev => ({ ...prev, [field]: value }));
+    }
 
-  // Store receipt in localStorage for later processing
+    if (validationErrors[field]) {
+      setValidationErrors(prev => {
+        const newErrors = { ...prev };
+        delete newErrors[field];
+        return newErrors;
+      });
+    }
+
+    if (serverError) setServerError(null);
+
+    if (field === 'password') {
+      const password = value as string;
+      let strength = 0;
+      if (password.length >= 6) strength += 33;
+      if (/[A-Z]/.test(password)) strength += 33;
+      if (/[0-9]/.test(password)) strength += 34;
+      setPasswordStrength(strength);
+    }
+  };
+
+  const validateNigerianPhone = (phone: string): boolean => {
+    const cleaned = phone.replace(/[^\d+]/g, '');
+    if (!cleaned.startsWith('+234')) return false;
+    if (cleaned.length !== 14) return false;
+    const remainingDigits = cleaned.substring(4);
+    if (!/^[0-9]{10}$/.test(remainingDigits)) return false;
+    if (remainingDigits.charAt(0) === '0') return false;
+    return true;
+  };
+
+  const validateForm = (): boolean => {
+    const errors: { [key: string]: string } = {};
+
+    if (!formData.firstName.trim()) {
+      errors.firstName = 'First name is required';
+    } else if (formData.firstName.length < 2) {
+      errors.firstName = 'First name must be at least 2 characters';
+    } else if (!/^[a-zA-Z\s\-]+$/.test(formData.firstName)) {
+      errors.firstName = 'First name can only contain letters, spaces, and hyphens';
+    }
+
+    if (!formData.lastName.trim()) {
+      errors.lastName = 'Last name is required';
+    } else if (formData.lastName.length < 2) {
+      errors.lastName = 'Last name must be at least 2 characters';
+    } else if (!/^[a-zA-Z\s\-]+$/.test(formData.lastName)) {
+      errors.lastName = 'Last name can only contain letters, spaces, and hyphens';
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formData.email) {
+      errors.email = 'Email is required';
+    } else if (!emailRegex.test(formData.email)) {
+      errors.email = 'Please enter a valid email address';
+    }
+
+    if (formData.phone) {
+      if (!validateNigerianPhone(formData.phone)) {
+        errors.phone = 'Phone must start with +234 and be 14 digits total (e.g., +2348000000000)';
+      }
+    }
+
+    if (!formData.password) {
+      errors.password = 'Password is required';
+    } else if (formData.password.length < 6) {
+      errors.password = 'Password must be at least 6 characters';
+    } else if (!/(?=.*[A-Z])/.test(formData.password)) {
+      errors.password = 'Password must contain at least one uppercase letter';
+    } else if (!/(?=.*[0-9])/.test(formData.password)) {
+      errors.password = 'Password must contain at least one number';
+    }
+
+    if (!formData.confirmPassword) {
+      errors.confirmPassword = 'Please confirm your password';
+    } else if (formData.password !== formData.confirmPassword) {
+      errors.confirmPassword = 'Passwords do not match';
+    }
+
+    if (!formData.agreeToTerms) {
+      errors.agreeToTerms = 'You must agree to the terms and conditions';
+    }
+
+    setValidationErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  const checkUserExists = async (email: string): Promise<boolean> => {
+    try {
+      const { data } = await supabase
+        .from('profiles')
+        .select('email')
+        .eq('email', email.toLowerCase())
+        .maybeSingle();
+      return !!data;
+    } catch (error) {
+      if (error instanceof Error && error.message.includes('network')) {
+        console.error('Network error checking user existence');
+      }
+      return false;
+    }
+  };
+
+  const createNewUser = async (): Promise<{ user: any; session: any }> => {
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email: formData.email.trim(),
+        password: formData.password.trim(),
+        options: {
+          data: {
+            first_name: formData.firstName.trim(),
+            last_name: formData.lastName.trim(),
+            phone: formData.phone.trim() || null,
+          },
+          emailRedirectTo: `${window.location.origin}/login`,
+        },
+      });
+      if (error) throw error;
+      return data;
+    } catch (error: any) {
+      if (error.message?.includes('network') || error.message?.includes('Failed to fetch')) {
+        console.error('Critical network error creating user');
+      }
+      throw error;
+    }
+  };
+
   const storePendingVerification = (userId: string, file: File): Promise<void> => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.onloadend = () => {
         try {
           const base64data = reader.result as string;
-          localStorage.setItem('pendingVerification', JSON.stringify({
-            userId,
-            receiptData: base64data,
-            fileName: file.name,
-            fileType: file.type,
-          }));
+          localStorage.setItem(
+            'pendingVerification',
+            JSON.stringify({
+              userId,
+              receiptData: base64data,
+              fileName: file.name,
+              fileType: file.type,
+            })
+          );
           resolve();
         } catch (err) {
           reject(new Error('Failed to store receipt locally.'));
@@ -120,7 +321,9 @@ const SignUp: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     if (!validateForm()) return;
+
     if (userType === 'verified' && !receiptFile) {
       setValidationErrors(prev => ({ ...prev, receipt: 'Please upload your payment receipt' }));
       return;
@@ -138,6 +341,7 @@ const SignUp: React.FC = () => {
         setModalType('already_registered');
         setRedirectSeconds(3);
         setShowStatusModal(true);
+
         const countdown = setInterval(() => {
           setRedirectSeconds(prev => {
             if (prev <= 1) {
@@ -156,7 +360,9 @@ const SignUp: React.FC = () => {
           try {
             await storePendingVerification(user.id, receiptFile);
           } catch (storageError: any) {
-            setServerError(storageError.message || 'Failed to store receipt. Your account was created, but please contact support.');
+            setServerError(
+              storageError.message || 'Failed to store receipt. Your account was created, but please contact support.'
+            );
           } finally {
             setIsStoringReceipt(false);
           }
@@ -171,12 +377,12 @@ const SignUp: React.FC = () => {
           setRedirectSeconds(prev => {
             if (prev <= 1) {
               clearInterval(countdown);
-              // 👇 Pass messageType: 'success' so login shows it in blue
               navigate('/login', {
                 state: {
-                  message: userType === 'verified'
-                    ? 'Your account was created. After email verification, please log in to complete your verification request.'
-                    : 'Please check your email to verify your account',
+                  message:
+                    userType === 'verified'
+                      ? 'Your account was created. After email verification, please log in to complete your verification request.'
+                      : 'Please check your email to verify your account',
                   email,
                   messageType: 'success',
                 },
@@ -189,9 +395,13 @@ const SignUp: React.FC = () => {
       }
     } catch (error: any) {
       let userMessage = error.message || 'Registration failed. Please try again.';
-      if (error.message?.includes('already registered')) userMessage = 'This email is already registered. Please try logging in.';
-      else if (error.message?.includes('rate limit')) userMessage = 'Too many attempts. Please wait a few minutes before trying again.';
-      else if (error.message?.includes('network')) userMessage = 'Network error. Please check your connection and try again.';
+      if (error.message?.includes('already registered') || error.message?.includes('User already registered')) {
+        userMessage = 'This email is already registered. Please try logging in.';
+      } else if (error.message?.includes('rate limit')) {
+        userMessage = 'Too many attempts. Please wait a few minutes before trying again.';
+      } else if (error.message?.includes('network') || error.message?.includes('Failed to fetch')) {
+        userMessage = 'Network error. Please check your connection and try again.';
+      }
       setServerError(userMessage);
     } finally {
       setIsLoading(false);
@@ -200,22 +410,439 @@ const SignUp: React.FC = () => {
 
   return (
     <>
-      <StatusModal isOpen={showStatusModal} onClose={() => setShowStatusModal(false)} email={modalEmail} type={modalType} redirectSeconds={redirectSeconds} />
+      <StatusModal
+        isOpen={showStatusModal}
+        onClose={() => setShowStatusModal(false)}
+        email={modalEmail}
+        type={modalType}
+        redirectSeconds={redirectSeconds}
+      />
+
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-blue-50 flex flex-col justify-center items-center px-3 py-6 safe-area overflow-x-hidden relative">
         <div className="absolute top-0 left-0 right-0 h-48 bg-gradient-to-b from-blue-600/10 to-transparent" />
         <div className="absolute top-1/4 -right-12 w-48 h-48 bg-blue-500/5 rounded-full blur-3xl" />
         <div className="absolute bottom-1/4 -left-12 w-48 h-48 bg-indigo-400/5 rounded-full blur-3xl" />
+
         <div className="w-full max-w-md relative z-10">
-          <div className="flex flex-col items-center mb-6">{/* Header – same as before */}</div>
+          {/* Header */}
+          <div className="flex flex-col items-center mb-6">
+            <div className="relative mb-3">
+              <div className="w-20 h-20 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20 overflow-hidden border border-blue-100">
+                <img
+                  src="/gkbclogo.png"
+                  alt="GKBC Logo"
+                  className="w-full h-full object-contain p-1"
+                  onError={e => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    target.parentElement!.innerHTML = `
+                      <div class="w-full h-full bg-gradient-to-br from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-base">GKBC</span>
+                      </div>
+                    `;
+                  }}
+                />
+              </div>
+            </div>
+
+            <div className="mb-4">
+              <h1 className="text-2xl font-black text-gray-900 text-center">
+                <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                  GKBC
+                </span>
+              </h1>
+              <p className="text-xs text-gray-500 text-center font-medium mt-0.5">
+                Africa's Emerging Economic Vanguard
+              </p>
+            </div>
+
+            <div className="text-center mb-2">
+              <h2 className="text-xl font-bold text-gray-900 mb-1">Create Your Account</h2>
+              <p className="text-xs text-gray-500 font-medium max-w-xs mx-auto">
+                Join Greater Kano and grow your business
+              </p>
+            </div>
+          </div>
+
+          {/* Signup Card */}
           <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg border border-gray-200/80 overflow-hidden mb-4">
             <div className="p-4">
-              {serverError && ( /* server error display – same as before */ )}
+              {/* Server Error Display */}
+              {serverError && (
+                <div className="mb-4 p-3 bg-red-50 border border-red-100 rounded-lg">
+                  <div className="flex items-start gap-2">
+                    <AlertCircle className="text-red-600 flex-shrink-0 mt-0.5" size={16} />
+                    <div>
+                      <p className="text-red-800 font-medium text-xs">{serverError}</p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
               <form onSubmit={handleSubmit} className="space-y-4">
-                {/* Name, Email, Phone – same as before */}
-                {/* User Type Selection – same as before */}
-                {/* Verified User Fields – same as before */}
-                {/* Password fields – same as before */}
-                {/* Terms – same as before */}
+                {/* Name Fields */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="space-y-1.5">
+                    <label className="block text-xs font-medium text-gray-700 pl-1">First Name *</label>
+                    <div className="relative">
+                      <div className="absolute left-0 top-0 bottom-0 w-10 flex items-center justify-center">
+                        <User className="text-gray-400" size={16} />
+                      </div>
+                      <input
+                        type="text"
+                        value={formData.firstName}
+                        onChange={e => handleInputChange('firstName', e.target.value)}
+                        className={`w-full pl-10 pr-3 py-2.5 bg-white border rounded-lg text-sm focus:outline-none focus:ring-1 focus:border-blue-500 ${
+                          validationErrors.firstName
+                            ? 'border-red-300 focus:ring-red-500/20'
+                            : 'border-blue-200 focus:ring-blue-500/20'
+                        }`}
+                        placeholder="Abdullahi"
+                        required
+                      />
+                    </div>
+                    {validationErrors.firstName && (
+                      <p className="text-xs text-red-600 flex items-center gap-1">
+                        <X size={10} />
+                        {validationErrors.firstName}
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="block text-xs font-medium text-gray-700 pl-1">Last Name *</label>
+                    <input
+                      type="text"
+                      value={formData.lastName}
+                      onChange={e => handleInputChange('lastName', e.target.value)}
+                      className={`w-full px-3 py-2.5 bg-white border rounded-lg text-sm focus:outline-none focus:ring-1 focus:border-blue-500 ${
+                        validationErrors.lastName
+                          ? 'border-red-300 focus:ring-red-500/20'
+                          : 'border-blue-200 focus:ring-blue-500/20'
+                      }`}
+                      placeholder="Ahmad"
+                      required
+                    />
+                    {validationErrors.lastName && (
+                      <p className="text-xs text-red-600 flex items-center gap-1">
+                        <X size={10} />
+                        {validationErrors.lastName}
+                      </p>
+                    )}
+                  </div>
+                </div>
+
+                {/* Email */}
+                <div className="space-y-1.5">
+                  <label className="block text-xs font-medium text-gray-700 pl-1">Email *</label>
+                  <div className="relative">
+                    <div className="absolute left-0 top-0 bottom-0 w-10 flex items-center justify-center">
+                      <Mail className="text-gray-400" size={16} />
+                    </div>
+                    <input
+                      type="email"
+                      value={formData.email}
+                      onChange={e => handleInputChange('email', e.target.value)}
+                      className={`w-full pl-10 pr-3 py-2.5 bg-white border rounded-lg text-sm focus:outline-none focus:ring-1 focus:border-blue-500 ${
+                        validationErrors.email
+                          ? 'border-red-300 focus:ring-red-500/20'
+                          : 'border-blue-200 focus:ring-blue-500/20'
+                      }`}
+                      placeholder="Ahmad@company.com"
+                      required
+                    />
+                  </div>
+                  {validationErrors.email && (
+                    <p className="text-xs text-red-600 flex items-center gap-1">
+                      <X size={10} />
+                      {validationErrors.email}
+                    </p>
+                  )}
+                </div>
+
+                {/* Phone */}
+                <div className="space-y-1.5">
+                  <label className="block text-xs font-medium text-gray-700 pl-1">Phone Number (Optional)</label>
+                  <div className="relative">
+                    <div className="absolute left-0 top-0 bottom-0 w-10 flex items-center justify-center">
+                      <Phone className="text-gray-400" size={16} />
+                    </div>
+                    <input
+                      type="tel"
+                      value={formData.phone}
+                      onChange={e => handleInputChange('phone', e.target.value)}
+                      className={`w-full pl-10 pr-3 py-2.5 bg-white border rounded-lg text-sm focus:outline-none focus:ring-1 focus:border-blue-500 ${
+                        validationErrors.phone
+                          ? 'border-red-300 focus:ring-red-500/20'
+                          : 'border-blue-200 focus:ring-blue-500/20'
+                      }`}
+                      placeholder="+2348000000000"
+                    />
+                  </div>
+                  {validationErrors.phone && (
+                    <p className="text-xs text-red-600 flex items-center gap-1">
+                      <X size={10} />
+                      {validationErrors.phone}
+                    </p>
+                  )}
+                  <p className="text-xs text-gray-500 mt-0.5">
+                    Format: +234 followed by 10 digits (e.g., +2348000000000)
+                  </p>
+                </div>
+
+                {/* User Type Selection */}
+                <div className="space-y-2">
+                  <label className="block text-xs font-medium text-gray-700 pl-1">Account Type *</label>
+
+                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 text-xs text-blue-800">
+                    <p className="font-bold text-sm mb-2">Why become a Verified Member?</p>
+                    <ul className="space-y-1.5 list-disc pl-4">
+                      <li>
+                        <span className="font-semibold">Enhanced Trust & Credibility</span> – Get the verified badge to
+                        stand out as a reputable business.
+                      </li>
+                      <li>
+                        <span className="font-semibold">Full Platform Access</span> – Unlock all features including
+                        buying, selling, and social networking.
+                      </li>
+                      <li>
+                        <span className="font-semibold">Direct Customer Communication</span> – Use GKBC Chat to engage
+                        with customers instantly.
+                      </li>
+                      <li>
+                        <span className="font-semibold">Showcase Your Products</span> – Promote your products to a wider
+                        audience with premium visibility.
+                      </li>
+                      <li>
+                        <span className="font-semibold">Priority Support</span> – Receive faster assistance from our
+                        team.
+                      </li>
+                    </ul>
+                    <p className="mt-2 text-blue-700">
+                      After payment, upload your receipt and complete signup. You'll submit it after email verification.
+                    </p>
+                  </div>
+
+                  <div className="flex gap-4 mt-2">
+                    <label className="flex items-center gap-2 cursor-pointer">
+                      <input
+                        type="radio"
+                        name="userType"
+                        value="regular"
+                        checked={userType === 'regular'}
+                        onChange={() => setUserType('regular')}
+                        className="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
+                      />
+                      <span className="text-sm text-gray-700">Regular User</span>
+                    </label>
+                    <label className="flex items-center gap-2 cursor-pointer">
+                      <input
+                        type="radio"
+                        name="userType"
+                        value="verified"
+                        checked={userType === 'verified'}
+                        onChange={() => setUserType('verified')}
+                        className="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
+                      />
+                      <span className="text-sm text-gray-700">Verified User</span>
+                    </label>
+                  </div>
+                </div>
+
+                {/* Verified User Fields */}
+                {userType === 'verified' && (
+                  <div className="space-y-3 p-3 bg-gray-50 border border-gray-200 rounded-lg">
+                    <h3 className="text-sm font-bold text-gray-800">Verified Member Application</h3>
+
+                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-2 text-xs">
+                      <p className="font-semibold text-blue-800">Annual Fee: ₦12,000</p>
+                    </div>
+
+                    <div className="space-y-1 text-xs">
+                      <p>
+                        <span className="font-medium">Bank Name:</span> Kayi Microfinance Bank
+                      </p>
+                      <p>
+                        <span className="font-medium">Account Name:</span> GREATER KANO BUSINESS COUNCIL
+                      </p>
+                      <p>
+                        <span className="font-medium">Account Number:</span> 4145931252
+                      </p>
+                      <p>
+                        <span className="font-medium">WhatsApp:</span>{' '}
+                        <a
+                          href="https://wa.me/2348023104333"
+                          className="text-blue-600 underline"
+                          target="_blank"
+                          rel="noopener"
+                        >
+                          +234 802 310 4333
+                        </a>
+                      </p>
+                    </div>
+
+                    <div className="space-y-1.5">
+                      <label className="block text-xs font-medium text-gray-700">Upload Payment Receipt *</label>
+                      <div className="relative">
+                        <input
+                          type="file"
+                          accept="image/*,.pdf"
+                          onChange={e => setReceiptFile(e.target.files?.[0] || null)}
+                          className="w-full text-xs border border-gray-300 rounded-lg p-2 file:mr-2 file:py-1 file:px-3 file:rounded file:border-0 file:text-xs file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                        />
+                      </div>
+                      {validationErrors.receipt && (
+                        <p className="text-xs text-red-600 flex items-center gap-1">
+                          <X size={10} />
+                          {validationErrors.receipt}
+                        </p>
+                      )}
+                      <p className="text-xs text-gray-500">
+                        Upload a screenshot or PDF of your payment receipt.
+                      </p>
+                    </div>
+                  </div>
+                )}
+
+                {/* Password */}
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between pl-1">
+                    <label className="block text-xs font-medium text-gray-700">Password *</label>
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="text-xs text-blue-600 hover:text-blue-700 font-medium flex items-center gap-0.5"
+                    >
+                      {showPassword ? 'Hide' : 'Show'}
+                    </button>
+                  </div>
+
+                  <div className="relative">
+                    <div className="absolute left-0 top-0 bottom-0 w-10 flex items-center justify-center">
+                      <Lock className="text-gray-400" size={16} />
+                    </div>
+                    <input
+                      type={showPassword ? 'text' : 'password'}
+                      value={formData.password}
+                      onChange={e => handleInputChange('password', e.target.value)}
+                      className={`w-full pl-10 pr-10 py-2.5 bg-white border rounded-lg text-sm focus:outline-none focus:ring-1 focus:border-blue-500 ${
+                        validationErrors.password
+                          ? 'border-red-300 focus:ring-red-500/20'
+                          : 'border-blue-200 focus:ring-blue-500/20'
+                      }`}
+                      placeholder="Create a strong password"
+                      required
+                    />
+                    <div className="absolute right-0 top-0 bottom-0 w-10 flex items-center justify-center">
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-gray-600"
+                      >
+                        {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                      </button>
+                    </div>
+                  </div>
+
+                  {formData.password && (
+                    <div className="space-y-1.5">
+                      <div className="flex items-center justify-between text-xs">
+                        <span className="text-gray-600">Password strength:</span>
+                        <span
+                          className={`font-medium ${
+                            passwordStrength < 50
+                              ? 'text-red-600'
+                              : passwordStrength < 80
+                              ? 'text-yellow-600'
+                              : 'text-green-600'
+                          }`}
+                        >
+                          {passwordStrength < 50 ? 'Weak' : passwordStrength < 80 ? 'Good' : 'Strong'}
+                        </span>
+                      </div>
+                      <div className="w-full bg-gray-200 rounded-full h-1.5">
+                        <div
+                          className={`h-1.5 rounded-full ${
+                            passwordStrength < 50
+                              ? 'bg-red-500'
+                              : passwordStrength < 80
+                              ? 'bg-yellow-500'
+                              : 'bg-green-500'
+                          }`}
+                          style={{ width: `${passwordStrength}%` }}
+                        />
+                      </div>
+                    </div>
+                  )}
+
+                  {validationErrors.password && (
+                    <p className="text-xs text-red-600 flex items-center gap-1">
+                      <X size={10} />
+                      {validationErrors.password}
+                    </p>
+                  )}
+                </div>
+
+                {/* Confirm Password */}
+                <div className="space-y-1.5">
+                  <label className="block text-xs font-medium text-gray-700 pl-1">Confirm Password *</label>
+                  <input
+                    type={showPassword ? 'text' : 'password'}
+                    value={formData.confirmPassword}
+                    onChange={e => handleInputChange('confirmPassword', e.target.value)}
+                    className={`w-full px-3 py-2.5 bg-white border rounded-lg text-sm focus:outline-none focus:ring-1 focus:border-blue-500 ${
+                      validationErrors.confirmPassword
+                        ? 'border-red-300 focus:ring-red-500/20'
+                        : 'border-blue-200 focus:ring-blue-500/20'
+                    }`}
+                    placeholder="Re-enter your password"
+                    required
+                  />
+                  {validationErrors.confirmPassword && (
+                    <p className="text-xs text-red-600 flex items-center gap-1">
+                      <X size={10} />
+                      {validationErrors.confirmPassword}
+                    </p>
+                  )}
+                </div>
+
+                {/* Terms Agreement */}
+                <div className="pt-1">
+                  <label className="flex items-start gap-2 cursor-pointer">
+                    <div className="relative mt-0.5 flex-shrink-0">
+                      <input
+                        type="checkbox"
+                        checked={formData.agreeToTerms}
+                        onChange={e => handleInputChange('agreeToTerms', e.target.checked)}
+                        className={`h-4 w-4 rounded border ${
+                          validationErrors.agreeToTerms
+                            ? 'border-red-300 text-red-600'
+                            : 'border-blue-300 text-blue-600'
+                        }`}
+                      />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <span className="text-xs text-gray-700">
+                        I agree to the{' '}
+                        <Link to="/terms" className="text-blue-600 font-semibold hover:underline">
+                          Terms & Conditions
+                        </Link>{' '}
+                        and{' '}
+                        <Link to="/privacy" className="text-blue-600 font-semibold hover:underline">
+                          Privacy Policy
+                        </Link>
+                      </span>
+                      {validationErrors.agreeToTerms && (
+                        <p className="text-xs text-red-600 flex items-center gap-1 mt-0.5">
+                          <X size={10} />
+                          {validationErrors.agreeToTerms}
+                        </p>
+                      )}
+                    </div>
+                  </label>
+                </div>
+
+                {/* Submit Button */}
                 <button
                   type="submit"
                   disabled={isLoading || isStoringReceipt}
@@ -234,11 +861,45 @@ const SignUp: React.FC = () => {
                   )}
                 </button>
               </form>
-              <div className="flex items-center my-4">{/* divider – same */}</div>
-              <button onClick={() => navigate('/login')} className="w-full border border-gray-300 text-gray-700 font-bold py-2.5 rounded-lg hover:border-blue-500 hover:text-blue-600 hover:bg-blue-50 transition-all duration-200 min-h-[44px]">Sign In Instead</button>
+
+              <div className="flex items-center my-4">
+                <div className="flex-1 border-t border-gray-300"></div>
+                <span className="px-3 text-xs text-gray-500 font-medium">Already have an account?</span>
+                <div className="flex-1 border-t border-gray-300"></div>
+              </div>
+
+              <button
+                onClick={() => navigate('/login')}
+                className="w-full border border-gray-300 text-gray-700 font-bold py-2.5 rounded-lg hover:border-blue-500 hover:text-blue-600 hover:bg-blue-50 transition-all duration-200 min-h-[44px]"
+              >
+                Sign In Instead
+              </button>
             </div>
           </div>
-          <div className="bg-gradient-to-r from-white/80 to-white/60 backdrop-blur-sm rounded-lg border border-gray-200/60 p-3">{/* security footer – same */}</div>
+
+          {/* Security Footer */}
+          <div className="bg-gradient-to-r from-white/80 to-white/60 backdrop-blur-sm rounded-lg border border-gray-200/60 p-3">
+            <div className="flex items-center justify-center gap-4">
+              <div className="flex flex-col items-center">
+                <div className="w-6 h-6 bg-gradient-to-br from-green-500 to-green-600 rounded-md flex items-center justify-center mb-0.5">
+                  <Shield size={12} className="text-white" />
+                </div>
+                <span className="text-xs text-gray-600 font-medium">Secure</span>
+              </div>
+              <div className="flex flex-col items-center">
+                <div className="w-6 h-6 bg-gradient-to-br from-blue-500 to-blue-600 rounded-md flex items-center justify-center mb-0.5">
+                  <Building size={12} className="text-white" />
+                </div>
+                <span className="text-xs text-gray-600 font-medium">Verified</span>
+              </div>
+              <div className="flex flex-col items-center">
+                <div className="w-6 h-6 bg-gradient-to-br from-purple-500 to-purple-600 rounded-md flex items-center justify-center mb-0.5">
+                  <Smartphone size={12} className="text-white" />
+                </div>
+                <span className="text-xs text-gray-600 font-medium">GKBC</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </>
