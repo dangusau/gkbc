@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import {
   Menu, X, LayoutDashboard, Users, ShoppingBag, Briefcase,
-  Calendar, Ticket, Megaphone, Settings, LogOut, Loader2
+  Calendar, Ticket, Megaphone, Settings, UserCheck, LogOut, Loader2
 } from 'lucide-react';
 import { supabase } from '../../services/supabase';
 
@@ -49,6 +49,7 @@ const AdminLayout: React.FC = () => {
     { to: '/admin/jobs-events', icon: Calendar, label: 'Explore' },
     { to: '/admin/tickets', icon: Ticket, label: 'Support' },
     { to: '/admin/announcements', icon: Megaphone, label: 'Announcements' },
+    { to: '/admin/Verifications', icon: UserCheck, label: 'Verifications' },
     { to: '/admin/manage-admins', icon: Settings, label: 'Admin Management' },
   ];
 
