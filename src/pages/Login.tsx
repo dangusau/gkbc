@@ -22,13 +22,7 @@ interface LoginFormData {
   password: string;
 }
 
-interface UserProfile {
-  id: string;
-  email: string;
-  user_status: 'member' | 'verified' | 'banned';
-  verified_at?: string;
-}
-
+// LoginStatusModal Component
 const LoginStatusModal: React.FC<{
   isOpen: boolean;
   onClose: () => void;
@@ -37,15 +31,7 @@ const LoginStatusModal: React.FC<{
   onSignupClick: () => void;
   onTryAgain?: () => void;
   onForgotPassword?: () => void;
-}> = ({ 
-  isOpen, 
-  onClose, 
-  email, 
-  status, 
-  onSignupClick, 
-  onTryAgain,
-  onForgotPassword 
-}) => {
+}> = ({ isOpen, onClose, email, status, onSignupClick, onTryAgain, onForgotPassword }) => {
   if (!isOpen) return null;
 
   const getModalConfig = () => {
@@ -79,12 +65,8 @@ const LoginStatusModal: React.FC<{
           iconBorder: 'border-red-200',
           message: (
             <>
-              <p className="text-gray-600 mb-2 text-sm">
-                Your account has been restricted.
-              </p>
-              <p className="text-gray-600 text-sm">
-                Please contact support@GKBC.com for assistance.
-              </p>
+              <p className="text-gray-600 mb-2 text-sm">Your account has been restricted.</p>
+              <p className="text-gray-600 text-sm">Please contact support@GKBC.com for assistance.</p>
             </>
           ),
           primaryButton: 'Contact Support',
@@ -121,12 +103,8 @@ const LoginStatusModal: React.FC<{
           iconBorder: 'border-red-200',
           message: (
             <>
-              <p className="text-gray-600 mb-2 text-sm">
-                The email or password you entered is incorrect.
-              </p>
-              <p className="text-gray-600 text-sm">
-                Please check your credentials and try again.
-              </p>
+              <p className="text-gray-600 mb-2 text-sm">The email or password you entered is incorrect.</p>
+              <p className="text-gray-600 text-sm">Please check your credentials and try again.</p>
             </>
           ),
           primaryButton: 'Try Again',
@@ -144,7 +122,9 @@ const LoginStatusModal: React.FC<{
       <div className="relative w-full max-w-md bg-white rounded-xl shadow-lg border border-gray-200">
         <div className="p-4 border-b border-gray-100">
           <div className="flex items-center justify-center mb-3">
-            <div className={`w-12 h-12 bg-gradient-to-br ${config.iconBg} rounded-full flex items-center justify-center border ${config.iconBorder}`}>
+            <div
+              className={`w-12 h-12 bg-gradient-to-br ${config.iconBg} rounded-full flex items-center justify-center border ${config.iconBorder}`}
+            >
               {config.icon}
             </div>
           </div>
@@ -152,15 +132,13 @@ const LoginStatusModal: React.FC<{
         </div>
 
         <div className="p-4">
-          <div className="text-center mb-4">
-            {config.message}
-          </div>
+          <div className="text-center mb-4">{config.message}</div>
 
           <div className="space-y-2">
             <button
               onClick={config.primaryAction}
               className={`w-full ${
-                status === 'banned' 
+                status === 'banned'
                   ? 'bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800'
                   : status === 'unverified'
                   ? 'bg-gradient-to-r from-yellow-600 to-orange-600 hover:from-yellow-700 hover:to-orange-700'
@@ -194,28 +172,30 @@ const LoginStatusModal: React.FC<{
 const Login: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  
   const prefilledEmail = (location.state as any)?.prefilledEmail || '';
 
   const [formData, setFormData] = useState<LoginFormData>({
     email: prefilledEmail,
     password: '',
   });
-  
+
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>((location.state as any)?.message || null);
-
+  const [message, setMessage] = useState<string | null>((location.state as any)?.message || null);
+  const [messageType, setMessageType] = useState<'success' | 'error' | null>((location.state as any)?.messageType || null);
   const [showStatusModal, setShowStatusModal] = useState(false);
   const [loginStatus, setLoginStatus] = useState<'unverified' | 'banned' | 'no_account' | 'credentials_incorrect'>('credentials_incorrect');
 
+  const handleInputChange = (field: keyof LoginFormData, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+    if (message) setMessage(null);
+  };
+
   const handleModalClose = () => {
     setShowStatusModal(false);
-    
     if (loginStatus === 'credentials_incorrect') {
       setFormData(prev => ({ ...prev, password: '' }));
     }
-    
     if (loginStatus === 'no_account') {
       setFormData(prev => ({ ...prev, email: '' }));
     }
@@ -223,9 +203,7 @@ const Login: React.FC = () => {
 
   const handleSignupFromModal = () => {
     setShowStatusModal(false);
-    navigate('/Signup', { 
-      state: { prefilledEmail: formData.email } 
-    });
+    navigate('/Signup', { state: { prefilledEmail: formData.email } });
   };
 
   const handleTryAgain = () => {
@@ -244,48 +222,45 @@ const Login: React.FC = () => {
         type: 'signup',
         email: formData.email.trim(),
       });
-      
       if (error) throw error;
-      
-      setError('Verification email sent! Please check your inbox.');
+      setMessage('Verification email sent! Please check your inbox.');
+      setMessageType('success');
       setShowStatusModal(false);
-      
     } catch (err: any) {
-      setError('Failed to resend verification. Please try again later.');
+      setMessage('Failed to resend verification. Please try again later.');
+      setMessageType('error');
     }
   };
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!formData.email.trim() || !formData.password.trim()) {
-      setError('Please enter both email and password');
+      setMessage('Please enter both email and password');
+      setMessageType('error');
       return;
     }
 
     setIsLoading(true);
-    setError(null);
+    setMessage(null);
 
     try {
       const email = formData.email.trim();
       const password = formData.password.trim();
 
-      // STEP 1: Authenticate with Supabase
       const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
-      
-      // Handle auth errors
+
       if (authError) {
         if (authError.message.includes('Invalid login credentials')) {
-          // Check if email exists in profiles (for "no_account" case)
           const { data: existingProfile } = await supabase
             .from('profiles')
             .select('email')
             .eq('email', email.toLowerCase())
             .maybeSingle();
-          
+
           if (!existingProfile) {
             setLoginStatus('no_account');
             setShowStatusModal(true);
@@ -297,96 +272,113 @@ const Login: React.FC = () => {
           setLoginStatus('unverified');
           setShowStatusModal(true);
         } else {
-          setError(authError.message);
+          setMessage(authError.message);
+          setMessageType('error');
         }
         setIsLoading(false);
         return;
       }
-      
+
       if (!authData.user) {
-        setError('Authentication failed. Please try again.');
+        setMessage('Authentication failed. Please try again.');
+        setMessageType('error');
         setIsLoading(false);
         return;
       }
-      
-      // STEP 2: Check email verification
+
       if (!authData.user.email_confirmed_at) {
         setLoginStatus('unverified');
         setShowStatusModal(true);
         setIsLoading(false);
         return;
       }
-      
-      // STEP 3: Get profile using authenticated user ID (works with RLS)
+
       const { data: profile, error: profileError } = await supabase
         .from('profiles')
         .select('user_status')
         .eq('id', authData.user.id)
         .single();
-      
+
       if (profileError) {
-        // Only log critical network errors
-        if (profileError.message.includes('network')) {
-          console.error('Critical network error fetching profile');
-        }
-        setError('Account error. Please contact support@GKBC.com');
+        setMessage('Account error. Please contact support.');
+        setMessageType('error');
         setIsLoading(false);
         return;
       }
-      
-      if (!profile) {
-        // Profile doesn't exist - database trigger failed
-        setError('Account setup incomplete. Please contact support.');
-        setIsLoading(false);
-        return;
-      }
-      
-      // STEP 4: Check user status
-      if (profile.user_status === 'banned') {
+
+      if (profile?.user_status === 'banned') {
         setLoginStatus('banned');
         setShowStatusModal(true);
         setIsLoading(false);
         return;
       }
-      
-      // STEP 5: Successful login
 
-      // STEP 5: Successful login
-// Trigger RSVP reminders check in the background (does not delay navigation)
+      // Small delay for session propagation
+      await new Promise(resolve => setTimeout(resolve, 100));
+
+      // Process pending verification
+      const pending = localStorage.getItem('pendingVerification');
+      if (pending) {
+        try {
+          const { userId, receiptData, fileName, fileType } = JSON.parse(pending);
+          if (userId === authData.user.id) {
+            const response = await fetch(receiptData);
+            const blob = await response.blob();
+            const file = new File([blob], fileName, { type: fileType });
+
+            const fileExt = fileName.split('.').pop() || 'jpg';
+            const newFileName = `receipt-${userId}-${Date.now()}.${fileExt}`;
+            const filePath = `${userId}/${newFileName}`;
+
+            const { error: uploadError } = await supabase.storage
+              .from('verification-receipts')
+              .upload(filePath, file);
+
+            if (uploadError) throw uploadError;
+
+            const { data: urlData } = supabase.storage
+              .from('verification-receipts')
+              .getPublicUrl(filePath);
+            const receiptUrl = urlData.publicUrl;
+
+            const { error: insertError } = await supabase
+              .from('verified_user_requests')
+              .insert({
+                user_id: userId,
+                receipt_url: receiptUrl,
+                status: 'pending',
+                created_at: new Date().toISOString(),
+              });
+
+            if (insertError) throw insertError;
+
+            localStorage.removeItem('pendingVerification');
+            setMessage('Verification request submitted successfully!');
+            setMessageType('success');
+          } else {
+            localStorage.removeItem('pendingVerification');
+          }
+        } catch (err: any) {
+          console.error('Failed to process pending verification:', err);
+          setMessage('Your verification request could not be submitted. Please contact support.');
+          setMessageType('error');
+        }
+      }
+
+      // Background tasks
       supabase.rpc('check_rsvp_reminders').then(({ error }) => {
-       if (error) console.error('RSVP reminder check failed:', error);
+        if (error) console.error('RSVP reminder check failed:', error);
       });
 
-      navigate('/Home'); 
-      
+      navigate('/Home');
     } catch (err: any) {
-      // Only log critical network errors
-      if (err.message?.includes('Failed to fetch') || err.message?.includes('network')) {
-        console.error('Critical network error during login');
-      }
-      
-      let errorMessage = 'Login failed. Please try again.';
-      if (err.message?.includes('Invalid login credentials')) {
-        setLoginStatus('credentials_incorrect');
-        setShowStatusModal(true);
-      } else if (err.message?.includes('Email not confirmed')) {
-        setLoginStatus('unverified');
-        setShowStatusModal(true);
-      } else if (err.message?.includes('Failed to fetch')) {
-        errorMessage = 'Network error. Please check your connection.';
-        setError(errorMessage);
-      } else {
-        setError(err.message || errorMessage);
-      }
-      
+      console.error('Login error:', err);
+      setMessage(err.message || 'Login failed. Please try again.');
+      setMessageType('error');
+      setIsLoading(false);
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const handleInputChange = (field: keyof LoginFormData, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
-    if (error) setError(null);
   };
 
   return (
@@ -400,21 +392,21 @@ const Login: React.FC = () => {
         onTryAgain={loginStatus === 'unverified' ? handleResendVerification : handleTryAgain}
         onForgotPassword={handleForgotPassword}
       />
-      
+
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-blue-50 flex flex-col justify-center items-center px-3 relative overflow-hidden safe-area">
         <div className="absolute top-0 left-0 right-0 h-48 bg-gradient-to-b from-blue-600/10 to-transparent" />
         <div className="absolute top-1/4 -right-12 w-48 h-48 bg-blue-500/5 rounded-full blur-3xl" />
         <div className="absolute bottom-1/4 -left-12 w-48 h-48 bg-blue-400/5 rounded-full blur-3xl" />
-        
+
         <div className="w-full max-w-md relative z-10">
           <div className="flex flex-col items-center mb-6">
             <div className="relative mb-3">
               <div className="w-20 h-20 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20 overflow-hidden border border-blue-100">
-                <img 
-                  src="/GKBClogo.png" 
-                  alt="GKBC logo" 
+                <img
+                  src="/GKBClogo.png"
+                  alt="GKBC logo"
                   className="w-full h-full object-contain p-1"
-                  onError={(e) => {
+                  onError={e => {
                     const target = e.target as HTMLImageElement;
                     target.style.display = 'none';
                     target.parentElement!.innerHTML = `
@@ -426,7 +418,7 @@ const Login: React.FC = () => {
                 />
               </div>
             </div>
-            
+
             <div className="mb-3">
               <h1 className="text-2xl font-black text-gray-900 text-center">
                 <span className="bg-gradient-to-r from-blue-600 to-blue-600 bg-clip-text text-transparent">
@@ -437,7 +429,7 @@ const Login: React.FC = () => {
                 Africa's Emerging Economic Vanguard
               </p>
             </div>
-            
+
             <div className="text-center">
               <h2 className="text-lg font-bold text-gray-900 mb-1">Welcome Back</h2>
               <p className="text-xs text-gray-500 font-medium max-w-xs mx-auto">
@@ -448,23 +440,29 @@ const Login: React.FC = () => {
 
           <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg border border-gray-200/80 overflow-hidden mb-4">
             <div className="p-4">
-              {error && (
-                <div className={`mb-4 p-3 rounded-lg ${
-                  error.includes('sent') || error.includes('check your email') 
-                    ? 'bg-blue-50 border border-blue-100' 
-                    : 'bg-red-50 border border-red-100'
-                }`}>
+              {message && (
+                <div
+                  className={`mb-4 p-3 rounded-lg ${
+                    messageType === 'success'
+                      ? 'bg-blue-50 border border-blue-100'
+                      : 'bg-red-50 border border-red-100'
+                  }`}
+                >
                   <div className="flex items-start gap-2">
                     <div className="flex-shrink-0">
-                      {error.includes('sent') || error.includes('check your email') ? (
+                      {messageType === 'success' ? (
                         <CheckCircle className="text-blue-600" size={16} />
                       ) : (
                         <AlertCircle className="text-red-600" size={16} />
                       )}
                     </div>
                     <div className="flex-1">
-                      <p className={`font-medium text-xs ${error.includes('sent') ? 'text-blue-800' : 'text-red-800'}`}>
-                        {error}
+                      <p
+                        className={`font-medium text-xs ${
+                          messageType === 'success' ? 'text-blue-800' : 'text-red-800'
+                        }`}
+                      >
+                        {message}
                       </p>
                     </div>
                   </div>
@@ -473,9 +471,7 @@ const Login: React.FC = () => {
 
               <form onSubmit={handleLogin} className="space-y-4">
                 <div className="space-y-1.5">
-                  <label className="block text-xs font-medium text-gray-700 pl-1">
-                    Email Address *
-                  </label>
+                  <label className="block text-xs font-medium text-gray-700 pl-1">Email Address *</label>
                   <div className="relative">
                     <div className="absolute left-0 top-0 bottom-0 w-10 flex items-center justify-center">
                       <Mail className="text-gray-400" size={16} />
@@ -483,7 +479,7 @@ const Login: React.FC = () => {
                     <input
                       type="email"
                       value={formData.email}
-                      onChange={(e) => handleInputChange('email', e.target.value)}
+                      onChange={e => handleInputChange('email', e.target.value)}
                       className="w-full pl-10 pr-3 py-2.5 bg-white border border-blue-200 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
                       placeholder="your@email.com"
                       required
@@ -494,9 +490,7 @@ const Login: React.FC = () => {
 
                 <div className="space-y-1.5">
                   <div className="flex items-center justify-between pl-1">
-                    <label className="block text-xs font-medium text-gray-700">
-                      Password *
-                    </label>
+                    <label className="block text-xs font-medium text-gray-700">Password *</label>
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
@@ -512,7 +506,7 @@ const Login: React.FC = () => {
                     <input
                       type={showPassword ? 'text' : 'password'}
                       value={formData.password}
-                      onChange={(e) => handleInputChange('password', e.target.value)}
+                      onChange={e => handleInputChange('password', e.target.value)}
                       className="w-full pl-10 pr-10 py-2.5 bg-white border border-blue-200 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
                       placeholder="Enter your password"
                       required
@@ -556,7 +550,7 @@ const Login: React.FC = () => {
                 >
                   Don't have an account? Sign Up
                 </button>
-                
+
                 <button
                   onClick={() => navigate('/forgot-password')}
                   className="w-full text-center text-gray-500 hover:text-gray-700 text-xs py-2 rounded-md hover:bg-gray-50 transition-colors"
@@ -589,7 +583,7 @@ const Login: React.FC = () => {
               </div>
             </div>
           </div>
-          
+
           <div className="text-center mt-3">
             <p className="text-xs text-gray-400">GKBC Network v1.0</p>
           </div>
