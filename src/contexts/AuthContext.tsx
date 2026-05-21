@@ -6,7 +6,7 @@ import type { Member } from '../types/index';
 interface AuthContextType {
   user: User | null;
   profile: Member | null;
-  userProfile: Member | null; // alias for profile, for compatibility
+  userProfile: Member | null;
   loading: boolean;
   isAuthenticated: boolean;
   hasStatus: (status: Member['user_status'] | Member['user_status'][]) => boolean;
@@ -22,36 +22,66 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   // Fetch profile when user changes
   useEffect(() => {
     const fetchProfile = async (userId: string) => {
-      const { data, error } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', userId)
-        .single();
+      try {
+        const { data, error } = await supabase
+          .from('profiles')
+          .select('*')
+          .eq('id', userId)
+          .single();
 
-      if (error) {
+        if (error) {
+          console.error('Error fetching profile:', error);
+          setProfile(null);
+        } else {
+          setProfile(data as Member);
+          // Cache profile in localStorage for quick access
+          try {
+            localStorage.setItem('auth_profile_cache', JSON.stringify(data));
+          } catch (e) {
+            console.warn('Failed to cache profile:', e);
+          }
+        }
+      } catch (error) {
         console.error('Error fetching profile:', error);
         setProfile(null);
-      } else {
-        setProfile(data as Member);
       }
     };
 
     if (user) {
       fetchProfile(user.id);
+      // Save session info to localStorage
+      try {
+        localStorage.setItem('auth_user_session', JSON.stringify({
+          id: user.id,
+          email: user.email,
+          lastLogin: new Date().toISOString(),
+        }));
+      } catch (e) {
+        console.warn('Failed to save session:', e);
+      }
     } else {
       setProfile(null);
+      try {
+        localStorage.removeItem('auth_user_session');
+        localStorage.removeItem('auth_profile_cache');
+      } catch (e) {
+        console.warn('Failed to clear session:', e);
+      }
     }
   }, [user]);
 
-  // Listen to auth changes
+  // Listen to auth changes and restore session
   useEffect(() => {
+    // Check current session
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null);
       setLoading(false);
     });
 
+    // Listen to auth state changes
     const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null);
+      setLoading(false);
     });
 
     return () => listener?.subscription.unsubscribe();
@@ -69,7 +99,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       value={{
         user,
         profile,
-        userProfile: profile, // alias for convenience
+        userProfile: profile,
         loading,
         isAuthenticated: !!user,
         hasStatus,
