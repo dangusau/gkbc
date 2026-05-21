@@ -5,7 +5,7 @@ import { supabase } from '../services/supabase';
 import VerifiedBadge from './VerifiedBadge';
 import { useUnreadCounts } from '../hooks/useUnreadCounts';
 import { useNotifications } from '../hooks/useNotifications';
-import { useQueryClient } from '@tanstack/react-query'; // <-- ADDED: import hook
+import { useQueryClient } from '@tanstack/react-query';
 
 interface HeaderProps {
   userName?: string;
@@ -25,15 +25,11 @@ const Header: React.FC<HeaderProps> = ({
   const [userInitials, setUserInitials] = useState('M');
   const [profileData, setProfileData] = useState<any>(null);
   const [userStatus, setUserStatus] = useState<'verified' | 'member'>('member');
-  
-  // ADDED: get the query client instance
   const queryClient = useQueryClient();
 
-  // Use the real unread counts hook for messages
   const { data: unreadCounts } = useUnreadCounts();
   const unreadMessageCount = unreadCounts?.total || 0;
   
-  // Use the notifications hook for real unread count
   const { unreadCount: unreadNotificationCount } = useNotifications();
 
   useEffect(() => {
@@ -81,14 +77,27 @@ const Header: React.FC<HeaderProps> = ({
   const handlelogout = async () => {
     try {
       await supabase.auth.signOut();
-      // ADDED: clear all React Query cache
+      // Clear React Query cache
       queryClient.clear();
-      navigate('/login');
+      // Clear localStorage (persistence)
+      try {
+        localStorage.removeItem('auth_user_session');
+        localStorage.removeItem('auth_profile_cache');
+      } catch (e) {
+        console.warn('Failed to clear localStorage:', e);
+      }
+      navigate('/Login');
     } catch (error) {
       console.error('Error logging out:', error);
-      // Even on error, try to clear cache and redirect
+      // Still clear caches and redirect even on error
       queryClient.clear();
-      navigate('/login');
+      try {
+        localStorage.removeItem('auth_user_session');
+        localStorage.removeItem('auth_profile_cache');
+      } catch (e) {
+        console.warn('Failed to clear localStorage:', e);
+      }
+      navigate('/Login');
     }
   };
 
