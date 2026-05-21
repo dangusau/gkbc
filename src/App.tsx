@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { QueryProvider } from './Providers/QueryProvider';
 import { usePresence } from './hooks/usePresence';
-import { useAuth } from './contexts/AuthContext';
+import { AuthProvider } from './contexts/AuthContext';
 import { NotificationsPage } from './pages/NotificationsPage';
 import { AnnouncementPage } from './pages/AnnouncementPage';
 import BottomNav from './components/BottomNav';
@@ -41,31 +41,6 @@ import AdminTickets from './pages/admin/AdminTickets';
 import AdminAnnouncements from './pages/admin/AdminAnnouncements';
 import AdminManagement from './pages/admin/AdminManagement';
 import AdminVerificationRequests from './pages/admin/AdminVerificationRequests.tsx';
-
-// ✅ NEW: Root route component with auth check
-const RootRoute: React.FC = () => {
-  const { isAuthenticated, loading } = useAuth();
-
-  // Wait for auth check to complete
-  if (loading) {
-    return (
-      <div className="min-h-screen w-full flex items-center justify-center bg-gray-50">
-        <div className="text-center">
-          <div className="w-12 h-12 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-gray-600 text-sm font-medium">Loading...</p>
-        </div>
-      </div>
-    );
-  }
-
-  // ✅ KEY: If authenticated, go to Home; otherwise show Landing Page
-  if (isAuthenticated) {
-    return <Navigate to="/Home" replace />;
-  }
-
-  return <LandingPage />;
-};
-
 // Presence tracker component – must be inside AuthProvider
 const PresenceTracker: React.FC = () => {
   usePresence();
@@ -112,10 +87,8 @@ function App() {
         <PresenceTracker />
         <QueryProvider>
           <Routes>
-            {/* ✅ UPDATED: Root route now checks auth and redirects */}
-            <Route path="/" element={<RootRoute />} />
-            
             {/* Public / Auth pages - no layout */}
+            <Route path="/" element={<LandingPage />} />
             <Route path="/Login" element={<Login />} />
             <Route path="/Signup" element={<Signup />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -161,7 +134,7 @@ function App() {
             <Route path="/support/:id" element={<Layout><HelpSupport /></Layout>} />
 
             {/* Fallback */}
-            <Route path="*" element={<Navigate to="/Login" replace />} />
+            <Route path="*" element={<Navigate to="/login" replace />} />
           </Routes>
         </QueryProvider>
       </AuthProvider>
@@ -170,3 +143,4 @@ function App() {
 }
 
 export default App;
+
