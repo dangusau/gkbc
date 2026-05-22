@@ -38,6 +38,9 @@ export interface Post {
   updated_at: string;
   has_liked: boolean;
   has_shared: boolean;
+  // ✅ NEW: First liker information
+  first_liker_name?: string | null;
+  first_liker_avatar?: string | null;
 }
 
 export interface Comment {
