@@ -5,6 +5,8 @@ import { formatDistanceToNow } from 'date-fns';
 import { useLikeShare } from '../../hooks/useLikeShare';
 import { useComments } from '../../hooks/useComments';
 import { useVideoAutoplay } from '../../hooks/useVideoAutoPlay';
+import { useFeed } from '../../hooks/useFeed'; // ✅ NEW: Import useFeed for shadow cache
+import { useAuth } from '../../contexts/AuthContext'; // ✅ NEW: Import useAuth for user profile
 import { VideoPlayer } from './VideoPlayer';
 import VerifiedBadge from '../VerifiedBadge';
 import { ConfirmationDialog } from '../shared/ConfirmationDialogue';
@@ -25,13 +27,17 @@ export const PostCard: React.FC<PostCardProps> = ({
   onDelete,
 }) => {
   const navigate = useNavigate();
+  const { userProfile } = useAuth(); // ✅ NEW: Get current user profile
   const [showComments, setShowComments] = useState(false);
   const [newComment, setNewComment] = useState('');
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
   const [feedback, setFeedback] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
 
-  const { toggleLike, toggleShare } = useLikeShare(postsQueryKey);
+  // ✅ NEW: Get shadow cache mutation instead of old toggleLike
+  const { updatePostLikeShadow } = useFeed();
+  
+  const { toggleShare } = useLikeShare(postsQueryKey); // Keep toggleShare as is
   const { comments, addComment, isLoading: commentsLoading } = useComments(
     post.id,
     commentsQueryKey,
@@ -47,7 +53,17 @@ export const PostCard: React.FC<PostCardProps> = ({
     }
   };
 
-  const handleLike = () => toggleLike(post.id);
+  // ✅ UPDATED: Use shadow cache for like instead of direct API call
+  const handleLike = async () => {
+    if (!userProfile?.id) return;
+    try {
+      await updatePostLikeShadow(post.id, userProfile.id);
+    } catch (error) {
+      console.error('Error liking post:', error);
+      setFeedback({ message: 'Failed to like post', type: 'error' });
+    }
+  };
+
   const handleShare = () => toggleShare(post.id);
   const handleCommentSubmit = async () => {
     if (!newComment.trim()) return;
@@ -73,6 +89,23 @@ export const PostCard: React.FC<PostCardProps> = ({
   };
 
   const userInitials = (post.author_first_name?.[0] || '') + (post.author_last_name?.[0] || '') || 'U';
+
+  // ✅ NEW: Helper function to format likes display with first liker name
+  const formatLikesDisplay = () => {
+    if (post.likes_count === 0) return null;
+    
+    if (post.first_liker_name) {
+      if (post.likes_count === 1) {
+        return `Liked by ${post.first_liker_name}`;
+      } else {
+        const othersCount = post.likes_count - 1;
+        return `Liked by ${post.first_liker_name} and ${othersCount} other${othersCount > 1 ? 's' : ''}`;
+      }
+    }
+    
+    // Fallback to simple count if first_liker_name is not available
+    return `${post.likes_count} like${post.likes_count !== 1 ? 's' : ''}`;
+  };
 
   return (
     <>
@@ -218,20 +251,24 @@ export const PostCard: React.FC<PostCardProps> = ({
             </div>
           )}
 
-          {/* Stats */}
+          {/* Stats - ✅ UPDATED: Show "Liked by Name and X others" format */}
           <div className="flex items-center justify-between mt-3 pt-3 border-t border-gray-100 text-xs text-gray-500">
-            <span className="flex items-center gap-1">
-              <div className="w-4 h-4 bg-gradient-to-r from-red-500 to-pink-500 rounded-full flex items-center justify-center">
-                <Heart size={8} className="text-white" />
-              </div>
-              {post.likes_count}
-            </span>
-            <span>{post.comments_count} comments</span>
-            <span>{post.shares_count} shares</span>
+            {/* ✅ NEW: Likes display with first liker name */}
+            {post.likes_count > 0 && (
+              <button className="flex items-center gap-1 hover:text-blue-600 transition-colors">
+                <div className="w-4 h-4 bg-gradient-to-r from-red-500 to-pink-500 rounded-full flex items-center justify-center">
+                  <Heart size={8} className="text-white" />
+                </div>
+                {formatLikesDisplay()}
+              </button>
+            )}
+            <span>{post.comments_count} comment{post.comments_count !== 1 ? 's' : ''}</span>
+            <span>{post.shares_count} share{post.shares_count !== 1 ? 's' : ''}</span>
           </div>
 
           {/* Actions */}
           <div className="flex items-center justify-between mt-1.5 pt-2 border-t border-gray-100">
+            {/* ✅ UPDATED: Like button uses shadow cache */}
             <button
               onClick={handleLike}
               className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg transition-all ${
@@ -372,3 +409,5 @@ export const PostCard: React.FC<PostCardProps> = ({
     </>
   );
 };
+
+export default PostCard;
