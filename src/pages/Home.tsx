@@ -16,6 +16,8 @@ const Home: React.FC = () => {
     isLoading,
     isFetching,
     refetch,
+    addNewPostShadow, // ✅ NEW: Get shadow cache mutation
+    isAddingPost, // ✅ NEW: Get loading state
   } = useFeed();
 
   const [showPostModal, setShowPostModal] = useState(false);
@@ -140,7 +142,13 @@ const Home: React.FC = () => {
         ) : (
           <div className="space-y-3 px-3">
             {posts.map((post) => (
-              <PostCard key={post.id} post={post} />
+              // ✅ NEW: Mark shadow posts with opacity while syncing
+              <div
+                key={post.id}
+                className={post.id.startsWith('shadow-') ? 'opacity-75' : ''}
+              >
+                <PostCard key={post.id} post={post} />
+              </div>
             ))}
 
             {/* Infinite scroll trigger */}
@@ -170,11 +178,13 @@ const Home: React.FC = () => {
       <CreatePostModal
         isOpen={showPostModal}
         onClose={() => setShowPostModal(false)}
-        onPostCreated={() => {
-          // Optionally scroll to top or show a message; refetch is automatic if query invalidated
-          // We can also manually refetch to get the new post at top
-          refetch();
+        // ✅ NEW: Use shadow cache mutation instead of direct refetch
+        onPostCreated={async (userId, content, mediaUrls, mediaType, tags, author) => {
+          await addNewPostShadow(userId, content, mediaUrls, mediaType, tags, author);
+          setShowPostModal(false);
+          toast.success('Post created!');
         }}
+        isLoading={isAddingPost}
       />
     </div>
   );
