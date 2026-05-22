@@ -29,10 +29,12 @@ export const feedService = {
       updated_at: post.updated_at,
       has_liked: post.has_liked || false,
       has_shared: post.has_shared || false,
+      first_liker_name: post.first_liker_name || null, // ✅ NEW: First liker name
+      first_liker_avatar: post.first_liker_avatar || null, // ✅ NEW: First liker avatar
     }));
   },
 
-  async toggleLike(postId: string, userId: string): Promise<{ likes_count: number; has_liked: boolean }> {
+  async toggleLike(postId: string, userId: string): Promise<{ likes_count: number; has_liked: boolean; first_liker_name?: string; first_liker_avatar?: string }> {
     const { data, error } = await supabase.rpc('toggle_post_like', {
       p_post_id: postId,
       p_user_id: userId,
