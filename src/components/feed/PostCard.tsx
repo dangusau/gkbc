@@ -252,18 +252,18 @@ export const PostCard: React.FC<PostCardProps> = ({
           )}
 
           {/* Stats - ✅ UPDATED: Show "Liked by Name and X others" format */}
-          <div className="flex items-center justify-between mt-3 pt-3 border-t border-gray-100 text-xs text-gray-500">
-            {/* ✅ NEW: Likes display with first liker name */}
+          <div className="flex items-center justify-between gap-2 mt-3 pt-3 border-t border-gray-100 text-xs text-gray-500 flex-wrap">
+            {/* ✅ NEW: Likes display with first liker name - truncated to prevent overflow */}
             {post.likes_count > 0 && (
-              <button className="flex items-center gap-1 hover:text-blue-600 transition-colors">
-                <div className="w-4 h-4 bg-gradient-to-r from-red-500 to-pink-500 rounded-full flex items-center justify-center">
+              <button className="flex items-center gap-1 hover:text-blue-600 transition-colors min-w-0 flex-shrink">
+                <div className="w-4 h-4 bg-gradient-to-r from-red-500 to-pink-500 rounded-full flex items-center justify-center flex-shrink-0">
                   <Heart size={8} className="text-white" />
                 </div>
-                {formatLikesDisplay()}
+                <span className="truncate">{formatLikesDisplay()}</span>
               </button>
             )}
-            <span>{post.comments_count} comment{post.comments_count !== 1 ? 's' : ''}</span>
-            <span>{post.shares_count} share{post.shares_count !== 1 ? 's' : ''}</span>
+            <span className="flex-shrink-0">{post.comments_count} comment{post.comments_count !== 1 ? 's' : ''}</span>
+            <span className="flex-shrink-0">{post.shares_count} share{post.shares_count !== 1 ? 's' : ''}</span>
           </div>
 
           {/* Actions */}
